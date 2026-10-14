@@ -20,4 +20,4 @@ Visualizador interactivo y mapa de arquitectura para flujos de ingeniería de so
 4. **Fase 4: Backend, Autenticación Soberana & APIs:** Better Auth, Reverse API Engineer, Cloud Sandboxes.
 5. **Fase 5: Testing Autónomo, Calidad & Ciberseguridad:** CodeRabbit AI, Autonoma AI (self-healing tests), Google OSS-Fuzz, REA, EmailOSINT.
 6. **Fase 6: Extracción de Datos, Automatización & RAG:** Firecrawl, Agent Reach.
-7. **Fase 7: Estrategia SaaS, Formación & Crecimiento:** Ecosistema MoureDev, SENA/Accenture, Validación y Legal SaaS.
+7. **Fase 7: Estrategia SaaS, Analítica de Producto & Crecimiento:** Microsoft Clarity (Top 1 mapas de calor y UX analytics sin límites), MDN Web Docs & Web.dev (Top 1 estándares y Core Web Vitals), Similarweb & Meta Ads Library (inteligencia competitiva y tráfico), Ecosistema MoureDev, SENA/Accenture, Validación y Legal SaaS.
