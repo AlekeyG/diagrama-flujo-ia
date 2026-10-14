@@ -4,23 +4,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pipeline de Ingeniería de Software con IA</title>
+    <title>Pipeline Interactivo de Ingeniería de Software con IA</title>
     <style>
         :root {
             --bg: #f8fafc;
             --panel: #ffffff;
-            --ink: #334155;          /* Gris pizarra suave en lugar de negro oscuro */
-            --title: #1e293b;        /* Títulos bien contrastados pero no agresivos */
-            --muted: #64748b;        /* Texto secundario legible */
-            --line: #e2e8f0;         /* Líneas divisorias muy sutiles */
-            --start-bg: #475569;     /* Píldora de inicio suave */
-            --start-text: #ffffff;
-            --p1: #3b82f6;           /* Azul suave */
-            --p2: #8b5cf6;           /* Violeta suave */
-            --p3: #0d9488;           /* Teal suave */
-            --p4: #e11d48;           /* Rosa/rojo cálido */
-            --p5: #d97706;           /* Ámbar */
-            --p6: #64748b;           /* Slate */
+            --panel-card: #ffffff;
+            --ink: #334155;
+            --title: #1e293b;
+            --muted: #64748b;
+            --line: #e2e8f0;
+            --active-tab-bg: #475569;
+            --active-tab-text: #ffffff;
+            --p1: #3b82f6;
+            --p2: #8b5cf6;
+            --p3: #0d9488;
+            --p4: #e11d48;
+            --p5: #d97706;
+            --p6: #64748b;
             --shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
             --prio-core-bg: #eff6ff;
             --prio-core-border: #93c5fd;
@@ -35,14 +36,15 @@
 
         @media (prefers-color-scheme: dark) {
             :root:not([data-theme="light"]) {
-                --bg: #151922;          /* Fondo oscuro aterciopelado (no negro quemado) */
-                --panel: #1e2430;       /* Panel suave con elevación confortable */
-                --ink: #cbd5e1;         /* Texto claro descansado para la vista */
-                --title: #f1f5f9;       /* Título blanco cálido */
-                --muted: #94a3b8;       /* Texto secundario atenuado */
-                --line: #2d3748;        /* Bordes discretos */
-                --start-bg: #334155;    /* Píldora de inicio integrada */
-                --start-text: #f8fafc;
+                --bg: #151922;
+                --panel: #1e2430;
+                --panel-card: #242c3b;
+                --ink: #cbd5e1;
+                --title: #f1f5f9;
+                --muted: #94a3b8;
+                --line: #2d3748;
+                --active-tab-bg: #334155;
+                --active-tab-text: #f8fafc;
                 --p1: #60a5fa;
                 --p2: #a78bfa;
                 --p3: #2dd4bf;
@@ -65,12 +67,13 @@
         :root[data-theme="dark"] {
             --bg: #151922;
             --panel: #1e2430;
+            --panel-card: #242c3b;
             --ink: #cbd5e1;
             --title: #f1f5f9;
             --muted: #94a3b8;
             --line: #2d3748;
-            --start-bg: #334155;
-            --start-text: #f8fafc;
+            --active-tab-bg: #334155;
+            --active-tab-text: #f8fafc;
             --p1: #60a5fa;
             --p2: #a78bfa;
             --p3: #2dd4bf;
@@ -102,7 +105,7 @@
         }
 
         header {
-            padding: 28px 24px 10px;
+            padding: 26px 24px 10px;
             max-width: 1440px;
             margin: 0 auto;
         }
@@ -128,7 +131,7 @@
             flex-wrap: wrap;
         }
 
-        .toolbar button {
+        .btn-ctrl {
             background: var(--panel);
             color: var(--ink);
             border: 1px solid var(--line);
@@ -140,9 +143,43 @@
             transition: all 0.2s ease;
         }
 
-        .toolbar button:hover {
+        .btn-ctrl:hover {
             border-color: var(--p1);
             color: var(--p1);
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 240px;
+            max-width: 360px;
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--panel);
+            color: var(--ink);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 6px 12px 6px 32px;
+            font: inherit;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--p1);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            font-size: 0.85rem;
+            pointer-events: none;
         }
 
         .filter-bar {
@@ -164,192 +201,141 @@
         }
 
         .filter-btn.active {
-            background: var(--start-bg);
-            color: var(--start-text);
-            border-color: var(--start-bg);
+            background: var(--active-tab-bg);
+            color: var(--active-tab-text);
+            border-color: var(--active-tab-bg);
             font-weight: 600;
         }
 
-        .legend {
-            display: flex;
-            gap: 14px;
-            flex-wrap: wrap;
-            color: var(--muted);
-            font-size: 0.82rem;
-            margin-top: 8px;
+        /* NAVEGADOR HORIZONTAL POR ETAPAS / SUB-DIAGRAMAS */
+        .stage-nav-wrapper {
+            max-width: 1440px;
+            margin: 16px auto 0;
+            padding: 0 24px;
         }
 
-        .legend span {
+        .stage-nav {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .stage-pill {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 10px;
+            border: 1px solid var(--line);
+            background: var(--panel);
+            color: var(--ink);
+            cursor: pointer;
+            white-space: nowrap;
+            font-size: 0.84rem;
+            font-weight: 500;
+            transition: all 0.15s ease;
         }
 
-        .dot {
-            width: 10px;
-            height: 10px;
+        .stage-pill:hover {
+            border-color: var(--c);
+            transform: translateY(-1px);
+        }
+
+        .stage-pill.active {
+            background: var(--panel);
+            border-color: var(--c);
+            border-width: 2px;
+            color: var(--title);
+            font-weight: 600;
+            box-shadow: var(--shadow);
+        }
+
+        .stage-dot {
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
             display: inline-block;
         }
 
-        .scroll {
-            overflow-x: auto;
+        /* VISTAS DE DIAGRAMAS: HORIZONTAL PIPELINE */
+        .view-container {
+            max-width: 1440px;
+            margin: 0 auto;
             padding: 20px 24px 40px;
         }
 
-        .flow {
-            min-width: 1360px;
-            max-width: 1440px;
-            margin: 0 auto;
+        .section-header {
+            margin-bottom: 16px;
+        }
+
+        .section-header h2 {
+            margin: 0 0 4px;
+            font-size: 1.25rem;
+            color: var(--title);
             display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .start {
-            background: var(--ink);
-            color: var(--bg);
-            border-radius: 999px;
-            padding: 10px 24px;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-        }
-
-        .end {
-            background: #10b981;
-            color: #ffffff;
-            border-radius: 999px;
-            padding: 10px 26px;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
-            margin-top: 24px;
-            display: inline-flex;
             align-items: center;
             gap: 8px;
         }
 
-        .stem {
-            width: 2px;
-            height: 24px;
-            background: var(--line);
+        .section-header p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.82rem;
         }
 
-        .rail {
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 28px;
-            position: relative;
+        /* CONTENEDOR DE DIAGRAMA HORIZONTAL CON SCROLL SUAVE */
+        .h-diagram-scroll {
+            overflow-x: auto;
+            padding: 10px 4px 20px;
+            margin-bottom: 30px;
         }
 
-        .col {
-            position: relative;
+        .h-diagram-track {
             display: flex;
-            flex-direction: column;
+            gap: 20px;
             align-items: stretch;
+            min-width: min-content;
         }
 
-        .phase {
-            --c: var(--p1);
-            background: var(--panel);
-            border: 2px solid var(--c);
+        /* TARJETA DE HERRAMIENTA EN DIAGRAMA HORIZONTAL */
+        .tool-card {
+            width: 320px;
+            flex-shrink: 0;
+            background: var(--panel-card);
+            border: 1px solid var(--line);
+            border-top: 4px solid var(--c);
             border-radius: 12px;
             padding: 14px;
             box-shadow: var(--shadow);
-            position: relative;
-        }
-
-        .phase .n {
-            font-size: 0.72rem;
-            font-weight: 700;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: var(--c);
-        }
-
-        .phase h2 {
-            margin: 2px 0 4px;
-            font-size: 1.05rem;
-            line-height: 1.25;
-        }
-
-        .phase p {
-            margin: 0;
-            color: var(--muted);
-            font-size: 0.78rem;
-        }
-
-        .col:not(:last-child) .phase::after {
-            content: "";
-            position: absolute;
-            top: 50%;
-            right: -28px;
-            width: 28px;
-            height: 2px;
-            background: var(--line);
-            transform: translateY(-1px);
-        }
-
-        .col:not(:last-child) .phase::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            right: -30px;
-            border-left: 8px solid var(--line);
-            border-top: 5px solid transparent;
-            border-bottom: 5px solid transparent;
-            transform: translateY(-5px);
-            z-index: 1;
-        }
-
-        .branch {
-            width: 2px;
-            height: 20px;
-            background: var(--line);
-            align-self: center;
-        }
-
-        .tools {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
             position: relative;
         }
 
-        .tool {
-            --c: var(--p1);
-            background: var(--panel);
-            border: 1px solid var(--line);
-            border-left: 4px solid var(--c);
-            border-radius: 10px;
-            padding: 12px;
-            box-shadow: var(--shadow);
-            position: relative;
-            transition: transform 0.15s ease, border-color 0.15s ease;
+        .tool-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--c);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
         }
 
-        .tool:hover {
-            transform: translateY(-2px);
-        }
-
-        .tool.prio-core {
-            border-top: 1px solid var(--prio-core-border);
-            border-right: 1px solid var(--prio-core-border);
-            border-bottom: 1px solid var(--prio-core-border);
-        }
-
-        .tool-header {
+        .card-top {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
             gap: 8px;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
 
-        .tool h3 {
+        .tool-card h3 {
             margin: 0;
-            font-size: 0.92rem;
+            font-size: 0.95rem;
             font-weight: 600;
+            color: var(--title);
         }
 
         .prio-badge {
@@ -380,41 +366,45 @@
             border: 1px solid var(--prio-opt-border);
         }
 
-        .tool .role {
+        .tool-card .role {
             font-size: 0.72rem;
             font-weight: 600;
             color: var(--c);
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             text-transform: uppercase;
             letter-spacing: 0.03em;
         }
 
-        .tool .what {
-            margin: 0 0 8px;
+        .tool-card .what {
+            margin: 0 0 10px;
             color: var(--muted);
-            font-size: 0.77rem;
-            line-height: 1.35;
+            font-size: 0.78rem;
+            line-height: 1.4;
+            flex-grow: 1;
         }
 
-        .tool .impact {
+        .tool-card .impact {
             background: rgba(0, 0, 0, 0.025);
             border-left: 2px solid var(--c);
-            padding: 4px 8px;
+            padding: 6px 8px;
             border-radius: 0 4px 4px 0;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             font-size: 0.73rem;
             color: var(--ink);
         }
 
-        :root[data-theme="dark"] .tool .impact {
+        :root[data-theme="dark"] .tool-card .impact {
             background: rgba(255, 255, 255, 0.04);
         }
 
-        .tool .meta {
+        .card-bottom {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            border-top: 1px solid var(--line);
             flex-wrap: wrap;
             gap: 6px;
-            align-items: center;
         }
 
         .tag {
@@ -425,97 +415,174 @@
             color: var(--muted);
         }
 
-        .refs {
-            display: inline-flex;
+        .links-group {
+            display: flex;
+            gap: 5px;
             flex-wrap: wrap;
-            gap: 4px;
-            align-items: center;
         }
 
-        .refs a {
-            font-size: 0.72rem;
-            font-weight: 600;
-            color: var(--c);
+        .links-group a {
             text-decoration: none;
+            font-size: 0.73rem;
+            font-weight: 600;
+            padding: 2px 7px;
+            border-radius: 5px;
             border: 1px solid var(--c);
-            border-radius: 6px;
-            padding: 1px 6px;
+            color: var(--c);
+            background: transparent;
+            transition: all 0.15s ease;
             display: inline-flex;
             align-items: center;
             gap: 3px;
-            transition: all 0.15s ease;
         }
 
-        .refs a.official {
+        .links-group a.official {
             background: var(--c);
             color: #ffffff;
-            border-color: var(--c);
         }
 
-        .refs a.official:hover {
+        .links-group a.official:hover {
             filter: brightness(1.15);
         }
 
-        .refs a:not(.official):hover {
+        .links-group a:not(.official):hover {
             background: var(--c);
             color: #ffffff;
         }
 
-        .tool:not(:last-child)::after {
-            content: "";
-            position: absolute;
-            left: 50%;
-            bottom: -12px;
-            width: 2px;
-            height: 12px;
-            background: var(--line);
-        }
-
-        .side {
-            margin-top: 36px;
-            width: 100%;
+        /* CONECTOR HORIZONTAL ENTRE PASOS DEL DIAGRAMA */
+        .step-connector {
             display: flex;
-            flex-direction: column;
             align-items: center;
-        }
-
-        .side .tagline {
-            font-size: 0.8rem;
+            justify-content: center;
+            width: 24px;
             color: var(--muted);
-            margin-bottom: 8px;
-            font-weight: 500;
+            font-weight: bold;
+            font-size: 1.1rem;
+            flex-shrink: 0;
         }
 
-        .phase.six {
-            --c: var(--p6);
-            border-style: dashed;
-            max-width: 1080px;
-            width: 100%;
+        /* MODAL DE DETALLE RÁPIDO (CLICK DIRECTO A HERRAMIENTA) */
+        .modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
         }
 
-        .phase.six .items {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-top: 12px;
+        .modal-backdrop.open {
+            display: flex;
         }
 
-        .item {
+        .modal-box {
+            background: var(--panel);
             border: 1px solid var(--line);
-            border-radius: 10px;
-            padding: 12px;
+            border-top: 5px solid var(--c, var(--p1));
+            border-radius: 14px;
+            max-width: 580px;
+            width: 100%;
+            padding: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: transparent;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--muted);
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        .modal-close:hover {
+            background: var(--line);
+            color: var(--title);
+        }
+
+        .modal-box h2 {
+            margin: 0 0 4px;
+            font-size: 1.3rem;
+            color: var(--title);
+        }
+
+        .modal-box .m-role {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--c, var(--p1));
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .modal-box .m-desc {
+            font-size: 0.88rem;
+            color: var(--ink);
+            line-height: 1.5;
+            margin-bottom: 14px;
+        }
+
+        .modal-box .m-impact {
+            background: rgba(0, 0, 0, 0.03);
+            border-left: 3px solid var(--c, var(--p1));
+            padding: 10px 12px;
+            border-radius: 0 6px 6px 0;
+            margin-bottom: 18px;
+            font-size: 0.84rem;
+            color: var(--ink);
+        }
+
+        :root[data-theme="dark"] .modal-box .m-impact {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid var(--line);
+        }
+
+        .modal-actions a {
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s ease;
+        }
+
+        .modal-actions a.btn-primary {
+            background: var(--c, var(--p1));
+            color: #ffffff;
+        }
+
+        .modal-actions a.btn-primary:hover {
+            filter: brightness(1.15);
+        }
+
+        .modal-actions a.btn-secondary {
+            border: 1px solid var(--line);
+            color: var(--ink);
             background: var(--bg);
         }
 
-        .item h3 {
-            margin: 0 0 2px;
-            font-size: 0.9rem;
-        }
-
-        .item p {
-            margin: 0 0 8px;
-            color: var(--muted);
-            font-size: 0.77rem;
+        .modal-actions a.btn-secondary:hover {
+            border-color: var(--c, var(--p1));
+            color: var(--c, var(--p1));
         }
 
         footer {
@@ -531,85 +598,108 @@
 
 <body>
     <header>
-        <h1>Pipeline de Ingeniería de Software con IA</h1>
-        <p>Estructura jerárquica por <strong>fases del ciclo de vida</strong>, clasificadas por nivel de prioridad operativa, rol arquitectónico y aporte de valor técnico.</p>
+        <h1>Pipeline Interactivo de Ingeniería de Software con IA</h1>
+        <p>Visualización por <strong>sub-diagramas horizontales independientes</strong>. Haz clic en cualquier tarjeta para abrir su panel interactivo con accesos directos.</p>
         <div class="toolbar">
-            <button id="theme" type="button" aria-label="Cambiar tema">Cambiar tema</button>
-            <div class="filter-bar">
-                <span style="font-size:0.8rem; color:var(--muted); font-weight:600;">Filtrar por Prioridad:</span>
-                <button class="filter-btn active" data-prio="all">Todas</button>
-                <button class="filter-btn" data-prio="core">⚡ Core / Imprescindible</button>
-                <button class="filter-btn" data-prio="high">🔥 Alta Relevancia</button>
-                <button class="filter-btn" data-prio="opt">💡 Especializada / Opcional</button>
+            <button class="btn-ctrl" id="theme" type="button" aria-label="Cambiar tema">Cambiar tema</button>
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" class="search-input" placeholder="Buscar herramienta o aporte...">
             </div>
-            <div class="legend" id="legend"></div>
+            <div class="filter-bar">
+                <span style="font-size:0.8rem; color:var(--muted); font-weight:600;">Prioridad:</span>
+                <button class="filter-btn active" data-prio="all">Todas</button>
+                <button class="filter-btn" data-prio="core">⚡ Core</button>
+                <button class="filter-btn" data-prio="high">🔥 Alta</button>
+                <button class="filter-btn" data-prio="opt">💡 Opcional</button>
+            </div>
         </div>
     </header>
 
-    <div class="scroll">
-        <div class="flow">
-            <div class="start">Inicio: Requerimiento &amp; Arquitectura</div>
-            <div class="stem"></div>
-            <div class="rail" id="rail"></div>
-            <div class="stem"></div>
-            <div class="end">Despliegue Continuo &amp; Producción</div>
-            <div class="side" id="side"></div>
+    <!-- NAVEGADOR DE SUB-DIAGRAMAS HORIZONTALES -->
+    <div class="stage-nav-wrapper">
+        <div class="stage-nav" id="stageNav"></div>
+    </div>
+
+    <!-- CONTENEDOR PRINCIPAL DE DIAGRAMAS HORIZONTALES -->
+    <div class="view-container" id="diagramsContainer"></div>
+
+    <!-- MODAL DE DETALLE INTERACTIVO -->
+    <div class="modal-backdrop" id="modalBackdrop">
+        <div class="modal-box" id="modalBox">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <h2 id="mTitle">Nombre</h2>
+            <div class="m-role" id="mRole">Rol</div>
+            <div class="m-desc" id="mDesc">Descripción</div>
+            <div class="m-impact" id="mImpact">Aporte</div>
+            <div class="tag" id="mLic">Licencia</div>
+            <div class="modal-actions" id="mActions"></div>
         </div>
     </div>
 
     <footer>
-        Pipeline de ingeniería basado en el catálogo técnico de «catalogo_herramientas.md». Diseñado para estructurar proyectos asistidos por Inteligencia Artificial.
+        Pipeline interactivo de ingeniería de software con IA. Repositorio de código abierto desplegado en GitHub Pages.
     </footer>
 
     <script>
-        const PHASES = [
+        const DIAGRAMS = [
             {
-                n: "Fase 1", t: "Codificación Asistida por IA", d: "Agentes de consola, LLMs y orquestación", c: "--p1", tools: [
+                id: "fase1",
+                n: "Fase 1",
+                title: "Codificación Asistida & Agentes Autónomos",
+                desc: "Desde modelos de razonamiento hasta agentes autónomos en consola",
+                color: "--p1",
+                tools: [
                     {
-                        name: "OpenCode",
+                        id: "llms",
+                        name: "Grandes Modelos (LLMs)",
                         prio: "core",
                         prioLabel: "Core",
-                        role: "Agente de Consola (TUI)",
-                        what: "Agente CLI de código abierto conectado a +75 proveedores o modelos 100% locales (Ollama/LM Studio).",
-                        impact: "Aporte: Elimina suscripciones fijas y desbloquea desarrollo privado sin fugas de datos.",
-                        lic: "Open Source (Gratis)",
-                        official: [["Web", "https://opencode.ai/"], ["GitHub", "https://github.com/anomalyco/opencode"]],
-                        refs: [["Ref 1", "https://www.facebook.com/share/r/14hWsnezzaB/"], ["Ref 2", "https://www.facebook.com/share/r/1BGHLzGDm4/"]]
+                        role: "Motores Fundacionales de Razonamiento",
+                        what: "Chats y asistentes de cabecera: ChatGPT, Claude 3.7 Sonnet, DeepSeek R1 y Microsoft Copilot.",
+                        impact: "Aporte: Comparación multi-modelo de arquitectura, resolución de problemas algorítmicos complejos y generación de contexto.",
+                        lic: "Freemium / Comercial",
+                        official: [["ChatGPT", "https://chatgpt.com/"], ["Claude", "https://claude.ai/"], ["DeepSeek", "https://chat.deepseek.com/"], ["Copilot", "https://copilot.microsoft.com/"]],
+                        refs: []
                     },
                     {
+                        id: "claude-code",
                         name: "Claude Code CLI",
                         prio: "core",
                         prioLabel: "Core",
                         role: "Agente Autónomo de Sistema",
-                        what: "Agente de consola de Anthropic con permisos para navegar directorios, editar código y correr bash.",
-                        impact: "Aporte: Resuelve refactorizaciones complejas y valida compilaciones de inmediato en tu terminal.",
+                        what: "Agente de consola de Anthropic con permisos para navegar directorios, editar código y correr bash de forma autónoma.",
+                        impact: "Aporte: Resuelve refactorizaciones de gran envergadura y valida compilaciones de inmediato en tu terminal.",
                         lic: "Propietario / API",
                         official: [["Anthropic", "https://www.anthropic.com/claude-code"]],
                         refs: []
                     },
                     {
+                        id: "opencode",
+                        name: "OpenCode",
+                        prio: "core",
+                        prioLabel: "Core",
+                        role: "Agente de Consola (TUI)",
+                        what: "Agente CLI de código abierto conectado a +75 proveedores o modelos 100% locales (Ollama/LM Studio).",
+                        impact: "Aporte: Elimina suscripciones fijas y desbloquea desarrollo privado sin fugas de datos hacia la nube.",
+                        lic: "Open Source (Gratis)",
+                        official: [["Web", "https://opencode.ai/"], ["GitHub", "https://github.com/anomalyco/opencode"]],
+                        refs: [["Ref 1", "https://www.facebook.com/share/r/14hWsnezzaB/"], ["Ref 2", "https://www.facebook.com/share/r/1BGHLzGDm4/"]]
+                    },
+                    {
+                        id: "ecc",
                         name: "Everything Claude Code (ECC)",
                         prio: "high",
                         prioLabel: "Alta",
                         role: "Orquestador de Subagentes",
-                        what: "Framework de más de 70 subagentes especializados, memoria entre sesiones y escudo AgentShield.",
+                        what: "Framework de más de 70 subagentes especializados, memoria entre sesiones y escudo de seguridad AgentShield.",
                         impact: "Aporte: Evita alucinaciones imponiendo especificaciones formales de diseño de software (SDD).",
                         lic: "Open Source",
                         official: [["GitHub", "https://github.com/affaan-m/ECC"]],
                         refs: [["Ref 3", "https://www.facebook.com/share/r/1EjGyB9V6C/"], ["Ref 4", "https://www.facebook.com/share/r/1TxX5m2S5G/"]]
                     },
                     {
-                        name: "Grandes Modelos (LLMs)",
-                        prio: "core",
-                        prioLabel: "Core",
-                        role: "Motores Fundacionales de Razonamiento",
-                        what: "Chats y asistentes de cabecera para lógica, arquitectura y resolución de dudas.",
-                        impact: "Aporte: Máxima capacidad de análisis comparando respuestas entre modelos líderes.",
-                        lic: "Freemium",
-                        official: [["ChatGPT", "https://chatgpt.com/"], ["Claude", "https://claude.ai/"], ["DeepSeek", "https://chat.deepseek.com/"], ["Copilot", "https://copilot.microsoft.com/"]],
-                        refs: []
-                    },
-                    {
+                        id: "google-ai",
                         name: "Google AI Suite & Colab",
                         prio: "high",
                         prioLabel: "Alta",
@@ -621,6 +711,7 @@
                         refs: []
                     },
                     {
+                        id: "builders",
                         name: "Lovable & Bolt.new",
                         prio: "high",
                         prioLabel: "Alta",
@@ -632,6 +723,7 @@
                         refs: []
                     },
                     {
+                        id: "kimi",
                         name: "Kimi K3 (Moonshot)",
                         prio: "opt",
                         prioLabel: "Opcional",
@@ -643,6 +735,7 @@
                         refs: [["Ref 7", "https://www.facebook.com/share/p/1DS89U3Mtg/"]]
                     },
                     {
+                        id: "files2prompt",
                         name: "Files2Prompt",
                         prio: "opt",
                         prioLabel: "Opcional",
@@ -654,6 +747,7 @@
                         refs: [["Ref 5", "https://www.facebook.com/share/r/1H65kUXRwn/"]]
                     },
                     {
+                        id: "kickbacks",
                         name: "Kickbacks.ai",
                         prio: "opt",
                         prioLabel: "Opcional",
@@ -667,8 +761,14 @@
                 ]
             },
             {
-                n: "Fase 2", t: "Diseño & Frontend UI/UX", d: "Anti-AI Slop, arquitectura y maquetación", c: "--p2", tools: [
+                id: "fase2",
+                n: "Fase 2",
+                title: "Diseño & Arquitectura Frontend UI/UX",
+                desc: "Prevención de código obsoleto (Anti-AI Slop) y maquetación estructurada",
+                color: "--p2",
+                tools: [
                     {
+                        id: "modern-web",
                         name: "Modern Web Guidance",
                         prio: "core",
                         prioLabel: "Core",
@@ -680,6 +780,7 @@
                         refs: [["Ref 9", "https://www.facebook.com/share/v/1cMnqK4BfL/"]]
                     },
                     {
+                        id: "drawio",
                         name: "Draw.io & Balsamiq",
                         prio: "core",
                         prioLabel: "Core",
@@ -691,6 +792,7 @@
                         refs: []
                     },
                     {
+                        id: "m3e",
                         name: "M3E Canvas",
                         prio: "high",
                         prioLabel: "Alta",
@@ -702,6 +804,7 @@
                         refs: [["Ref 8", "https://www.instagram.com/reel/DdBZM7YhkZt/?vrfl=aXk1M3FveDd2djNu"]]
                     },
                     {
+                        id: "tailwind-gsap",
                         name: "Tailwind CSS & GSAP",
                         prio: "high",
                         prioLabel: "Alta",
@@ -713,6 +816,7 @@
                         refs: []
                     },
                     {
+                        id: "apple-hig",
                         name: "Skills de Diseño Apple (HIG)",
                         prio: "opt",
                         prioLabel: "Opcional",
@@ -724,6 +828,7 @@
                         refs: [["Ref 11", "https://www.facebook.com/share/r/1Hwrur2vog/"]]
                     },
                     {
+                        id: "open-design",
                         name: "Open Design",
                         prio: "opt",
                         prioLabel: "Opcional",
@@ -737,8 +842,14 @@
                 ]
             },
             {
-                n: "Fase 3", t: "Backend, APIs & Cloud", d: "Seguridad de datos, infraestructura y conectividad", c: "--p3", tools: [
+                id: "fase3",
+                n: "Fase 3",
+                title: "Backend, Seguridad de APIs & Infraestructura",
+                desc: "Autenticación soberana, ingeniería inversa de endpoints y hosting",
+                color: "--p3",
+                tools: [
                     {
+                        id: "better-auth",
                         name: "Better Auth",
                         prio: "core",
                         prioLabel: "Core",
@@ -750,6 +861,7 @@
                         refs: [["Ref 12", "https://www.instagram.com/reel/DeXKWxLGUrA/?cplk=c2p6anYwNDBsb3dt"]]
                     },
                     {
+                        id: "cloud-sandboxes",
                         name: "Cloud, Sandboxes & Repos",
                         prio: "core",
                         prioLabel: "Core",
@@ -761,6 +873,7 @@
                         refs: []
                     },
                     {
+                        id: "reverse-api",
                         name: "Reverse API Engineer",
                         prio: "high",
                         prioLabel: "Alta",
@@ -774,8 +887,14 @@
                 ]
             },
             {
-                n: "Fase 4", t: "Testing & Calidad de Código", d: "Auditoría automatizada, fuzzing y seguridad", c: "--p4", tools: [
+                id: "fase4",
+                n: "Fase 4",
+                title: "Testing, Calidad de Código & Ciberseguridad",
+                desc: "Auditorías automatizadas de Pull Requests y análisis de vulnerabilidades",
+                color: "--p4",
+                tools: [
                     {
+                        id: "coderabbit",
                         name: "CodeRabbit AI",
                         prio: "core",
                         prioLabel: "Core",
@@ -787,6 +906,7 @@
                         refs: [["Ref 14", "https://www.facebook.com/share/p/1Ba3h7oiHE/"]]
                     },
                     {
+                        id: "oss-fuzz",
                         name: "OSS-Fuzz (Google)",
                         prio: "high",
                         prioLabel: "Alta",
@@ -798,6 +918,7 @@
                         refs: []
                     },
                     {
+                        id: "rea",
                         name: "REA (Reverse Engineer Anything)",
                         prio: "opt",
                         prioLabel: "Opcional",
@@ -809,6 +930,7 @@
                         refs: [["Ref 15", "https://www.instagram.com/reel/DeXQgNhgFl5/?psln=MWxkb2J2eTBpNHNvaw=="]]
                     },
                     {
+                        id: "emailosint",
                         name: "EmailOSINT",
                         prio: "opt",
                         prioLabel: "Opcional",
@@ -822,8 +944,14 @@
                 ]
             },
             {
-                n: "Fase 5", t: "Extracción de Datos & RAG", d: "Suministro de información limpia para agentes", c: "--p5", tools: [
+                id: "fase5",
+                n: "Fase 5",
+                title: "Extracción de Datos, Automatización & RAG",
+                desc: "Ingesta de datos web estructurados para alimentar modelos de IA",
+                color: "--p5",
+                tools: [
                     {
+                        id: "firecrawl",
                         name: "Firecrawl",
                         prio: "core",
                         prioLabel: "Core",
@@ -835,6 +963,7 @@
                         refs: [["Ref 17", "https://www.facebook.com/share/r/193MgfYZEC/"]]
                     },
                     {
+                        id: "agent-reach",
                         name: "Agent Reach",
                         prio: "high",
                         prioLabel: "Alta",
@@ -846,159 +975,328 @@
                         refs: [["Ref 18", "https://www.instagram.com/reel/DeVbt7FleL5/?mdxt=MXJmeWx6Z2FzcGY5aQ=="]]
                     }
                 ]
+            },
+            {
+                id: "fase6",
+                n: "Fase 6",
+                title: "Ecosistema, Empleo & Estrategia SaaS",
+                desc: "Capacidades de negocio, validación de mercado y formación continua",
+                color: "--p6",
+                tools: [
+                    {
+                        id: "mouredev",
+                        name: "Formación Técnica de MoureDev",
+                        prio: "high",
+                        prioLabel: "Alta",
+                        role: "Comunidad & Formación Continua",
+                        what: "Cursos gratuitos de desarrollo guiado por IA, configuración de TUI en terminal y comunidad hispanohablante.",
+                        impact: "Aporte: Nivelación de habilidades en herramientas de desarrollo asistido de vanguardia.",
+                        lic: "Comunidad / Gratis",
+                        official: [["moure.dev", "https://moure.dev/"], ["YouTube", "https://www.youtube.com/@mouredev"], ["GitHub", "https://github.com/mouredev"]],
+                        refs: [["Ref 2", "https://www.facebook.com/share/r/1BGHLzGDm4/"]]
+                    },
+                    {
+                        id: "sena-accenture",
+                        name: "Convocatorias SENA / Accenture",
+                        prio: "high",
+                        prioLabel: "Alta",
+                        role: "Inserción Laboral & Empleo",
+                        what: "Oportunidades de formación y convocatorias de contratación para perfiles tecnológicos en Colombia.",
+                        impact: "Aporte: Transición directa hacia empleo formal en desarrollo y cloud corporativo.",
+                        lic: "Institucional",
+                        official: [["Accenture", "https://www.accenture.com/co-es/careers/jobdetails?id=R00243777_es&title=Aprendices+SENA"]],
+                        refs: [["Ref 19", "https://www.accenture.com/co-es/careers/jobdetails?id=R00243777_es&title=Aprendices+SENA"]]
+                    },
+                    {
+                        id: "saas-strategy",
+                        name: "Estrategia SaaS & Validación",
+                        prio: "opt",
+                        prioLabel: "Opcional",
+                        role: "Modelo de Negocio & Legalidad",
+                        what: "Estrategias para monetizar herramientas de software, mitigar riesgos legales de código IA y estructurar pruebas gratuitas.",
+                        impact: "Aporte: Transforma proyectos técnicos en productos digitales viables y rentables.",
+                        lic: "Estrategia",
+                        official: [],
+                        refs: [["Ref 20", "https://www.instagram.com/reel/Dd7idktuOFx/?exln=MWtoYzhyaDI3ODN4cw=="], ["Ref 21", "https://www.instagram.com/reel/DeZCQHvxohj/?srtk=MTltczZodHRpc3Bzcg=="]]
+                    }
+                ]
             }
         ];
 
-        const SIX = {
-            n: "Fase 6", t: "Estrategia de Negocio, Empleo & Crecimiento Digital", d: "Capacidades transversales de apoyo profesional", c: "--p6", items: [
-                {
-                    name: "Formación Técnica de MoureDev",
-                    role: "Comunidad & Formación Continua",
-                    what: "Cursos gratuitos de desarrollo guiado por IA, configuración de TUI en terminal y comunidad hispanohablante.",
-                    official: [["moure.dev", "https://moure.dev/"], ["YouTube", "https://www.youtube.com/@mouredev"], ["GitHub", "https://github.com/mouredev"]],
-                    refs: [["Ref 2", "https://www.facebook.com/share/r/1BGHLzGDm4/"]]
-                },
-                {
-                    name: "Convocatorias SENA / Accenture",
-                    role: "Inserción Laboral & Empleo",
-                    what: "Oportunidades de formación y convocatorias de contratación para perfiles tecnológicos en Colombia.",
-                    official: [["Accenture", "https://www.accenture.com/co-es/careers/jobdetails?id=R00243777_es&title=Aprendices+SENA"]],
-                    refs: [["Ref 19", "https://www.accenture.com/co-es/careers/jobdetails?id=R00243777_es&title=Aprendices+SENA"]]
-                },
-                {
-                    name: "Estrategia SaaS & Validación de Apps",
-                    role: "Modelo de Negocio & Legalidad",
-                    what: "Estrategias para monetizar herramientas de software, mitigar riesgos legales de código IA y estructurar pruebas gratuitas.",
-                    official: [],
-                    refs: [["Ref 20", "https://www.instagram.com/reel/Dd7idktuOFx/?exln=MWtoYzhyaDI3ODN4cw=="], ["Ref 21", "https://www.instagram.com/reel/DeZCQHvxohj/?srtk=MTltczZodHRpc3Bzcg=="]]
-                }
-            ]
-        };
+        let activePrio = "all";
+        let searchQuery = "";
+        let activeStageId = "all";
 
-        const el = (tag, cls, text) => {
-            const e = document.createElement(tag);
-            if (cls) e.className = cls;
-            if (text != null) e.textContent = text;
-            return e;
-        };
+        const stageNav = document.getElementById("stageNav");
+        const diagramsContainer = document.getElementById("diagramsContainer");
 
-        const renderLinks = (officialList, refList) => {
-            const w = el("div", "refs");
-            if (officialList && officialList.length) {
-                officialList.forEach(([label, url]) => {
-                    const a = el("a", "official", "↗ " + label);
-                    a.href = url; a.target = "_blank"; a.rel = "noopener noreferrer";
-                    w.appendChild(a);
+        // Construir barra de navegación por etapas
+        function buildStageNav() {
+            stageNav.innerHTML = "";
+
+            const allBtn = document.createElement("button");
+            allBtn.className = "stage-pill" + (activeStageId === "all" ? " active" : "");
+            allBtn.style.setProperty("--c", "var(--ink)");
+            allBtn.textContent = "🌐 Ver Todo el Flujo";
+            allBtn.addEventListener("click", () => {
+                activeStageId = "all";
+                updateStageNav();
+                renderDiagrams();
+            });
+            stageNav.appendChild(allBtn);
+
+            DIAGRAMS.forEach(d => {
+                const btn = document.createElement("button");
+                btn.className = "stage-pill" + (activeStageId === d.id ? " active" : "");
+                btn.style.setProperty("--c", "var(" + d.color + ")");
+
+                const dot = document.createElement("span");
+                dot.className = "stage-dot";
+                dot.style.background = "var(" + d.color + ")";
+
+                btn.appendChild(dot);
+                btn.appendChild(document.createTextNode(d.n + ": " + d.title.split("&")[0].trim()));
+                btn.addEventListener("click", () => {
+                    activeStageId = d.id;
+                    updateStageNav();
+                    renderDiagrams();
+                    // Scroll suave hacia la sección
+                    const elTarget = document.getElementById("sec-" + d.id);
+                    if (elTarget) elTarget.scrollIntoView({ behavior: "smooth", block: "start" });
                 });
-            }
-            if (refList && refList.length) {
-                refList.forEach(([id, url]) => {
-                    const a = el("a", null, "[" + id + "]");
-                    a.href = url; a.target = "_blank"; a.rel = "noopener noreferrer";
-                    w.appendChild(a);
-                });
-            }
-            return w;
-        };
-
-        const rail = document.getElementById("rail");
-        const legend = document.getElementById("legend");
-
-        function renderPipeline(filterPrio = "all") {
-            rail.innerHTML = "";
-            legend.innerHTML = "";
-
-            PHASES.forEach(p => {
-                const col = el("div", "col");
-                col.style.setProperty("--c", "var(" + p.c + ")");
-
-                const ph = el("div", "phase");
-                ph.style.setProperty("--c", "var(" + p.c + ")");
-                ph.appendChild(el("div", "n", p.n));
-                ph.appendChild(el("h2", null, p.t));
-                ph.appendChild(el("p", null, p.d));
-                col.appendChild(ph);
-                col.appendChild(el("div", "branch"));
-
-                const tools = el("div", "tools");
-                const filteredTools = p.tools.filter(t => filterPrio === "all" || t.prio === filterPrio);
-
-                if (filteredTools.length === 0) {
-                    const empty = el("div", "tool");
-                    empty.style.opacity = "0.6";
-                    empty.appendChild(el("p", "what", "Sin herramientas en este filtro de prioridad."));
-                    tools.appendChild(empty);
-                } else {
-                    filteredTools.forEach(t => {
-                        const c = el("div", "tool prio-" + t.prio);
-                        c.style.setProperty("--c", "var(" + p.c + ")");
-
-                        const head = el("div", "tool-header");
-                        head.appendChild(el("h3", null, t.name));
-                        head.appendChild(el("span", "prio-badge " + t.prio, t.prioLabel));
-                        c.appendChild(head);
-
-                        c.appendChild(el("div", "role", t.role));
-                        c.appendChild(el("p", "what", t.what));
-                        c.appendChild(el("div", "impact", t.impact));
-
-                        const meta = el("div", "meta");
-                        meta.appendChild(el("span", "tag", t.lic));
-                        meta.appendChild(renderLinks(t.official, t.refs));
-                        c.appendChild(meta);
-
-                        tools.appendChild(c);
-                    });
-                }
-
-                col.appendChild(tools);
-                rail.appendChild(col);
-
-                const l = el("span");
-                const d = el("i", "dot"); d.style.background = "var(" + p.c + ")";
-                l.appendChild(d); l.appendChild(document.createTextNode(p.n + ": " + p.t));
-                legend.appendChild(l);
+                stageNav.appendChild(btn);
             });
         }
 
-        // Render inicial
-        renderPipeline("all");
+        function updateStageNav() {
+            document.querySelectorAll(".stage-pill").forEach((btn, idx) => {
+                if (idx === 0) {
+                    btn.classList.toggle("active", activeStageId === "all");
+                } else {
+                    const d = DIAGRAMS[idx - 1];
+                    btn.classList.toggle("active", activeStageId === d.id);
+                }
+            });
+        }
 
-        // Fase 6
-        const side = document.getElementById("side");
-        side.appendChild(el("div", "tagline", "Recursos transversales de crecimiento y ecosistema"));
-        const six = el("div", "phase six");
-        six.appendChild(el("div", "n", SIX.n));
-        six.appendChild(el("h2", null, SIX.t));
-        six.appendChild(el("p", null, SIX.d));
-        const items = el("div", "items");
-        SIX.items.forEach(i => {
-            const c = el("div", "item");
-            c.appendChild(el("h3", null, i.name));
-            c.appendChild(el("div", "role", i.role));
-            c.appendChild(el("p", null, i.what));
-            c.appendChild(renderLinks(i.official, i.refs));
-            items.appendChild(c);
+        // Renderizar sub-diagramas horizontales
+        function renderDiagrams() {
+            diagramsContainer.innerHTML = "";
+
+            const listToRender = activeStageId === "all" 
+                ? DIAGRAMS 
+                : DIAGRAMS.filter(d => d.id === activeStageId);
+
+            listToRender.forEach(d => {
+                // Filtrado por prioridad y por búsqueda
+                const matchedTools = d.tools.filter(t => {
+                    const matchPrio = activePrio === "all" || t.prio === activePrio;
+                    const q = searchQuery.toLowerCase().trim();
+                    const matchSearch = !q || 
+                        t.name.toLowerCase().includes(q) || 
+                        t.role.toLowerCase().includes(q) || 
+                        t.what.toLowerCase().includes(q) ||
+                        t.impact.toLowerCase().includes(q);
+                    return matchPrio && matchSearch;
+                });
+
+                if (matchedTools.length === 0 && searchQuery) return;
+
+                const sec = document.createElement("section");
+                sec.id = "sec-" + d.id;
+                sec.style.setProperty("--c", "var(" + d.color + ")");
+                sec.style.marginBottom = "30px";
+
+                const header = document.createElement("div");
+                header.className = "section-header";
+                const h2 = document.createElement("h2");
+                const dot = document.createElement("span");
+                dot.className = "stage-dot";
+                dot.style.width = "10px";
+                dot.style.height = "10px";
+                dot.style.background = "var(" + d.color + ")";
+                h2.appendChild(dot);
+                h2.appendChild(document.createTextNode(d.n + " — " + d.title));
+
+                const p = document.createElement("p");
+                p.textContent = d.desc + " (" + matchedTools.length + " herramientas disponibles)";
+                header.appendChild(h2);
+                header.appendChild(p);
+                sec.appendChild(header);
+
+                // Track horizontal del diagrama
+                const scrollWrapper = document.createElement("div");
+                scrollWrapper.className = "h-diagram-scroll";
+
+                const track = document.createElement("div");
+                track.className = "h-diagram-track";
+
+                if (matchedTools.length === 0) {
+                    const emptyCard = document.createElement("div");
+                    emptyCard.className = "tool-card";
+                    emptyCard.style.opacity = "0.6";
+                    emptyCard.innerHTML = "<p class='what'>Sin herramientas que coincidan con los filtros actuales.</p>";
+                    track.appendChild(emptyCard);
+                } else {
+                    matchedTools.forEach((tool, index) => {
+                        const card = document.createElement("div");
+                        card.className = "tool-card";
+                        card.style.setProperty("--c", "var(" + d.color + ")");
+
+                        // Contenido
+                        const top = document.createElement("div");
+                        top.className = "card-top";
+                        const h3 = document.createElement("h3");
+                        h3.textContent = tool.name;
+                        const badge = document.createElement("span");
+                        badge.className = "prio-badge " + tool.prio;
+                        badge.textContent = tool.prioLabel;
+                        top.appendChild(h3);
+                        top.appendChild(badge);
+                        card.appendChild(top);
+
+                        const role = document.createElement("div");
+                        role.className = "role";
+                        role.textContent = tool.role;
+                        card.appendChild(role);
+
+                        const what = document.createElement("p");
+                        what.className = "what";
+                        what.textContent = tool.what;
+                        card.appendChild(what);
+
+                        const impact = document.createElement("div");
+                        impact.className = "impact";
+                        impact.textContent = tool.impact;
+                        card.appendChild(impact);
+
+                        const bottom = document.createElement("div");
+                        bottom.className = "card-bottom";
+
+                        const tag = document.createElement("span");
+                        tag.className = "tag";
+                        tag.textContent = tool.lic;
+                        bottom.appendChild(tag);
+
+                        const links = document.createElement("div");
+                        links.className = "links-group";
+                        if (tool.official && tool.official.length) {
+                            tool.official.forEach(([label, url]) => {
+                                const a = document.createElement("a");
+                                a.className = "official";
+                                a.href = url;
+                                a.target = "_blank";
+                                a.rel = "noopener noreferrer";
+                                a.textContent = "↗ " + label;
+                                a.addEventListener("click", (e) => e.stopPropagation());
+                                links.appendChild(a);
+                            });
+                        }
+                        bottom.appendChild(links);
+                        card.appendChild(bottom);
+
+                        // Click interactivo en tarjeta para abrir Modal de Inspección
+                        card.addEventListener("click", () => openModal(tool, d.color));
+
+                        track.appendChild(card);
+
+                        // Flecha conectora entre pasos consecutivos
+                        if (index < matchedTools.length - 1) {
+                            const connector = document.createElement("div");
+                            connector.className = "step-connector";
+                            connector.textContent = "➔";
+                            track.appendChild(connector);
+                        }
+                    });
+                }
+
+                scrollWrapper.appendChild(track);
+                sec.appendChild(scrollWrapper);
+                diagramsContainer.appendChild(sec);
+            });
+        }
+
+        // Modal de detalle y acceso directo
+        const backdrop = document.getElementById("modalBackdrop");
+        const modalBox = document.getElementById("modalBox");
+        const mClose = document.getElementById("modalClose");
+        const mTitle = document.getElementById("mTitle");
+        const mRole = document.getElementById("mRole");
+        const mDesc = document.getElementById("mDesc");
+        const mImpact = document.getElementById("mImpact");
+        const mLic = document.getElementById("mLic");
+        const mActions = document.getElementById("mActions");
+
+        function openModal(tool, colorVar) {
+            modalBox.style.setProperty("--c", "var(" + colorVar + ")");
+            mTitle.textContent = tool.name;
+            mRole.textContent = tool.role + " — Prioridad: " + tool.prioLabel;
+            mDesc.textContent = tool.what;
+            mImpact.textContent = tool.impact;
+            mLic.textContent = "Licencia / Modelo: " + tool.lic;
+
+            mActions.innerHTML = "";
+            if (tool.official && tool.official.length) {
+                tool.official.forEach(([label, url]) => {
+                    const a = document.createElement("a");
+                    a.className = "btn-primary";
+                    a.href = url;
+                    a.target = "_blank";
+                    a.rel = "noopener noreferrer";
+                    a.textContent = "Abrir " + label + " ↗";
+                    mActions.appendChild(a);
+                });
+            }
+            if (tool.refs && tool.refs.length) {
+                tool.refs.forEach(([id, url]) => {
+                    const a = document.createElement("a");
+                    a.className = "btn-secondary";
+                    a.href = url;
+                    a.target = "_blank";
+                    a.rel = "noopener noreferrer";
+                    a.textContent = "Ver Referencia " + id + " ↗";
+                    mActions.appendChild(a);
+                });
+            }
+
+            backdrop.classList.add("open");
+        }
+
+        mClose.addEventListener("click", () => backdrop.classList.remove("open"));
+        backdrop.addEventListener("click", (e) => {
+            if (e.target === backdrop) backdrop.classList.remove("open");
         });
-        six.appendChild(items);
-        side.appendChild(six);
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") backdrop.classList.remove("open");
+        });
 
-        // Filtros de prioridad interactivos
+        // Barra de búsqueda interactiva
+        document.getElementById("searchInput").addEventListener("input", (e) => {
+            searchQuery = e.target.value;
+            renderDiagrams();
+        });
+
+        // Filtro por prioridad
         document.querySelectorAll(".filter-btn").forEach(btn => {
             btn.addEventListener("click", () => {
                 document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
                 btn.classList.add("active");
-                renderPipeline(btn.dataset.prio);
+                activePrio = btn.dataset.prio;
+                renderDiagrams();
             });
         });
 
         // Alternador de tema
         document.getElementById("theme").addEventListener("click", () => {
-            const r = document.documentElement;
+            const root = document.documentElement;
             const isDark = matchMedia("(prefers-color-scheme: dark)").matches;
-            const cur = r.getAttribute("data-theme") || (isDark ? "dark" : "light");
-            r.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+            const current = root.getAttribute("data-theme") || (isDark ? "dark" : "light");
+            root.setAttribute("data-theme", current === "dark" ? "light" : "dark");
         });
+
+        // Inicialización
+        buildStageNav();
+        renderDiagrams();
     </script>
 </body>
 
