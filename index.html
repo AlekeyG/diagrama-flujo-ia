@@ -664,16 +664,70 @@
             color: var(--ink);
         }
 
-        :root[data-theme="dark"] .modal-box .m-impact {
-            background: rgba(255, 255, 255, 0.05);
+        .modal-conns {
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px dashed var(--line);
+        }
+
+        .modal-conns h4 {
+            margin: 0 0 8px;
+            font-size: 0.8rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .conns-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .conn-item {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            font-size: 0.78rem;
+            line-height: 1.4;
+            background: rgba(0, 0, 0, 0.02);
+            padding: 6px 10px;
+            border-radius: 6px;
+            border-left: 2px solid var(--c, var(--c-p1));
+        }
+
+        :root[data-theme="dark"] .conn-item {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .conn-target {
+            font-weight: 700;
+            color: var(--title);
+            white-space: nowrap;
+            cursor: pointer;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-underline-offset: 2px;
+        }
+
+        .conn-target:hover {
+            color: var(--c, var(--c-p1));
+        }
+
+        .conn-rel {
+            color: var(--muted);
+            font-size: 0.75rem;
         }
 
         .modal-actions {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            margin-top: 20px;
-            padding-top: 16px;
+            margin-top: 18px;
+            padding-top: 14px;
             border-top: 1px solid var(--line);
         }
 
@@ -765,6 +819,7 @@
             <div class="m-desc" id="mDesc">Descripción</div>
             <div class="m-impact" id="mImpact">Aporte</div>
             <div class="tag-lic" id="mLic">Licencia</div>
+            <div class="modal-conns" id="mConns"></div>
             <div class="modal-actions" id="mActions"></div>
         </div>
     </div>
@@ -784,6 +839,7 @@
                 tools: [
                     {
                         name: "Papers With Code",
+                        conns: [{"target":"arXiv (cs.SE / cs.AI / cs.DC)","rel":"Alimentado por los preprints científicos publicados en arXiv"},{"target":"Cloud, Sandboxes & Repositorios","rel":"Enlaza directamente al código fuente y repositorios oficiales en GitHub"}],
                         type: "app",
                         typeLabel: "Plataforma Web",
                         tier: "tier-1",
@@ -797,6 +853,7 @@
                     },
                     {
                         name: "arXiv (cs.SE / cs.AI / cs.DC)",
+                        conns: [{"target":"Papers With Code","rel":"Indexación comunitaria de implementaciones de código fuente"},{"target":"Semantic Scholar (Computer Science)","rel":"Extracción de citas y análisis semántico de algoritmos"}],
                         type: "app",
                         typeLabel: "Repositorio Web",
                         tier: "tier-1",
@@ -810,6 +867,7 @@
                     },
                     {
                         name: "LMSYS Chatbot Arena",
+                        conns: [{"target":"Grandes Modelos (LLMs)","rel":"Evalúa y rankea a ciegas las capacidades de codificación de Claude, GPT y DeepSeek"}],
                         type: "app",
                         typeLabel: "Plataforma Web",
                         tier: "tier-1",
@@ -823,6 +881,7 @@
                     },
                     {
                         name: "SWE-bench (Software Engineering Benchmark)",
+                        conns: [{"target":"Cline (Claude Dev)","rel":"Benchmark de referencia para medir la resolución de issues reales de GitHub"},{"target":"OpenCode","rel":"Métrica estándar para evaluar la autonomía del agente en terminal"},{"target":"OpenHands (OpenDevin)","rel":"Evaluación de agentes en entornos Docker reproducibles"}],
                         type: "lib",
                         typeLabel: "Benchmark / Dataset",
                         tier: "tier-1",
@@ -836,6 +895,7 @@
                     },
                     {
                         name: "Hugging Face Papers & Hub",
+                        conns: [{"target":"Grandes Modelos (LLMs)","rel":"Distribución de pesos y modelos abiertos (Qwen, DeepSeek, Llama)"},{"target":"SciSpace (Typeset.io)","rel":"Lectura asistida y desglose de papers técnicos"}],
                         type: "app",
                         typeLabel: "Plataforma Web",
                         tier: "tier-2",
@@ -849,6 +909,7 @@
                     },
                     {
                         name: "Semantic Scholar (Computer Science)",
+                        conns: [{"target":"Connected Papers","rel":"Grafo relacional de co-citación a partir de papers descubiertos"}],
                         type: "app",
                         typeLabel: "Motor Web",
                         tier: "tier-2",
@@ -862,6 +923,7 @@
                     },
                     {
                         name: "Connected Papers",
+                        conns: [{"target":"SciSpace (Typeset.io)","rel":"Análisis profundo del paper semilla identificado en el grafo"}],
                         type: "app",
                         typeLabel: "Plataforma Web",
                         tier: "tier-2",
@@ -875,6 +937,7 @@
                     },
                     {
                         name: "SciSpace (Typeset.io)",
+                        conns: [{"target":"Overleaf (LaTeX)","rel":"Redacción de citas y fórmulas matemáticas derivadas del análisis"}],
                         type: "app",
                         typeLabel: "Plataforma Web",
                         tier: "tier-2",
@@ -888,6 +951,7 @@
                     },
                     {
                         name: "Overleaf (LaTeX)",
+                        conns: [{"target":"Draw.io (Modelado UML & Arquitectura)","rel":"Incrustación de diagramas de arquitectura en formato PDF/SVG vectorial"}],
                         type: "app",
                         typeLabel: "Plataforma Web",
                         tier: "tier-2",
@@ -901,6 +965,7 @@
                     },
                     {
                         name: "Draw.io (Modelado UML & Arquitectura)",
+                        conns: [{"target":"Draw.io & Balsamiq","rel":"Esquematización de arquitectura previa a prototipos de interfaz"}],
                         type: "app",
                         typeLabel: "App / PWA",
                         tier: "tier-3",
@@ -923,6 +988,7 @@
                 tools: [
                     {
                         name: "OpenCode",
+                        conns: [{"target":"Grandes Modelos (LLMs)","rel":"Se conecta a APIs de modelos locales (Ollama) o nubes de inferencia"},{"target":"Modern Web Guidance","rel":"Aplica reglas oficiales para evitar dependencias innecesarias"}],
                         type: "ext",
                         typeLabel: "CLI / Terminal",
                         tier: "tier-1",
@@ -936,6 +1002,7 @@
                     },
                     {
                         name: "Cline (Claude Dev)",
+                        conns: [{"target":"Modern Web Guidance","rel":"Utiliza directrices para generar frontend nativo Baseline en VS Code"},{"target":"CodeRabbit AI","rel":"Los cambios generados se someten a revisión automática en Pull Requests"}],
                         type: "ext",
                         typeLabel: "Extensión VS Code",
                         tier: "tier-1",
@@ -949,6 +1016,7 @@
                     },
                     {
                         name: "Claude Code CLI",
+                        conns: [{"target":"Everything Claude Code (ECC)","rel":"Extensible mediante configuraciones multi-agente y guardarraíles"},{"target":"Cloud, Sandboxes & Repositorios","rel":"Automatiza commits y navegación directa en repositorios Git locales"}],
                         type: "ext",
                         typeLabel: "CLI / Terminal",
                         tier: "tier-1",
@@ -962,6 +1030,7 @@
                     },
                     {
                         name: "Aider",
+                        conns: [{"target":"Cloud, Sandboxes & Repositorios","rel":"Genera commits semánticos y limpios en el historial de Git"}],
                         type: "ext",
                         typeLabel: "CLI / Terminal",
                         tier: "tier-1",
@@ -975,6 +1044,7 @@
                     },
                     {
                         name: "Grandes Modelos (LLMs)",
+                        conns: [{"target":"OpenCode","rel":"Motores de inferencia que impulsan a los agentes de programación"},{"target":"Firecrawl","rel":"Consumen datos web limpios en Markdown para generación RAG"}],
                         type: "app",
                         typeLabel: "Plataforma / API",
                         tier: "tier-1",
@@ -988,6 +1058,7 @@
                     },
                     {
                         name: "OpenHands (OpenDevin)",
+                        conns: [{"target":"Cloud, Sandboxes & Repositorios","rel":"Resuelve issues y genera Pull Requests autónomos en GitHub"}],
                         type: "app",
                         typeLabel: "Plataforma / Docker",
                         tier: "tier-2",
@@ -1001,6 +1072,7 @@
                     },
                     {
                         name: "Everything Claude Code (ECC)",
+                        conns: [{"target":"Claude Code CLI","rel":"Marco de especificaciones y guardarraíles para agentes de consola"}],
                         type: "ext",
                         typeLabel: "Config / Subagentes",
                         tier: "tier-2",
@@ -1014,6 +1086,7 @@
                     },
                     {
                         name: "Lovable & Bolt.new",
+                        conns: [{"target":"Better Auth","rel":"Integración recomendada para autenticación soberana en fullstack generado"},{"target":"Tailwind CSS & GSAP","rel":"Estilizado nativo con clases utilitarias de Tailwind"}],
                         type: "app",
                         typeLabel: "Plataforma Web",
                         tier: "tier-2",
@@ -1027,6 +1100,7 @@
                     },
                     {
                         name: "Kimi K3 & Files2Prompt",
+                        conns: [{"target":"Grandes Modelos (LLMs)","rel":"Empaqueta repositorios enteros para ingesta en ventanas de contexto extensas"}],
                         type: "ext",
                         typeLabel: "CLI & Modelo",
                         tier: "tier-3",
@@ -1049,6 +1123,7 @@
                 tools: [
                     {
                         name: "Modern Web Guidance",
+                        conns: [{"target":"Cline (Claude Dev)","rel":"Instrucciones inyectadas en asistentes para restringir código obsoleto"},{"target":"Tailwind CSS & GSAP","rel":"Combina estilos utilitarios con estándares HTML5 Baseline"}],
                         type: "ext",
                         typeLabel: "Skill / Reglas IDE",
                         tier: "tier-1",
@@ -1062,6 +1137,7 @@
                     },
                     {
                         name: "Draw.io & Balsamiq",
+                        conns: [{"target":"M3E Canvas","rel":"Traducción de wireframes estructurales hacia tokens visuales y maquetación"}],
                         type: "app",
                         typeLabel: "App Web",
                         tier: "tier-1",
@@ -1075,6 +1151,7 @@
                     },
                     {
                         name: "Tailwind CSS & GSAP",
+                        conns: [{"target":"Lovable & Bolt.new","rel":"Diseño atómico y animaciones interactivas en aplicaciones web"}],
                         type: "lib",
                         typeLabel: "Framework & Librería",
                         tier: "tier-1",
@@ -1088,6 +1165,7 @@
                     },
                     {
                         name: "M3E Canvas",
+                        conns: [{"target":"Skills de Diseño Apple (HIG) & Open Design","rel":"Alineación de componentes con guías de diseño sistemáticas"}],
                         type: "app",
                         typeLabel: "Lienzo Web",
                         tier: "tier-2",
@@ -1101,6 +1179,7 @@
                     },
                     {
                         name: "Skills de Diseño Apple (HIG) & Open Design",
+                        conns: [{"target":"Draw.io & Balsamiq","rel":"Pautas estéticas aplicadas al diseño estructural de componentes"}],
                         type: "ext",
                         typeLabel: "Skill / Directrices",
                         tier: "tier-3",
@@ -1123,6 +1202,7 @@
                 tools: [
                     {
                         name: "Better Auth",
+                        conns: [{"target":"Cloud, Sandboxes & Repositorios","rel":"Manejo seguro de credenciales y sesiones en tu propio servidor"}],
                         type: "framework",
                         typeLabel: "Framework / SDK",
                         tier: "tier-1",
@@ -1136,6 +1216,7 @@
                     },
                     {
                         name: "Cloud, Sandboxes & Repositorios",
+                        conns: [{"target":"CodeRabbit AI","rel":"Gatilla auditorías continuas al abrir Pull Requests en GitHub"},{"target":"OSS-Fuzz (Google)","rel":"Pipelines de fuzzing continuo sobre repositorios abiertos"}],
                         type: "app",
                         typeLabel: "Plataforma Cloud",
                         tier: "tier-1",
@@ -1149,6 +1230,7 @@
                     },
                     {
                         name: "Reverse API Engineer",
+                        conns: [{"target":"Better Auth","rel":"Auditoría de endpoints de autenticación y generación de clientes tipados"}],
                         type: "ext",
                         typeLabel: "Herramienta CLI / Script",
                         tier: "tier-2",
@@ -1171,6 +1253,7 @@
                 tools: [
                     {
                         name: "CodeRabbit AI",
+                        conns: [{"target":"Cline (Claude Dev)","rel":"Revisa y valida los parches generados por agentes de código"},{"target":"Autonoma AI","rel":"Complementa la revisión de código con auto-generación de tests unitarios"}],
                         type: "ext",
                         typeLabel: "Bot / GitHub App",
                         tier: "tier-1",
@@ -1184,6 +1267,7 @@
                     },
                     {
                         name: "Autonoma AI",
+                        conns: [{"target":"CodeRabbit AI","rel":"Asegura que los PRs mantengan la cobertura de pruebas en verde"}],
                         type: "app",
                         typeLabel: "Plataforma / Agente",
                         tier: "tier-1",
@@ -1197,6 +1281,7 @@
                     },
                     {
                         name: "OSS-Fuzz (Google)",
+                        conns: [{"target":"Cloud, Sandboxes & Repositorios","rel":"Reporta vulnerabilidades críticas directo en los issues de GitHub"}],
                         type: "framework",
                         typeLabel: "Servicio / Pipeline",
                         tier: "tier-1",
@@ -1210,6 +1295,7 @@
                     },
                     {
                         name: "REA (Reverse Engineer Anything) & EmailOSINT",
+                        conns: [{"target":"CodeRabbit AI","rel":"Auditoría de seguridad en librerías externas antes de su adopción"}],
                         type: "ext",
                         typeLabel: "Servidor MCP & Script",
                         tier: "tier-3",
@@ -1232,6 +1318,7 @@
                 tools: [
                     {
                         name: "Firecrawl",
+                        conns: [{"target":"Grandes Modelos (LLMs)","rel":"Convierte páginas web en Markdown para alimentar contextos de RAG"},{"target":"Agent Reach","rel":"Combina scraping estricto con monitoreo pasivo de comunidades"}],
                         type: "app",
                         typeLabel: "API & Servicio OSS",
                         tier: "tier-1",
@@ -1245,6 +1332,7 @@
                     },
                     {
                         name: "Agent Reach",
+                        conns: [{"target":"Firecrawl","rel":"Monitoreo de redes sociales para extraer URLs que luego son procesadas"}],
                         type: "lib",
                         typeLabel: "SDK / Conector OSS",
                         tier: "tier-2",
@@ -1267,6 +1355,7 @@
                 tools: [
                     {
                         name: "Microsoft Clarity",
+                        conns: [{"target":"MDN Web Docs & Web.dev","rel":"Cruza mapas de calor y clics frustrados con métricas de Core Web Vitals"},{"target":"Estrategia SaaS & Validación de Apps","rel":"Optimización basada en datos reales de uso del producto"}],
                         type: "app",
                         typeLabel: "Plataforma / SDK",
                         tier: "tier-1",
@@ -1280,6 +1369,7 @@
                     },
                     {
                         name: "MDN Web Docs & Web.dev",
+                        conns: [{"target":"Modern Web Guidance","rel":"Base normativa de estándares W3C que orienta las reglas para la IA"}],
                         type: "app",
                         typeLabel: "Portal & Herramientas",
                         tier: "tier-1",
@@ -1293,6 +1383,7 @@
                     },
                     {
                         name: "Similarweb & Meta Ads Library",
+                        conns: [{"target":"Estrategia SaaS & Validación de Apps","rel":"Validación de demanda y canales de adquisición para productos digitales"}],
                         type: "app",
                         typeLabel: "Plataforma Web",
                         tier: "tier-2",
@@ -1306,6 +1397,7 @@
                     },
                     {
                         name: "Formación Técnica de MoureDev",
+                        conns: [{"target":"Convocatorias SENA / Accenture","rel":"Ruta de aprendizaje continuo hacia inserción laboral profesional"}],
                         type: "app",
                         typeLabel: "Comunidad & Cursos",
                         tier: "tier-1",
@@ -1319,6 +1411,7 @@
                     },
                     {
                         name: "Convocatorias SENA / Accenture",
+                        conns: [{"target":"Formación Técnica de MoureDev","rel":"Complemento de habilidades técnicas para vacantes de desarrollo"}],
                         type: "app",
                         typeLabel: "Portal de Empleo",
                         tier: "tier-2",
@@ -1332,6 +1425,7 @@
                     },
                     {
                         name: "Estrategia SaaS & Validación de Apps",
+                        conns: [{"target":"Microsoft Clarity","rel":"Analítica de retención y optimización de flujos de suscripción"}],
                         type: "app",
                         typeLabel: "Metodología / Guía",
                         tier: "tier-3",
@@ -1599,6 +1693,7 @@
         const mDesc = document.getElementById("mDesc");
         const mImpact = document.getElementById("mImpact");
         const mLic = document.getElementById("mLic");
+        const mConns = document.getElementById("mConns");
         const mActions = document.getElementById("mActions");
 
         function openModal(tool, colorVar) {
@@ -1609,6 +1704,47 @@
             mDesc.textContent = tool.what;
             mImpact.textContent = tool.impact;
             mLic.textContent = "Licencia / Modelo: " + tool.lic;
+
+            // Renderizar conexiones con otras herramientas
+            mConns.innerHTML = "";
+            if (tool.conns && tool.conns.length) {
+                const title = document.createElement("h4");
+                title.innerHTML = "🔗 Conexión &amp; Integración con otras herramientas:";
+                mConns.appendChild(title);
+
+                const list = document.createElement("div");
+                list.className = "conns-list";
+
+                tool.conns.forEach(c => {
+                    const item = document.createElement("div");
+                    item.className = "conn-item";
+
+                    const targetSpan = document.createElement("span");
+                    targetSpan.className = "conn-target";
+                    targetSpan.textContent = "➔ " + c.target;
+                    targetSpan.title = "Buscar y ver en el flujo";
+                    targetSpan.addEventListener("click", () => {
+                        backdrop.classList.remove("open");
+                        searchQuery = c.target;
+                        document.getElementById("searchInput").value = c.target;
+                        renderDiagrams();
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                    });
+
+                    const relSpan = document.createElement("span");
+                    relSpan.className = "conn-rel";
+                    relSpan.textContent = c.rel;
+
+                    item.appendChild(targetSpan);
+                    item.appendChild(relSpan);
+                    list.appendChild(item);
+                });
+
+                mConns.appendChild(list);
+                mConns.style.display = "block";
+            } else {
+                mConns.style.display = "none";
+            }
 
             mActions.innerHTML = "";
             if (tool.official && tool.official.length) {
