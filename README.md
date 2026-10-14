@@ -7,10 +7,17 @@ Visualizador interactivo y mapa de arquitectura para flujos de ingeniería de so
 * **Archivo principal:** `index.html`
 
 ## Características Principales
+* **Barra de Objetivos Directos (Misiones):** Acceso rápido e intuitivo orientado a la acción concreta:
+  * `🌐 Ver Todo`
+  * `🔬 Investigar Papers & Código` (Fase 1: Papers With Code, arXiv, SWE-bench, Arena)
+  * `🤖 Programar con Agentes CLI` (Fase 2: OpenCode, Cline, Claude Code, Aider, OpenHands)
+  * `✨ Maquetar Frontend Baseline` (Fase 3: Modern Web Guidance, M3E Canvas, Apple HIG)
+  * `🛡️ Auditar Seguridad & Testing` (Fases 4 y 5: Better Auth, CodeRabbit, Autonoma, OSS-Fuzz)
+  * `📈 Validar Métricas & Producto` (Fases 6 y 7: Firecrawl, Clarity, MDN Web Docs, Similarweb)
+* **Divulgación Progresiva:** Tarjetas ligeras con rol técnico, frase directa de valor y chips compactos de conexión interactiva (`🔗 Conecta: [Target]`). Al hacer clic se despliega el modal con la arquitectura, relaciones completas y enlaces oficiales.
+* **Filtros Técnicos Plegables:** Control desplegable `[⚙️ Filtros Técnicos ▾]` para filtrar por jerarquía (Top 1 Oro, Alta, Especializado) o tipo de artefacto (App, Extensión/CLI, Librería, Framework).
 * **Vistas duales:** Alternador rápido entre vista de **Flujo horizontal por fases (⇄)** y **Cuadrícula completa por tarjetas (☷)**.
 * **Buscador interactivo y filtros en tiempo real:** Búsqueda instantánea por nombre de herramienta, palabra clave o rol.
-* **Modal interactivo:** Clic en cualquier tarjeta o nodo para abrir su ficha técnica detallada (qué hace, cómo ayuda, cuándo usarla y enlaces directos).
-* **Jerarquía visual:** Clasificación con insignias de prioridad (Top 1 Oro, Alta Prioridad, Especializado).
 * **Paleta visual suave:** Temas Dark y Light calibrados en tonos pizarra (slate), suaves a la vista y sin negros saturados.
 
 ## Fases del Flujo de Trabajo

@@ -219,6 +219,131 @@
             font-weight: 600;
         }
 
+        /* BARRA DE OBJETIVOS / INTENCIONES DIRECTAS */
+        .missions-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            padding: 8px 12px;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 12px;
+            border: 1px solid var(--line);
+        }
+
+        :root[data-theme="dark"] .missions-bar {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .mission-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--muted);
+            margin-right: 2px;
+        }
+
+        .mission-pill {
+            font-size: 0.8rem;
+            padding: 5px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: var(--panel);
+            color: var(--ink);
+            cursor: pointer;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .mission-pill:hover {
+            border-color: var(--c-p1);
+            transform: translateY(-1px);
+        }
+
+        .mission-pill.active {
+            background: var(--active-tab-bg);
+            color: var(--active-tab-text);
+            border-color: var(--active-tab-bg);
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+            font-weight: 600;
+        }
+
+        .advanced-toggle {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 8px;
+            border: 1px dashed var(--line);
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+            margin-left: auto;
+            transition: all 0.15s ease;
+        }
+
+        .advanced-toggle:hover, .advanced-toggle.open {
+            color: var(--ink);
+            border-color: var(--ink);
+            background: rgba(0,0,0,0.03);
+        }
+
+        .advanced-filters {
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed var(--line);
+            width: 100%;
+        }
+
+        .advanced-filters.open {
+            display: flex;
+        }
+
+        /* CHIPS COMPACTOS DE CONEXIÓN EN TARJETA */
+        .card-conns-inline {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+            padding: 4px 6px;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 6px;
+            border: 1px solid var(--line);
+        }
+
+        :root[data-theme="dark"] .card-conns-inline {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .conn-chip-label {
+            font-size: 0.65rem;
+            color: var(--muted);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .conn-chip-mini {
+            font-size: 0.66rem;
+            padding: 1px 6px;
+            border-radius: 4px;
+            background: var(--panel);
+            color: var(--c, var(--c-p1));
+            border: 1px solid var(--line);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.12s ease;
+        }
+
+        .conn-chip-mini:hover {
+            border-color: var(--c, var(--c-p1));
+            filter: brightness(1.1);
+        }
+
         /* NAVEGADOR DE FASES DE INGENIERÍA */
         .stage-nav-wrapper {
             max-width: 1440px;
@@ -784,20 +909,35 @@
                 <span class="search-icon">🔍</span>
                 <input type="text" id="searchInput" class="search-input" placeholder="Buscar agente, testing, LLM, papers with code, arXiv, SWE-bench, benchmarks...">
             </div>
-            <div class="filter-bar">
-                <span style="font-size:0.8rem; color:var(--muted); font-weight:600;">Jerarquía:</span>
-                <button class="filter-btn active" data-prio="all">Todas</button>
-                <button class="filter-btn" data-prio="tier-1">👑 Top 1 Oro</button>
-                <button class="filter-btn" data-prio="tier-2">🔥 Alta</button>
-                <button class="filter-btn" data-prio="tier-3">🎯 Especializado</button>
+            <!-- Barra de Objetivos / Intenciones Rápidas -->
+            <div class="missions-bar">
+                <span class="mission-label">Objetivo:</span>
+                <button class="mission-pill active" data-mission="all">🌐 Ver Todo</button>
+                <button class="mission-pill" data-mission="research">🔬 Investigar Papers &amp; Código</button>
+                <button class="mission-pill" data-mission="agents">🤖 Programar con Agentes CLI</button>
+                <button class="mission-pill" data-mission="frontend">✨ Maquetar Frontend Baseline</button>
+                <button class="mission-pill" data-mission="backend_qa">🛡️ Auditar Seguridad &amp; Testing</button>
+                <button class="mission-pill" data-mission="metrics_saas">📈 Validar Métricas &amp; Producto</button>
+                <button class="advanced-toggle" id="advancedToggle" type="button">⚙️ Filtros Técnicos ▾</button>
             </div>
-            <div class="filter-bar" style="margin-top:2px;">
-                <span style="font-size:0.8rem; color:var(--muted); font-weight:600;">Tipo de Recurso:</span>
-                <button class="filter-btn type-filter-btn active" data-type="all">Todos</button>
-                <button class="filter-btn type-filter-btn" data-type="app">🌐 App / Plataforma Web</button>
-                <button class="filter-btn type-filter-btn" data-type="ext">🧩 Extensión / CLI / Tool</button>
-                <button class="filter-btn type-filter-btn" data-type="lib">📦 Librería / SDK</button>
-                <button class="filter-btn type-filter-btn" data-type="framework">⚡ Framework / Motor</button>
+
+            <!-- Filtros Técnicos Secundarios (Plegables) -->
+            <div class="advanced-filters" id="advancedFilters">
+                <div class="filter-bar">
+                    <span style="font-size:0.76rem; color:var(--muted); font-weight:600;">Jerarquía:</span>
+                    <button class="filter-btn active" data-prio="all">Todas</button>
+                    <button class="filter-btn" data-prio="tier-1">👑 Top 1 Oro</button>
+                    <button class="filter-btn" data-prio="tier-2">🔥 Alta</button>
+                    <button class="filter-btn" data-prio="tier-3">🎯 Especializado</button>
+                </div>
+                <div class="filter-bar">
+                    <span style="font-size:0.76rem; color:var(--muted); font-weight:600;">Tipo de Recurso:</span>
+                    <button class="filter-btn type-filter-btn active" data-type="all">Todos</button>
+                    <button class="filter-btn type-filter-btn" data-type="app">🌐 App / Plataforma Web</button>
+                    <button class="filter-btn type-filter-btn" data-type="ext">🧩 Extensión / CLI / Tool</button>
+                    <button class="filter-btn type-filter-btn" data-type="lib">📦 Librería / SDK</button>
+                    <button class="filter-btn type-filter-btn" data-type="framework">⚡ Framework / Motor</button>
+                </div>
             </div>
         </div>
     </header>
@@ -1445,10 +1585,21 @@
         let activeType = "all";
         let searchQuery = "";
         let activeStageId = "all";
+        let activeMission = "all";
         let isGridMode = false;
 
         const stageNav = document.getElementById("stageNav");
         const diagramsContainer = document.getElementById("diagramsContainer");
+
+        // Mapeo de objetivos directos hacia identificadores de Fases
+        const MISSION_STAGE_MAP = {
+            "all": "all",
+            "research": ["fase1_research"],
+            "agents": ["fase2_agents"],
+            "frontend": ["fase3_frontend"],
+            "backend_qa": ["fase4_backend", "fase5_qa_sec"],
+            "metrics_saas": ["fase6_monitoreo", "fase7_deployment"]
+        };
 
         function buildStageNav() {
             stageNav.innerHTML = "";
@@ -1459,6 +1610,8 @@
             allBtn.textContent = "🌐 Ver Todo el Pipeline";
             allBtn.addEventListener("click", () => {
                 activeStageId = "all";
+                activeMission = "all";
+                updateMissionPills();
                 updateStageNav();
                 renderDiagrams();
             });
@@ -1497,12 +1650,24 @@
             });
         }
 
+        function updateMissionPills() {
+            document.querySelectorAll(".mission-pill").forEach(p => {
+                p.classList.toggle("active", p.dataset.mission === activeMission);
+            });
+        }
+
         function renderDiagrams() {
             diagramsContainer.innerHTML = "";
 
-            const listToRender = activeStageId === "all" 
-                ? SOFTWARE_PIPELINE 
-                : SOFTWARE_PIPELINE.filter(d => d.id === activeStageId);
+            let listToRender;
+            if (activeStageId !== "all") {
+                listToRender = SOFTWARE_PIPELINE.filter(d => d.id === activeStageId);
+            } else if (activeMission !== "all") {
+                const targetStages = MISSION_STAGE_MAP[activeMission] || [];
+                listToRender = SOFTWARE_PIPELINE.filter(d => targetStages.includes(d.id));
+            } else {
+                listToRender = SOFTWARE_PIPELINE;
+            }
 
             listToRender.forEach(stage => {
                 const matchedTools = stage.tools.filter(tool => {
@@ -1622,6 +1787,25 @@
                         what.className = "what";
                         what.textContent = tool.what;
                         card.appendChild(what);
+
+                        // Chips compactos de conexión interactiva
+                        if (tool.conns && tool.conns.length > 0) {
+                            const connsDiv = document.createElement("div");
+                            connsDiv.className = "card-conns-inline";
+                            connsDiv.innerHTML = "<span class='conn-chip-label'>🔗 Conecta:</span>";
+                            tool.conns.forEach(c => {
+                                const chip = document.createElement("span");
+                                chip.className = "conn-chip-mini";
+                                chip.textContent = c.target;
+                                chip.title = c.rel + " (Clic para ver detalles)";
+                                chip.addEventListener("click", (e) => {
+                                    e.stopPropagation();
+                                    openModal(tool, stage.color);
+                                });
+                                connsDiv.appendChild(chip);
+                            });
+                            card.appendChild(connsDiv);
+                        }
 
                         const impact = document.createElement("div");
                         impact.className = "impact";
@@ -1787,10 +1971,32 @@
             renderDiagrams();
         });
 
+        // Barra de objetivos directos (Misiones)
+        document.querySelectorAll(".mission-pill").forEach(pill => {
+            pill.addEventListener("click", () => {
+                document.querySelectorAll(".mission-pill").forEach(p => p.classList.remove("active"));
+                pill.classList.add("active");
+                activeMission = pill.dataset.mission;
+                activeStageId = "all";
+                updateStageNav();
+                renderDiagrams();
+            });
+        });
+
+        // Alternador de Filtros Técnicos Avanzados
+        const advToggle = document.getElementById("advancedToggle");
+        const advFilters = document.getElementById("advancedFilters");
+        if (advToggle && advFilters) {
+            advToggle.addEventListener("click", () => {
+                advFilters.classList.toggle("open");
+                advToggle.classList.toggle("open");
+            });
+        }
+
         // Filtro por jerarquía
-        document.querySelectorAll(".filter-bar:not([style*='margin-top']) .filter-btn").forEach(btn => {
+        document.querySelectorAll(".advanced-filters .filter-btn:not(.type-filter-btn)").forEach(btn => {
             btn.addEventListener("click", () => {
-                document.querySelectorAll(".filter-bar:not([style*='margin-top']) .filter-btn").forEach(b => b.classList.remove("active"));
+                document.querySelectorAll(".advanced-filters .filter-btn:not(.type-filter-btn)").forEach(b => b.classList.remove("active"));
                 btn.classList.add("active");
                 activeTier = btn.dataset.prio;
                 renderDiagrams();
