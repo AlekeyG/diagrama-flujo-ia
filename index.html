@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pipeline Interactivo de Ingeniería de Software con IA</title>
+    <title>Pipeline de Ingeniería de Software con IA</title>
     <style>
         :root {
             --bg: #f8fafc;
@@ -16,22 +16,27 @@
             --line: #e2e8f0;
             --active-tab-bg: #475569;
             --active-tab-text: #ffffff;
-            --p1: #3b82f6;
-            --p2: #8b5cf6;
-            --p3: #0d9488;
-            --p4: #e11d48;
-            --p5: #d97706;
-            --p6: #64748b;
+            
+            /* Fases temáticas */
+            --c-p1: #2563eb;       /* Agentes & Modelos */
+            --c-p2: #8b5cf6;       /* Frontend & Diseño */
+            --c-p3: #0d9488;       /* Backend, Auth & Cloud */
+            --c-p4: #e11d48;       /* Testing, QA & Seguridad */
+            --c-p5: #d97706;       /* Datos, RAG & Scraping */
+            --c-p6: #475569;       /* Estrategia & Empleo */
+            
             --shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
-            --prio-core-bg: #eff6ff;
-            --prio-core-border: #93c5fd;
-            --prio-core-text: #2563eb;
-            --prio-high-bg: #ecfdf5;
-            --prio-high-border: #a7f3d0;
-            --prio-high-text: #059669;
-            --prio-opt-bg: #f8fafc;
-            --prio-opt-border: #cbd5e1;
-            --prio-opt-text: #64748b;
+            
+            /* Tiers de Prioridad */
+            --prio-tier1-bg: #eff6ff;
+            --prio-tier1-border: #93c5fd;
+            --prio-tier1-text: #2563eb;
+            --prio-tier2-bg: #ecfdf5;
+            --prio-tier2-border: #a7f3d0;
+            --prio-tier2-text: #059669;
+            --prio-tier3-bg: #f8fafc;
+            --prio-tier3-border: #cbd5e1;
+            --prio-tier3-text: #64748b;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -45,22 +50,24 @@
                 --line: #2d3748;
                 --active-tab-bg: #334155;
                 --active-tab-text: #f8fafc;
-                --p1: #60a5fa;
-                --p2: #a78bfa;
-                --p3: #2dd4bf;
-                --p4: #fb7185;
-                --p5: #fbbf24;
-                --p6: #94a3b8;
+                
+                --c-p1: #60a5fa;
+                --c-p2: #a78bfa;
+                --c-p3: #2dd4bf;
+                --c-p4: #fb7185;
+                --c-p5: #fbbf24;
+                --c-p6: #94a3b8;
+                
                 --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-                --prio-core-bg: rgba(59, 130, 246, 0.12);
-                --prio-core-border: rgba(96, 165, 250, 0.4);
-                --prio-core-text: #93c5fd;
-                --prio-high-bg: rgba(16, 185, 129, 0.12);
-                --prio-high-border: rgba(52, 211, 153, 0.4);
-                --prio-high-text: #6ee7b7;
-                --prio-opt-bg: rgba(148, 163, 184, 0.08);
-                --prio-opt-border: rgba(148, 163, 184, 0.25);
-                --prio-opt-text: #94a3b8;
+                --prio-tier1-bg: rgba(59, 130, 246, 0.12);
+                --prio-tier1-border: rgba(96, 165, 250, 0.4);
+                --prio-tier1-text: #93c5fd;
+                --prio-tier2-bg: rgba(16, 185, 129, 0.12);
+                --prio-tier2-border: rgba(52, 211, 153, 0.4);
+                --prio-tier2-text: #6ee7b7;
+                --prio-tier3-bg: rgba(148, 163, 184, 0.08);
+                --prio-tier3-border: rgba(148, 163, 184, 0.25);
+                --prio-tier3-text: #94a3b8;
             }
         }
 
@@ -74,22 +81,24 @@
             --line: #2d3748;
             --active-tab-bg: #334155;
             --active-tab-text: #f8fafc;
-            --p1: #60a5fa;
-            --p2: #a78bfa;
-            --p3: #2dd4bf;
-            --p4: #fb7185;
-            --p5: #fbbf24;
-            --p6: #94a3b8;
+            
+            --c-p1: #60a5fa;
+            --c-p2: #a78bfa;
+            --c-p3: #2dd4bf;
+            --c-p4: #fb7185;
+            --c-p5: #fbbf24;
+            --c-p6: #94a3b8;
+            
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-            --prio-core-bg: rgba(59, 130, 246, 0.12);
-            --prio-core-border: rgba(96, 165, 250, 0.4);
-            --prio-core-text: #93c5fd;
-            --prio-high-bg: rgba(16, 185, 129, 0.12);
-            --prio-high-border: rgba(52, 211, 153, 0.4);
-            --prio-high-text: #6ee7b7;
-            --prio-opt-bg: rgba(148, 163, 184, 0.08);
-            --prio-opt-border: rgba(148, 163, 184, 0.25);
-            --prio-opt-text: #94a3b8;
+            --prio-tier1-bg: rgba(59, 130, 246, 0.12);
+            --prio-tier1-border: rgba(96, 165, 250, 0.4);
+            --prio-tier1-text: #93c5fd;
+            --prio-tier2-bg: rgba(16, 185, 129, 0.12);
+            --prio-tier2-border: rgba(52, 211, 153, 0.4);
+            --prio-tier2-text: #6ee7b7;
+            --prio-tier3-bg: rgba(148, 163, 184, 0.08);
+            --prio-tier3-border: rgba(148, 163, 184, 0.25);
+            --prio-tier3-text: #94a3b8;
         }
 
         * {
@@ -105,14 +114,14 @@
         }
 
         header {
-            padding: 26px 24px 10px;
+            padding: 28px 24px 12px;
             max-width: 1440px;
             margin: 0 auto;
         }
 
         h1 {
             margin: 0 0 6px;
-            font-size: 1.65rem;
+            font-size: 1.7rem;
             letter-spacing: -0.02em;
             color: var(--title);
         }
@@ -120,7 +129,7 @@
         header p {
             margin: 0;
             color: var(--muted);
-            max-width: 80ch;
+            max-width: 82ch;
         }
 
         .toolbar {
@@ -144,8 +153,8 @@
         }
 
         .btn-ctrl:hover {
-            border-color: var(--p1);
-            color: var(--p1);
+            border-color: var(--c-p1);
+            color: var(--c-p1);
         }
 
         .search-box {
@@ -168,8 +177,8 @@
         }
 
         .search-input:focus {
-            border-color: var(--p1);
-            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+            border-color: var(--c-p1);
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.18);
         }
 
         .search-icon {
@@ -207,7 +216,7 @@
             font-weight: 600;
         }
 
-        /* NAVEGADOR HORIZONTAL POR ETAPAS / SUB-DIAGRAMAS */
+        /* NAVEGADOR DE FASES DE INGENIERÍA */
         .stage-nav-wrapper {
             max-width: 1440px;
             margin: 16px auto 0;
@@ -259,7 +268,7 @@
             display: inline-block;
         }
 
-        /* VISTAS DE DIAGRAMAS: HORIZONTAL PIPELINE */
+        /* LAYOUT HÍBRIDO ADAPTABLE: HORIZONTAL FLUIDO + GRID */
         .view-container {
             max-width: 1440px;
             margin: 0 auto;
@@ -267,11 +276,16 @@
         }
 
         .section-header {
-            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 14px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .section-header h2 {
-            margin: 0 0 4px;
+            margin: 0 0 3px;
             font-size: 1.25rem;
             color: var(--title);
             display: flex;
@@ -285,23 +299,55 @@
             font-size: 0.82rem;
         }
 
-        /* CONTENEDOR DE DIAGRAMA HORIZONTAL CON SCROLL SUAVE */
-        .h-diagram-scroll {
+        .view-switch {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn-view {
+            padding: 3px 8px;
+            font-size: 0.74rem;
+            border-radius: 6px;
+            border: 1px solid var(--line);
+            background: var(--panel);
+            color: var(--muted);
+            cursor: pointer;
+        }
+
+        .btn-view.active {
+            background: var(--ink);
+            color: var(--bg);
+            border-color: var(--ink);
+        }
+
+        /* Pista horizontal */
+        .track-wrapper {
             overflow-x: auto;
-            padding: 10px 4px 20px;
+            padding: 8px 4px 18px;
             margin-bottom: 30px;
         }
 
-        .h-diagram-track {
+        .track-wrapper.grid-mode {
+            overflow-x: visible;
+        }
+
+        .track-flow {
             display: flex;
-            gap: 20px;
+            gap: 18px;
             align-items: stretch;
             min-width: min-content;
         }
 
-        /* TARJETA DE HERRAMIENTA EN DIAGRAMA HORIZONTAL */
+        .track-wrapper.grid-mode .track-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 18px;
+            min-width: unset;
+        }
+
+        /* TARJETA DE HERRAMIENTA DE SOFTWARE CON IA */
         .tool-card {
-            width: 320px;
+            width: 330px;
             flex-shrink: 0;
             background: var(--panel-card);
             border: 1px solid var(--line);
@@ -315,6 +361,10 @@
             cursor: pointer;
             transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
             position: relative;
+        }
+
+        .track-wrapper.grid-mode .tool-card {
+            width: 100%;
         }
 
         .tool-card:hover {
@@ -333,13 +383,13 @@
 
         .tool-card h3 {
             margin: 0;
-            font-size: 0.95rem;
+            font-size: 0.96rem;
             font-weight: 600;
             color: var(--title);
         }
 
-        .prio-badge {
-            font-size: 0.65rem;
+        .rank-badge {
+            font-size: 0.64rem;
             font-weight: 700;
             padding: 2px 6px;
             border-radius: 4px;
@@ -348,22 +398,22 @@
             white-space: nowrap;
         }
 
-        .prio-badge.core {
-            background: var(--prio-core-bg);
-            color: var(--prio-core-text);
-            border: 1px solid var(--prio-core-border);
+        .rank-badge.tier-1 {
+            background: var(--prio-tier1-bg);
+            color: var(--prio-tier1-text);
+            border: 1px solid var(--prio-tier1-border);
         }
 
-        .prio-badge.high {
-            background: var(--prio-high-bg);
-            color: var(--prio-high-text);
-            border: 1px solid var(--prio-high-border);
+        .rank-badge.tier-2 {
+            background: var(--prio-tier2-bg);
+            color: var(--prio-tier2-text);
+            border: 1px solid var(--prio-tier2-border);
         }
 
-        .prio-badge.opt {
-            background: var(--prio-opt-bg);
-            color: var(--prio-opt-text);
-            border: 1px solid var(--prio-opt-border);
+        .rank-badge.tier-3 {
+            background: var(--prio-tier3-bg);
+            color: var(--prio-tier3-text);
+            border: 1px solid var(--prio-tier3-border);
         }
 
         .tool-card .role {
@@ -407,7 +457,7 @@
             gap: 6px;
         }
 
-        .tag {
+        .tag-lic {
             font-size: 0.68rem;
             border: 1px solid var(--line);
             border-radius: 999px;
@@ -450,19 +500,22 @@
             color: #ffffff;
         }
 
-        /* CONECTOR HORIZONTAL ENTRE PASOS DEL DIAGRAMA */
-        .step-connector {
+        .step-arrow {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 24px;
+            width: 20px;
             color: var(--muted);
             font-weight: bold;
             font-size: 1.1rem;
             flex-shrink: 0;
         }
 
-        /* MODAL DE DETALLE RÁPIDO (CLICK DIRECTO A HERRAMIENTA) */
+        .track-wrapper.grid-mode .step-arrow {
+            display: none;
+        }
+
+        /* MODAL DE DETALLE INTERACTIVO */
         .modal-backdrop {
             position: fixed;
             inset: 0;
@@ -482,7 +535,7 @@
         .modal-box {
             background: var(--panel);
             border: 1px solid var(--line);
-            border-top: 5px solid var(--c, var(--p1));
+            border-top: 5px solid var(--c, var(--c-p1));
             border-radius: 14px;
             max-width: 580px;
             width: 100%;
@@ -518,7 +571,7 @@
         .modal-box .m-role {
             font-size: 0.78rem;
             font-weight: 600;
-            color: var(--c, var(--p1));
+            color: var(--c, var(--c-p1));
             text-transform: uppercase;
             margin-bottom: 12px;
         }
@@ -532,7 +585,7 @@
 
         .modal-box .m-impact {
             background: rgba(0, 0, 0, 0.03);
-            border-left: 3px solid var(--c, var(--p1));
+            border-left: 3px solid var(--c, var(--c-p1));
             padding: 10px 12px;
             border-radius: 0 6px 6px 0;
             margin-bottom: 18px;
@@ -566,7 +619,7 @@
         }
 
         .modal-actions a.btn-primary {
-            background: var(--c, var(--p1));
+            background: var(--c, var(--c-p1));
             color: #ffffff;
         }
 
@@ -581,8 +634,8 @@
         }
 
         .modal-actions a.btn-secondary:hover {
-            border-color: var(--c, var(--p1));
-            color: var(--c, var(--p1));
+            border-color: var(--c, var(--c-p1));
+            color: var(--c, var(--c-p1));
         }
 
         footer {
@@ -598,33 +651,33 @@
 
 <body>
     <header>
-        <h1>Pipeline Interactivo de Ingeniería de Software con IA</h1>
-        <p>Visualización por <strong>sub-diagramas horizontales independientes</strong>. Haz clic en cualquier tarjeta para abrir su panel interactivo con accesos directos.</p>
+        <h1>Pipeline de Ingeniería de Software con IA</h1>
+        <p>Ecosistema integral clasificado por <strong>fases del ciclo de vida del software</strong>, posicionando en los primeros puestos a los mejores agentes de código abierto, herramientas de testing autónomo, arquitecturas frontend y modelos fundacionales.</p>
         <div class="toolbar">
             <button class="btn-ctrl" id="theme" type="button" aria-label="Cambiar tema">Cambiar tema</button>
             <div class="search-box">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" class="search-input" placeholder="Buscar herramienta o aporte...">
+                <input type="text" id="searchInput" class="search-input" placeholder="Buscar agente, testing, LLM, auth, fuzzing...">
             </div>
             <div class="filter-bar">
-                <span style="font-size:0.8rem; color:var(--muted); font-weight:600;">Prioridad:</span>
+                <span style="font-size:0.8rem; color:var(--muted); font-weight:600;">Jerarquía:</span>
                 <button class="filter-btn active" data-prio="all">Todas</button>
-                <button class="filter-btn" data-prio="core">⚡ Core</button>
-                <button class="filter-btn" data-prio="high">🔥 Alta</button>
-                <button class="filter-btn" data-prio="opt">💡 Opcional</button>
+                <button class="filter-btn" data-prio="tier-1">👑 Top 1 / Estándar Oro</button>
+                <button class="filter-btn" data-prio="tier-2">🔥 Alta Relevancia</button>
+                <button class="filter-btn" data-prio="tier-3">🎯 Especializado</button>
             </div>
         </div>
     </header>
 
-    <!-- NAVEGADOR DE SUB-DIAGRAMAS HORIZONTALES -->
+    <!-- NAVEGADOR DE FASES -->
     <div class="stage-nav-wrapper">
         <div class="stage-nav" id="stageNav"></div>
     </div>
 
-    <!-- CONTENEDOR PRINCIPAL DE DIAGRAMAS HORIZONTALES -->
+    <!-- CONTENEDOR DE DIAGRAMAS / CLUSTERS -->
     <div class="view-container" id="diagramsContainer"></div>
 
-    <!-- MODAL DE DETALLE INTERACTIVO -->
+    <!-- MODAL DE INSPECCIÓN RÁPIDA -->
     <div class="modal-backdrop" id="modalBackdrop">
         <div class="modal-box" id="modalBox">
             <button class="modal-close" id="modalClose">&times;</button>
@@ -632,7 +685,7 @@
             <div class="m-role" id="mRole">Rol</div>
             <div class="m-desc" id="mDesc">Descripción</div>
             <div class="m-impact" id="mImpact">Aporte</div>
-            <div class="tag" id="mLic">Licencia</div>
+            <div class="tag-lic" id="mLic">Licencia</div>
             <div class="modal-actions" id="mActions"></div>
         </div>
     </div>
@@ -642,244 +695,215 @@
     </footer>
 
     <script>
-        const DIAGRAMS = [
+        const SOFTWARE_PIPELINE = [
             {
-                id: "fase1",
+                id: "fase1_agents",
                 n: "Fase 1",
-                title: "Codificación Asistida & Agentes Autónomos",
-                desc: "Desde modelos de razonamiento hasta agentes autónomos en consola",
-                color: "--p1",
+                title: "1. Agentes de Código Autónomos & LLMs",
+                desc: "Agentes de consola, pair programming en terminal, orquestadores y modelos de razonamiento",
+                color: "--c-p1",
                 tools: [
                     {
-                        id: "llms",
-                        name: "Grandes Modelos (LLMs)",
-                        prio: "core",
-                        prioLabel: "Core",
-                        role: "Motores Fundacionales de Razonamiento",
-                        what: "Chats y asistentes de cabecera: ChatGPT, Claude 3.7 Sonnet, DeepSeek R1 y Microsoft Copilot.",
-                        impact: "Aporte: Comparación multi-modelo de arquitectura, resolución de problemas algorítmicos complejos y generación de contexto.",
-                        lic: "Freemium / Comercial",
-                        official: [["ChatGPT", "https://chatgpt.com/"], ["Claude", "https://claude.ai/"], ["DeepSeek", "https://chat.deepseek.com/"], ["Copilot", "https://copilot.microsoft.com/"]],
+                        name: "OpenCode",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Agente de Consola Open-Source (TUI)",
+                        what: "Agente CLI de código abierto independiente conectado a +75 proveedores de modelos o modelos 100% locales (Ollama/LM Studio). Sin cuotas de suscripción de interfaz.",
+                        impact: "Aporte: El estándar de oro comunitario para programar con agentes en terminal. Elimina vendor lock-in y protege código confidencial en tu propia máquina.",
+                        lic: "Open Source (MIT)",
+                        official: [["Web", "https://opencode.ai/"], ["GitHub", "https://github.com/anomalyco/opencode"]],
+                        refs: [["Ref 1", "https://www.facebook.com/share/r/14hWsnezzaB/"], ["Ref 2", "https://www.facebook.com/share/r/1BGHLzGDm4/"]]
+                    },
+                    {
+                        name: "Cline (Claude Dev)",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Agente Autónomo en VS Code con Checkpoints",
+                        what: "Extensión open-source líder en VS Code que crea/edita archivos, ejecuta comandos de terminal y solicita confirmación humana explícita antes de acciones críticas.",
+                        impact: "Aporte: Trae autonomía completa de agentes dentro del editor con modelo Bring-Your-Own-Key (BYOK) sin planes de suscripción cerrados.",
+                        lic: "Open Source (Apache 2.0)",
+                        official: [["Marketplace", "https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev"], ["GitHub", "https://github.com/cline/cline"]],
                         refs: []
                     },
                     {
-                        id: "claude-code",
                         name: "Claude Code CLI",
-                        prio: "core",
-                        prioLabel: "Core",
-                        role: "Agente Autónomo de Sistema",
-                        what: "Agente de consola de Anthropic con permisos para navegar directorios, editar código y correr bash de forma autónoma.",
-                        impact: "Aporte: Resuelve refactorizaciones de gran envergadura y valida compilaciones de inmediato en tu terminal.",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Agente Oficial de Consola (Anthropic)",
+                        what: "Agente autónomo de consola de Anthropic diseñado para proyectos complejos con permisos de navegación de repositorio, ejecución de linters y suites de test.",
+                        impact: "Aporte: Máxima capacidad de razonamiento multi-archivo directamente integrado en la terminal del sistema operativo.",
                         lic: "Propietario / API",
                         official: [["Anthropic", "https://www.anthropic.com/claude-code"]],
                         refs: []
                     },
                     {
-                        id: "opencode",
-                        name: "OpenCode",
-                        prio: "core",
-                        prioLabel: "Core",
-                        role: "Agente de Consola (TUI)",
-                        what: "Agente CLI de código abierto conectado a +75 proveedores o modelos 100% locales (Ollama/LM Studio).",
-                        impact: "Aporte: Elimina suscripciones fijas y desbloquea desarrollo privado sin fugas de datos hacia la nube.",
-                        lic: "Open Source (Gratis)",
-                        official: [["Web", "https://opencode.ai/"], ["GitHub", "https://github.com/anomalyco/opencode"]],
-                        refs: [["Ref 1", "https://www.facebook.com/share/r/14hWsnezzaB/"], ["Ref 2", "https://www.facebook.com/share/r/1BGHLzGDm4/"]]
+                        name: "Aider",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Pair Programming con Commits Automáticos",
+                        what: "Herramienta CLI para programar en pareja en la terminal conectada a Git. Cada refactorización o cambio lógico genera automáticamente un commit limpio y descriptivo.",
+                        impact: "Aporte: Historial de Git impecable y navegación profunda en repositorios grandes mediante mapeo AST del código.",
+                        lic: "Open Source (Apache 2.0)",
+                        official: [["Web", "https://aider.chat/"], ["GitHub", "https://github.com/paul-gauthier/aider"]],
+                        refs: []
                     },
                     {
-                        id: "ecc",
+                        name: "Grandes Modelos (LLMs)",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Motores Fundacionales de Razonamiento",
+                        what: "Chats y asistentes de cabecera para lógica, arquitectura y resolución de dudas: ChatGPT, Claude 3.7 Sonnet, DeepSeek R1 y Microsoft Copilot.",
+                        impact: "Aporte: Comparación multi-modelo para arquitectura, debugging de algoritmos y formulación de estrategias técnicas.",
+                        lic: "Freemium / Comercial",
+                        official: [["ChatGPT", "https://chatgpt.com/"], ["Claude", "https://claude.ai/"], ["DeepSeek", "https://chat.deepseek.com/"], ["Copilot", "https://copilot.microsoft.com/"]],
+                        refs: []
+                    },
+                    {
+                        name: "OpenHands (OpenDevin)",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Plataforma de Ingeniería Autónoma en Sandbox",
+                        what: "Plataforma de agentes autónomos que opera en un contenedor Docker aislado, capaz de resolver issues de GitHub, compilar entornos y auto-reparar fallos.",
+                        impact: "Aporte: Permite delegar tareas pesadas de mantenimiento e investigación de bugs sin arriesgar tu entorno local.",
+                        lic: "Open Source (MIT)",
+                        official: [["Web", "https://openhands.ai/"], ["GitHub", "https://github.com/All-Hands-AI/OpenHands"]],
+                        refs: []
+                    },
+                    {
                         name: "Everything Claude Code (ECC)",
-                        prio: "high",
-                        prioLabel: "Alta",
-                        role: "Orquestador de Subagentes",
-                        what: "Framework de más de 70 subagentes especializados, memoria entre sesiones y escudo de seguridad AgentShield.",
-                        impact: "Aporte: Evita alucinaciones imponiendo especificaciones formales de diseño de software (SDD).",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Orquestador de 70+ Subagentes",
+                        what: "Framework de más de 70 subagentes preconfigurados, memoria persistente entre sesiones y escudo AgentShield.",
+                        impact: "Aporte: Evita alucinaciones imponiendo especificaciones formales de diseño de software (SDD) en tareas largas.",
                         lic: "Open Source",
                         official: [["GitHub", "https://github.com/affaan-m/ECC"]],
                         refs: [["Ref 3", "https://www.facebook.com/share/r/1EjGyB9V6C/"], ["Ref 4", "https://www.facebook.com/share/r/1TxX5m2S5G/"]]
                     },
                     {
-                        id: "google-ai",
-                        name: "Google AI Suite & Colab",
-                        prio: "high",
-                        prioLabel: "Alta",
-                        role: "Laboratorio Experimental & RAG",
-                        what: "AI Studio con contexto extendido, Colab para notebooks Python y NotebookLM para síntesis documental.",
-                        impact: "Aporte: Experimentación con APIs de Gemini y lectura de bibliotecas técnicas completas.",
-                        lic: "Freemium",
-                        official: [["AI Studio", "https://aistudio.google.com/"], ["Colab", "https://colab.research.google.com/"], ["NotebookLM", "https://notebooklm.google.com/"]],
-                        refs: []
-                    },
-                    {
-                        id: "builders",
                         name: "Lovable & Bolt.new",
-                        prio: "high",
-                        prioLabel: "Alta",
-                        role: "Generadores Web Fullstack",
-                        what: "Entornos reactivos en el navegador para construir y probar aplicaciones completas con backend en minutos.",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Generadores Web Fullstack en Navegador",
+                        what: "Entornos reactivos en el navegador para construir y probar aplicaciones completas con backend en minutos a partir de prompts.",
                         impact: "Aporte: Acelera la validación de prototipos y pruebas de concepto (MVPs) a velocidad récord.",
                         lic: "Freemium",
                         official: [["Lovable", "https://lovable.dev/"], ["Bolt.new", "https://bolt.new/"]],
                         refs: []
                     },
                     {
-                        id: "kimi",
-                        name: "Kimi K3 (Moonshot)",
-                        prio: "opt",
-                        prioLabel: "Opcional",
-                        role: "Modelo de Contexto Masivo",
-                        what: "Modelo open-weights de 2.8B parámetros optimizado para ventanas de contexto de 1 millón de tokens.",
-                        impact: "Aporte: Permite auditar bases de código enteras o libros técnicos en una sola pasada.",
-                        lic: "Open Weights",
-                        official: [["Web", "https://kimi.ai/"], ["HuggingFace", "https://huggingface.co/moonshotai/Kimi-K3"]],
+                        name: "Kimi K3 & Files2Prompt",
+                        tier: "tier-3",
+                        tierLabel: "Especializado",
+                        role: "Modelos de Contexto Masivo & Empaquetadores",
+                        what: "Kimi K3 con 1M de tokens para auditar repositorios enteros y Files2Prompt para empaquetar código para modelos web.",
+                        impact: "Aporte: Resuelve la ingesta de bases de código monumentales sin fragmentar la memoria del modelo.",
+                        lic: "Open Weights / Gratis",
+                        official: [["Kimi.ai", "https://kimi.ai/"], ["Files2Prompt", "https://github.com/Thomas-McKanna/Files2Prompt"]],
                         refs: [["Ref 7", "https://www.facebook.com/share/p/1DS89U3Mtg/"]]
-                    },
-                    {
-                        id: "files2prompt",
-                        name: "Files2Prompt",
-                        prio: "opt",
-                        prioLabel: "Opcional",
-                        role: "Utilidad de Contexto para VS Code",
-                        what: "Empaqueta archivos seleccionados en formato Markdown/XML respetando reglas de .gitignore.",
-                        impact: "Aporte: Evita copiar manualmente fragmentos de código y saturar la ventana de contexto.",
-                        lic: "Gratis (Extensión)",
-                        official: [["Marketplace", "https://marketplace.visualstudio.com/items?itemName=thomas-mckanna.files2Prompt"], ["GitHub", "https://github.com/Thomas-McKanna/Files2Prompt"]],
-                        refs: [["Ref 5", "https://www.facebook.com/share/r/1H65kUXRwn/"]]
-                    },
-                    {
-                        id: "kickbacks",
-                        name: "Kickbacks.ai",
-                        prio: "opt",
-                        prioLabel: "Opcional",
-                        role: "Monetización de Espera",
-                        what: "Muestra microanuncios de texto mientras Claude Code compila o piensa, con reparto del 50-70%.",
-                        impact: "Aporte: Genera ingresos pasivos durante los tiempos muertos de desarrollo intensivo.",
-                        lic: "Gratis + Anuncios",
-                        official: [["Web", "https://kickbacks.ai/"], ["Dev", "https://kickbacks.dev/"]],
-                        refs: [["Ref 6", "https://www.facebook.com/share/r/1BKEYoMPpn/"]]
                     }
                 ]
             },
             {
-                id: "fase2",
+                id: "fase2_frontend",
                 n: "Fase 2",
-                title: "Diseño & Arquitectura Frontend UI/UX",
-                desc: "Prevención de código obsoleto (Anti-AI Slop) y maquetación estructurada",
-                color: "--p2",
+                title: "2. Diseño, UI/UX & Prevención Anti-AI Slop",
+                desc: "Garantizar código accesible, uso de APIs web nativas Baseline y arquitectura de componentes",
+                color: "--c-p2",
                 tools: [
                     {
-                        id: "modern-web",
                         name: "Modern Web Guidance",
-                        prio: "core",
-                        prioLabel: "Core",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
                         role: "Estándar Oficial (Google Chrome)",
-                        what: "Skill oficial con más de 100 reglas para obligar a la IA a usar APIs nativas (Baseline, dialog, popover).",
-                        impact: "Aporte: Elimina código obsoleto o redundante y garantiza máximo rendimiento y accesibilidad nativa.",
+                        what: "Skill oficial con más de 100 reglas para obligar a la IA a usar APIs nativas (Baseline, <dialog>, Popover API, CSS Anchor).",
+                        impact: "Aporte: Elimina dependencias JS pesadas innecesarias y código obsoleto. Asegura que la IA escriba frontend nativo ultraligero.",
                         lic: "Open Source (Google)",
                         official: [["GitHub", "https://github.com/GoogleChrome/modern-web-guidance"], ["Docs", "https://developer.chrome.com/docs/modern-web-guidance/"]],
                         refs: [["Ref 9", "https://www.facebook.com/share/v/1cMnqK4BfL/"]]
                     },
                     {
-                        id: "drawio",
                         name: "Draw.io & Balsamiq",
-                        prio: "core",
-                        prioLabel: "Core",
-                        role: "Esquematización & Wireframes",
-                        what: "Diagramación de flujos de usuario, diagramas de clases, bases de datos y prototipos estructurales rápidos.",
-                        impact: "Aporte: Claridad arquitectónica antes de escribir una sola línea de código en el frontend.",
-                        lic: "Freemium / Gratis",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Arquitectura de Software & Wireframes",
+                        what: "Diagramación visual de arquitectura de sistemas, esquemas UML, bases de datos y prototipos estructurales de baja fidelidad.",
+                        impact: "Aporte: Claridad arquitectónica absoluta antes de escribir la primera línea de código en el frontend.",
+                        lic: "Freemium / Gratuito",
                         official: [["Draw.io", "https://app.diagrams.net/"], ["Balsamiq", "https://balsamiq.cloud/"]],
                         refs: []
                     },
                     {
-                        id: "m3e",
-                        name: "M3E Canvas",
-                        prio: "high",
-                        prioLabel: "Alta",
-                        role: "Lienzo de Tokens Material 3",
-                        what: "Compositor visual interactivo que traduce pantallas Material 3 Expressive en prompts estructurados.",
-                        impact: "Aporte: Asegura que la IA construya interfaces limpias y proporcionadas a la primera.",
-                        lic: "Open Source (MIT)",
-                        official: [["GitHub", "https://github.com/lnkiai/m3e-canvas"]],
-                        refs: [["Ref 8", "https://www.instagram.com/reel/DdBZM7YhkZt/?vrfl=aXk1M3FveDd2djNu"]]
-                    },
-                    {
-                        id: "tailwind-gsap",
                         name: "Tailwind CSS & GSAP",
-                        prio: "high",
-                        prioLabel: "Alta",
-                        role: "Diseño Atómico & Animaciones",
-                        what: "Framework de utilidades CSS para diseño responsive junto al motor de animación más veloz del mercado.",
-                        impact: "Aporte: Flexibilidad estética total sin salir de clases atómicas y microinteracciones fluidas.",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Diseño Atómico & Animaciones de Alto Rendimiento",
+                        what: "Framework de utilidades CSS moderno combinado con el motor de animación JS más robusto para interfaces dinámicas.",
+                        impact: "Aporte: Flexibilidad estética total sin archivos CSS inflados y microinteracciones fluidas a 60 FPS.",
                         lic: "Open Source (MIT)",
                         official: [["Tailwind", "https://tailwindcss.com/"], ["GSAP", "https://gsap.com/"]],
                         refs: []
                     },
                     {
-                        id: "apple-hig",
-                        name: "Skills de Diseño Apple (HIG)",
-                        prio: "opt",
-                        prioLabel: "Opcional",
-                        role: "Directrices de Interfaz Premium",
-                        what: "Módulos de directrices formales de Apple (Human Interface Guidelines) integrados en formato SKILL.md.",
-                        impact: "Aporte: Impone una estética sobria, minimalista y refinada para aplicaciones web y móviles.",
-                        lic: "Open Source",
-                        official: [["Apple HIG", "https://developer.apple.com/design/human-interface-guidelines/"], ["GitHub", "https://github.com/justinwetch/HIGAgentSkills"]],
-                        refs: [["Ref 11", "https://www.facebook.com/share/r/1Hwrur2vog/"]]
+                        name: "M3E Canvas",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Lienzo de Tokens Material 3 Expressive",
+                        what: "Compositor visual interactivo que traduce pantallas basadas en Material 3 en prompts estructurados listos para asistentes de código.",
+                        impact: "Aporte: Asegura que la IA construya interfaces limpias, proporcionadas y con estándares de diseño corporativo a la primera.",
+                        lic: "Open Source (MIT)",
+                        official: [["GitHub", "https://github.com/lnkiai/m3e-canvas"]],
+                        refs: [["Ref 8", "https://www.instagram.com/reel/DdBZM7YhkZt/?vrfl=aXk1M3FveDd2djNu"]]
                     },
                     {
-                        id: "open-design",
-                        name: "Open Design",
-                        prio: "opt",
-                        prioLabel: "Opcional",
-                        role: "Estudio de Prototipado Abierto",
-                        what: "Alternativa libre a Claude Design para diseñar maquetas conectando modelos locales propios.",
-                        impact: "Aporte: Libertad completa para iterar sin gastar cuota de plataformas cerradas.",
+                        name: "Skills de Diseño Apple (HIG) & Open Design",
+                        tier: "tier-3",
+                        tierLabel: "Especializado",
+                        role: "Directrices Premium & Prototipado Abierto",
+                        what: "Módulos de directrices formales de Apple (HIG) y estudio de prototipado libre alternativa a Claude Design.",
+                        impact: "Aporte: Impone una estética sobria, minimalista y refinada para aplicaciones móviles y SaaS.",
                         lic: "Open Source",
-                        official: [["GitHub", "https://github.com/nexu-io/open-design"]],
-                        refs: [["Ref 10", "https://www.facebook.com/share/r/1JQQsuGaco/"]]
+                        official: [["Apple HIG", "https://developer.apple.com/design/human-interface-guidelines/"], ["Open Design", "https://github.com/nexu-io/open-design"]],
+                        refs: [["Ref 11", "https://www.facebook.com/share/r/1Hwrur2vog/"]]
                     }
                 ]
             },
             {
-                id: "fase3",
+                id: "fase3_backend",
                 n: "Fase 3",
-                title: "Backend, Seguridad de APIs & Infraestructura",
-                desc: "Autenticación soberana, ingeniería inversa de endpoints y hosting",
-                color: "--p3",
+                title: "3. Backend, Autenticación Soberana & APIs",
+                desc: "Seguridad de datos en tu propio servidor, clientes tipados e infraestructura cloud",
+                color: "--c-p3",
                 tools: [
                     {
-                        id: "better-auth",
                         name: "Better Auth",
-                        prio: "core",
-                        prioLabel: "Core",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
                         role: "Autenticación Type-Safe Autoalojada",
-                        what: "Framework TypeScript integral con passkeys, autenticación 2FA, multi-inquilino y soporte nativo de ORMs.",
-                        impact: "Aporte: Ahorra cientos de dólares en proveedores externos de Auth y mantiene soberanía total de datos.",
+                        what: "Framework TypeScript integral con passkeys, autenticación en dos pasos (2FA), soporte multi-inquilino y ORMs (Prisma, Drizzle).",
+                        impact: "Aporte: Ahorra miles de dólares en proveedores SaaS de Auth por usuario activo mensual y retiene la propiedad de los datos.",
                         lic: "Open Source (MIT)",
                         official: [["Web", "https://better-auth.com/"], ["GitHub", "https://github.com/better-auth/better-auth"]],
                         refs: [["Ref 12", "https://www.instagram.com/reel/DeXKWxLGUrA/?cplk=c2p6anYwNDBsb3dt"]]
                     },
                     {
-                        id: "cloud-sandboxes",
-                        name: "Cloud, Sandboxes & Repos",
-                        prio: "core",
-                        prioLabel: "Core",
-                        role: "Infraestructura & Control de Código",
-                        what: "Control de versiones centralizado en GitHub, portal cloud Microsoft Azure y pruebas rápidas en CodePen.",
-                        impact: "Aporte: Integración continua fiable y disponibilidad para despliegues en servidores globales.",
+                        name: "Cloud, Sandboxes & Repositorios",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Control de Versiones & Cómputo Escalable",
+                        what: "Gestión de código en GitHub, portal cloud Microsoft Azure y entornos rápidos de prototipado en CodePen.",
+                        impact: "Aporte: Canalización continua y disponibilidad global de servidores y despliegues sin interrupciones.",
                         lic: "Freemium / Cloud",
                         official: [["GitHub", "https://github.com/"], ["Azure", "https://portal.azure.com/"], ["CodePen", "https://codepen.io/spark"]],
                         refs: []
                     },
                     {
-                        id: "reverse-api",
                         name: "Reverse API Engineer",
-                        prio: "high",
-                        prioLabel: "Alta",
-                        role: "Generador de Clientes HTTP",
-                        what: "Captura el tráfico de red del navegador y genera clientes Python tipados para portales sin API oficial.",
-                        impact: "Aporte: Ahorra horas de ingeniería inversa manual conectando servicios web externos con tu backend.",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Generador de Clientes HTTP Tipados",
+                        what: "Herramienta que intercepta el tráfico HTTP del navegador y genera de forma automática un cliente Python tipado y listo para producción.",
+                        impact: "Aporte: Ahorra horas de trabajo manual descifrando endpoints ocultos en sitios sin API oficial documentada.",
                         lic: "Open Source",
                         official: [["GitHub", "https://github.com/kalil0321/reverse-api-engineer"]],
                         refs: [["Ref 13", "https://www.instagram.com/reel/DeSH1O_sxI2/?dlrf=MThxd2cwYm9ja2FlYw=="]]
@@ -887,89 +911,83 @@
                 ]
             },
             {
-                id: "fase4",
+                id: "fase4_qa_security",
                 n: "Fase 4",
-                title: "Testing, Calidad de Código & Ciberseguridad",
-                desc: "Auditorías automatizadas de Pull Requests y análisis de vulnerabilidades",
-                color: "--p4",
+                title: "4. Testing Autónomo, Calidad & Ciberseguridad",
+                desc: "Auditoría incremental de Pull Requests, tests auto-reparables y fuzzing continuo",
+                color: "--c-p4",
                 tools: [
                     {
-                        id: "coderabbit",
                         name: "CodeRabbit AI",
-                        prio: "core",
-                        prioLabel: "Core",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
                         role: "Revisor Automático de Pull Requests",
-                        what: "Auditor continuo de PRs en GitHub/GitLab que detecta regresiones, cuellos de botella y riesgos de seguridad.",
-                        impact: "Aporte: Eleva la calidad del código del equipo antes de fusionar a la rama principal de producción.",
-                        lic: "Freemium (Gratis en OSS)",
+                        what: "Auditor continuo para GitHub y GitLab que revisa cada PR, detecta posibles regresiones de lógica, propone parches y grafica diagramas de secuencia.",
+                        impact: "Aporte: Eleva la calidad y la seguridad del código del equipo antes de fusionar a la rama principal de producción.",
+                        lic: "Freemium (100% Gratis en OSS)",
                         official: [["Web", "https://www.coderabbit.ai/"], ["GitHub", "https://github.com/coderabbitai"]],
                         refs: [["Ref 14", "https://www.facebook.com/share/p/1Ba3h7oiHE/"]]
                     },
                     {
-                        id: "oss-fuzz",
+                        name: "Autonoma AI",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Generación & Auto-Reparación de Tests con IA",
+                        what: "Plataforma de testing impulsada por agentes que planifica, genera, ejecuta y auto-repara pruebas unitarias y de integración en tu base de código.",
+                        impact: "Aporte: Elimina el trabajo manual de escribir tests repetitivos y mantiene la cobertura verde ante cambios de API.",
+                        lic: "Source Available / Gratis",
+                        official: [["Web", "https://getautonoma.com/"]],
+                        refs: []
+                    },
+                    {
                         name: "OSS-Fuzz (Google)",
-                        prio: "high",
-                        prioLabel: "Alta",
-                        role: "Fuzzing Continuo en la Nube",
-                        what: "Servicio de pruebas aleatorias mutadas con sanitizadores de memoria para descubrir fallos críticos ocultos.",
-                        impact: "Aporte: Detecta fugas de memoria, desbordamientos de búfer y cuelgues antes de que lleguen a los usuarios.",
-                        lic: "Open Source (Google)",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Fuzzing Continuo Automatizado en la Nube",
+                        what: "Servicio de Google que bombardea software con millones de entradas aleatorias y mutadas por segundo junto a sanitizadores de memoria.",
+                        impact: "Aporte: Descubre vulnerabilidades críticas que escapan a linters estáticos: buffer overflows, fugas de memoria y condiciones de carrera.",
+                        lic: "Open Source (Apache 2.0)",
                         official: [["GitHub", "https://github.com/google/oss-fuzz"], ["Docs", "https://google.github.io/oss-fuzz/"]],
                         refs: []
                     },
                     {
-                        id: "rea",
-                        name: "REA (Reverse Engineer Anything)",
-                        prio: "opt",
-                        prioLabel: "Opcional",
-                        role: "Desensamblador MCP",
-                        what: "Herramienta CLI/MCP que permite a la IA desensamblar ejecutables y aplicaciones de Electron.",
-                        impact: "Aporte: Inspección interna de librerías de terceros cerradas o análisis forense de seguridad.",
-                        lic: "Open Source",
-                        official: [["GitHub", "https://github.com/morluto/rea"], ["npm", "https://www.npmjs.com/package/rea-agents"]],
+                        name: "REA (Reverse Engineer Anything) & EmailOSINT",
+                        tier: "tier-3",
+                        tierLabel: "Especializado",
+                        role: "Desensamblador MCP & Auditoría de Exposición",
+                        what: "REA conecta asistentes de IA con descompiladores de binarios y apps Electron, y EmailOSINT audita fugas de datos de correos corporativos.",
+                        impact: "Aporte: Inspección interna de librerías dudosas y evaluación del riesgo de credenciales comprometidas.",
+                        lic: "Open Source / Freemium",
+                        official: [["REA GitHub", "https://github.com/morluto/rea"], ["EmailOSINT", "https://emailosint.org/"]],
                         refs: [["Ref 15", "https://www.instagram.com/reel/DeXQgNhgFl5/?psln=MWxkb2J2eTBpNHNvaw=="]]
-                    },
-                    {
-                        id: "emailosint",
-                        name: "EmailOSINT",
-                        prio: "opt",
-                        prioLabel: "Opcional",
-                        role: "Inteligencia de Amenazas OSINT",
-                        what: "Rastreo de cuentas vinculadas a correos electrónicos y verificación en registros de fugas de datos.",
-                        impact: "Aporte: Auditoría de seguridad defensiva y prevención contra suplantaciones corporativas.",
-                        lic: "Freemium / Web",
-                        official: [["Web", "https://emailosint.org/"], ["GitHub", "https://github.com/krishpranav/emailosint"]],
-                        refs: [["Ref 16", "https://www.instagram.com/reel/DeCwsiJJ3j0/?stkn=Zmw0Z3gxMHV1NWlz"]]
                     }
                 ]
             },
             {
-                id: "fase5",
+                id: "fase5_data_rag",
                 n: "Fase 5",
-                title: "Extracción de Datos, Automatización & RAG",
-                desc: "Ingesta de datos web estructurados para alimentar modelos de IA",
-                color: "--p5",
+                title: "5. Extracción de Datos, Automatización & RAG",
+                desc: "Suministro de datos limpios para agentes de IA y scraping sin bloqueos",
+                color: "--c-p5",
                 tools: [
                     {
-                        id: "firecrawl",
                         name: "Firecrawl",
-                        prio: "core",
-                        prioLabel: "Core",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
                         role: "Scraping a Markdown Limpio para RAG",
-                        what: "Motor de rastreo web que convierte cualquier página o sitio entero en Markdown puro sin menús ni CSS.",
-                        impact: "Aporte: Ahorra millones de tokens y optimiza la precisión en sistemas de búsqueda y RAG con IA.",
-                        lic: "Intermedia (OSS + Cloud)",
+                        what: "Plataforma de rastreo web que convierte cualquier URL o sitio completo en Markdown puro, eliminando menús, anuncios y hojas de estilo.",
+                        impact: "Aporte: Ahorra millones de tokens al alimentar modelos con texto puro y sortea bloqueos de JavaScript dinámico.",
+                        lic: "Intermedia (OSS Autoalojable + Nube)",
                         official: [["Web", "https://www.firecrawl.dev/"], ["GitHub", "https://github.com/firecrawl/firecrawl"]],
                         refs: [["Ref 17", "https://www.facebook.com/share/r/193MgfYZEC/"]]
                     },
                     {
-                        id: "agent-reach",
                         name: "Agent Reach",
-                        prio: "high",
-                        prioLabel: "Alta",
-                        role: "Lectura de Redes sin APIs de Pago",
-                        what: "Capa de conexión pasiva que permite a agentes rastrear Reddit, X, YouTube y GitHub sin pagar suscripciones.",
-                        impact: "Aporte: Obtiene opiniones de usuarios y tendencias de mercado en tiempo real a coste cero.",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Lectura de Redes Sociales sin APIs de Pago",
+                        what: "Capa de conexión pasiva que permite a agentes de IA leer Reddit, X (Twitter), YouTube y GitHub sin pagar costosas suscripciones de APIs oficiales.",
+                        impact: "Aporte: Monitoreo de tendencias y opiniones de usuarios en tiempo real a coste cero.",
                         lic: "Open Source",
                         official: [["GitHub", "https://github.com/Panniantong/Agent-Reach"]],
                         refs: [["Ref 18", "https://www.instagram.com/reel/DeVbt7FleL5/?mdxt=MXJmeWx6Z2FzcGY5aQ=="]]
@@ -977,29 +995,27 @@
                 ]
             },
             {
-                id: "fase6",
+                id: "fase6_strategy",
                 n: "Fase 6",
-                title: "Ecosistema, Empleo & Estrategia SaaS",
-                desc: "Capacidades de negocio, validación de mercado y formación continua",
-                color: "--p6",
+                title: "6. Estrategia SaaS, Formación & Crecimiento",
+                desc: "Capacidades transversales de modelo de negocio, validación de mercado y empleo digital",
+                color: "--c-p6",
                 tools: [
                     {
-                        id: "mouredev",
                         name: "Formación Técnica de MoureDev",
-                        prio: "high",
-                        prioLabel: "Alta",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
                         role: "Comunidad & Formación Continua",
                         what: "Cursos gratuitos de desarrollo guiado por IA, configuración de TUI en terminal y comunidad hispanohablante.",
-                        impact: "Aporte: Nivelación de habilidades en herramientas de desarrollo asistido de vanguardia.",
+                        impact: "Aporte: Nivelación constante de habilidades en herramientas de desarrollo asistido de vanguardia.",
                         lic: "Comunidad / Gratis",
                         official: [["moure.dev", "https://moure.dev/"], ["YouTube", "https://www.youtube.com/@mouredev"], ["GitHub", "https://github.com/mouredev"]],
                         refs: [["Ref 2", "https://www.facebook.com/share/r/1BGHLzGDm4/"]]
                     },
                     {
-                        id: "sena-accenture",
                         name: "Convocatorias SENA / Accenture",
-                        prio: "high",
-                        prioLabel: "Alta",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
                         role: "Inserción Laboral & Empleo",
                         what: "Oportunidades de formación y convocatorias de contratación para perfiles tecnológicos en Colombia.",
                         impact: "Aporte: Transición directa hacia empleo formal en desarrollo y cloud corporativo.",
@@ -1008,13 +1024,12 @@
                         refs: [["Ref 19", "https://www.accenture.com/co-es/careers/jobdetails?id=R00243777_es&title=Aprendices+SENA"]]
                     },
                     {
-                        id: "saas-strategy",
-                        name: "Estrategia SaaS & Validación",
-                        prio: "opt",
-                        prioLabel: "Opcional",
+                        name: "Estrategia SaaS & Validación de Apps",
+                        tier: "tier-3",
+                        tierLabel: "Especializado",
                         role: "Modelo de Negocio & Legalidad",
-                        what: "Estrategias para monetizar herramientas de software, mitigar riesgos legales de código IA y estructurar pruebas gratuitas.",
-                        impact: "Aporte: Transforma proyectos técnicos en productos digitales viables y rentables.",
+                        what: "Estrategias para monetizar herramientas de software, mitigar riesgos legales de código generado por IA y diseñar periodos de prueba exitosos.",
+                        impact: "Aporte: Transforma proyectos técnicos en productos digitales comercialmente viables.",
                         lic: "Estrategia",
                         official: [],
                         refs: [["Ref 20", "https://www.instagram.com/reel/Dd7idktuOFx/?exln=MWtoYzhyaDI3ODN4cw=="], ["Ref 21", "https://www.instagram.com/reel/DeZCQHvxohj/?srtk=MTltczZodHRpc3Bzcg=="]]
@@ -1023,21 +1038,21 @@
             }
         ];
 
-        let activePrio = "all";
+        let activeTier = "all";
         let searchQuery = "";
         let activeStageId = "all";
+        let isGridMode = false;
 
         const stageNav = document.getElementById("stageNav");
         const diagramsContainer = document.getElementById("diagramsContainer");
 
-        // Construir barra de navegación por etapas
         function buildStageNav() {
             stageNav.innerHTML = "";
 
             const allBtn = document.createElement("button");
             allBtn.className = "stage-pill" + (activeStageId === "all" ? " active" : "");
             allBtn.style.setProperty("--c", "var(--ink)");
-            allBtn.textContent = "🌐 Ver Todo el Flujo";
+            allBtn.textContent = "🌐 Ver Todo el Pipeline";
             allBtn.addEventListener("click", () => {
                 activeStageId = "all";
                 updateStageNav();
@@ -1045,7 +1060,7 @@
             });
             stageNav.appendChild(allBtn);
 
-            DIAGRAMS.forEach(d => {
+            SOFTWARE_PIPELINE.forEach(d => {
                 const btn = document.createElement("button");
                 btn.className = "stage-pill" + (activeStageId === d.id ? " active" : "");
                 btn.style.setProperty("--c", "var(" + d.color + ")");
@@ -1055,12 +1070,11 @@
                 dot.style.background = "var(" + d.color + ")";
 
                 btn.appendChild(dot);
-                btn.appendChild(document.createTextNode(d.n + ": " + d.title.split("&")[0].trim()));
+                btn.appendChild(document.createTextNode(d.n + ": " + d.title.split(". ")[1].split("&")[0].trim()));
                 btn.addEventListener("click", () => {
                     activeStageId = d.id;
                     updateStageNav();
                     renderDiagrams();
-                    // Scroll suave hacia la sección
                     const elTarget = document.getElementById("sec-" + d.id);
                     if (elTarget) elTarget.scrollIntoView({ behavior: "smooth", block: "start" });
                 });
@@ -1073,84 +1087,109 @@
                 if (idx === 0) {
                     btn.classList.toggle("active", activeStageId === "all");
                 } else {
-                    const d = DIAGRAMS[idx - 1];
+                    const d = SOFTWARE_PIPELINE[idx - 1];
                     btn.classList.toggle("active", activeStageId === d.id);
                 }
             });
         }
 
-        // Renderizar sub-diagramas horizontales
         function renderDiagrams() {
             diagramsContainer.innerHTML = "";
 
             const listToRender = activeStageId === "all" 
-                ? DIAGRAMS 
-                : DIAGRAMS.filter(d => d.id === activeStageId);
+                ? SOFTWARE_PIPELINE 
+                : SOFTWARE_PIPELINE.filter(d => d.id === activeStageId);
 
-            listToRender.forEach(d => {
-                // Filtrado por prioridad y por búsqueda
-                const matchedTools = d.tools.filter(t => {
-                    const matchPrio = activePrio === "all" || t.prio === activePrio;
+            listToRender.forEach(stage => {
+                const matchedTools = stage.tools.filter(tool => {
+                    const matchTier = activeTier === "all" || tool.tier === activeTier;
                     const q = searchQuery.toLowerCase().trim();
                     const matchSearch = !q || 
-                        t.name.toLowerCase().includes(q) || 
-                        t.role.toLowerCase().includes(q) || 
-                        t.what.toLowerCase().includes(q) ||
-                        t.impact.toLowerCase().includes(q);
-                    return matchPrio && matchSearch;
+                        tool.name.toLowerCase().includes(q) || 
+                        tool.role.toLowerCase().includes(q) || 
+                        tool.what.toLowerCase().includes(q) ||
+                        tool.impact.toLowerCase().includes(q) ||
+                        tool.lic.toLowerCase().includes(q);
+                    return matchTier && matchSearch;
                 });
 
                 if (matchedTools.length === 0 && searchQuery) return;
 
                 const sec = document.createElement("section");
-                sec.id = "sec-" + d.id;
-                sec.style.setProperty("--c", "var(" + d.color + ")");
-                sec.style.marginBottom = "30px";
+                sec.id = "sec-" + stage.id;
+                sec.style.setProperty("--c", "var(" + stage.color + ")");
+                sec.style.marginBottom = "34px";
 
                 const header = document.createElement("div");
                 header.className = "section-header";
+                
+                const titleCol = document.createElement("div");
                 const h2 = document.createElement("h2");
                 const dot = document.createElement("span");
                 dot.className = "stage-dot";
                 dot.style.width = "10px";
                 dot.style.height = "10px";
-                dot.style.background = "var(" + d.color + ")";
+                dot.style.background = "var(" + stage.color + ")";
                 h2.appendChild(dot);
-                h2.appendChild(document.createTextNode(d.n + " — " + d.title));
+                h2.appendChild(document.createTextNode(stage.title));
 
                 const p = document.createElement("p");
-                p.textContent = d.desc + " (" + matchedTools.length + " herramientas disponibles)";
-                header.appendChild(h2);
-                header.appendChild(p);
+                p.textContent = stage.desc + " (" + matchedTools.length + " herramientas disponibles)";
+                titleCol.appendChild(h2);
+                titleCol.appendChild(p);
+                header.appendChild(titleCol);
+
+                // Alternador de vista (Flujo Horizontal vs Cuadrícula Expandida)
+                const viewSwitch = document.createElement("div");
+                viewSwitch.className = "view-switch";
+                const btnH = document.createElement("button");
+                btnH.className = "btn-view" + (!isGridMode ? " active" : "");
+                btnH.textContent = "⇄ Flujo";
+                const btnG = document.createElement("button");
+                btnG.className = "btn-view" + (isGridMode ? " active" : "");
+                btnG.textContent = "☷ Cuadrícula";
+
+                btnH.addEventListener("click", () => {
+                    isGridMode = false;
+                    renderDiagrams();
+                });
+                btnG.addEventListener("click", () => {
+                    isGridMode = true;
+                    renderDiagrams();
+                });
+
+                viewSwitch.appendChild(btnH);
+                viewSwitch.appendChild(btnG);
+                header.appendChild(viewSwitch);
+
                 sec.appendChild(header);
 
-                // Track horizontal del diagrama
+                // Contenedor de pista
                 const scrollWrapper = document.createElement("div");
-                scrollWrapper.className = "h-diagram-scroll";
+                scrollWrapper.className = "track-wrapper" + (isGridMode ? " grid-mode" : "");
 
-                const track = document.createElement("div");
-                track.className = "h-diagram-track";
+                const flow = document.createElement("div");
+                flow.className = "track-flow";
 
                 if (matchedTools.length === 0) {
                     const emptyCard = document.createElement("div");
                     emptyCard.className = "tool-card";
                     emptyCard.style.opacity = "0.6";
                     emptyCard.innerHTML = "<p class='what'>Sin herramientas que coincidan con los filtros actuales.</p>";
-                    track.appendChild(emptyCard);
+                    flow.appendChild(emptyCard);
                 } else {
                     matchedTools.forEach((tool, index) => {
                         const card = document.createElement("div");
                         card.className = "tool-card";
-                        card.style.setProperty("--c", "var(" + d.color + ")");
+                        card.style.setProperty("--c", "var(" + stage.color + ")");
 
-                        // Contenido
                         const top = document.createElement("div");
                         top.className = "card-top";
                         const h3 = document.createElement("h3");
                         h3.textContent = tool.name;
                         const badge = document.createElement("span");
-                        badge.className = "prio-badge " + tool.prio;
-                        badge.textContent = tool.prioLabel;
+                        badge.className = "rank-badge " + tool.tier;
+                        badge.textContent = tool.tierLabel;
                         top.appendChild(h3);
                         top.appendChild(badge);
                         card.appendChild(top);
@@ -1174,7 +1213,7 @@
                         bottom.className = "card-bottom";
 
                         const tag = document.createElement("span");
-                        tag.className = "tag";
+                        tag.className = "tag-lic";
                         tag.textContent = tool.lic;
                         bottom.appendChild(tag);
 
@@ -1192,31 +1231,41 @@
                                 links.appendChild(a);
                             });
                         }
+                        if (tool.refs && tool.refs.length) {
+                            tool.refs.forEach(([id, url]) => {
+                                const a = document.createElement("a");
+                                a.href = url;
+                                a.target = "_blank";
+                                a.rel = "noopener noreferrer";
+                                a.textContent = "[" + id + "]";
+                                a.addEventListener("click", (e) => e.stopPropagation());
+                                links.appendChild(a);
+                            });
+                        }
                         bottom.appendChild(links);
                         card.appendChild(bottom);
 
-                        // Click interactivo en tarjeta para abrir Modal de Inspección
-                        card.addEventListener("click", () => openModal(tool, d.color));
+                        // Click interactivo para abrir Modal
+                        card.addEventListener("click", () => openModal(tool, stage.color));
 
-                        track.appendChild(card);
+                        flow.appendChild(card);
 
-                        // Flecha conectora entre pasos consecutivos
-                        if (index < matchedTools.length - 1) {
-                            const connector = document.createElement("div");
-                            connector.className = "step-connector";
-                            connector.textContent = "➔";
-                            track.appendChild(connector);
+                        if (!isGridMode && index < matchedTools.length - 1) {
+                            const arrow = document.createElement("div");
+                            arrow.className = "step-arrow";
+                            arrow.textContent = "➔";
+                            flow.appendChild(arrow);
                         }
                     });
                 }
 
-                scrollWrapper.appendChild(track);
+                scrollWrapper.appendChild(flow);
                 sec.appendChild(scrollWrapper);
                 diagramsContainer.appendChild(sec);
             });
         }
 
-        // Modal de detalle y acceso directo
+        // Modal
         const backdrop = document.getElementById("modalBackdrop");
         const modalBox = document.getElementById("modalBox");
         const mClose = document.getElementById("modalClose");
@@ -1230,7 +1279,7 @@
         function openModal(tool, colorVar) {
             modalBox.style.setProperty("--c", "var(" + colorVar + ")");
             mTitle.textContent = tool.name;
-            mRole.textContent = tool.role + " — Prioridad: " + tool.prioLabel;
+            mRole.textContent = tool.role + " — Jerarquía: " + tool.tierLabel;
             mDesc.textContent = tool.what;
             mImpact.textContent = tool.impact;
             mLic.textContent = "Licencia / Modelo: " + tool.lic;
@@ -1270,18 +1319,18 @@
             if (e.key === "Escape") backdrop.classList.remove("open");
         });
 
-        // Barra de búsqueda interactiva
+        // Búsqueda en tiempo real
         document.getElementById("searchInput").addEventListener("input", (e) => {
             searchQuery = e.target.value;
             renderDiagrams();
         });
 
-        // Filtro por prioridad
+        // Filtro por jerarquía
         document.querySelectorAll(".filter-btn").forEach(btn => {
             btn.addEventListener("click", () => {
                 document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
                 btn.classList.add("active");
-                activePrio = btn.dataset.prio;
+                activeTier = btn.dataset.prio;
                 renderDiagrams();
             });
         });
@@ -1294,7 +1343,6 @@
             root.setAttribute("data-theme", current === "dark" ? "light" : "dark");
         });
 
-        // Inicialización
         buildStageNav();
         renderDiagrams();
     </script>
