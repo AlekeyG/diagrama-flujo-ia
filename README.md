@@ -20,4 +20,4 @@ Visualizador interactivo y mapa de arquitectura para flujos de ingeniería de so
 4. **Fase 4: Testing, Calidad y Ciberseguridad:** CodeRabbit AI, Autonoma AI (self-healing tests), Google OSS-Fuzz, REA, EmailOSINT.
 5. **Fase 5: Extracción de Datos y Automatización:** Firecrawl, Agent Reach.
 6. **Fase 6: Formación y Estrategia de Negocio:** Ecosistema MoureDev, SENA/Accenture, Validación y Legal SaaS.
-7. **Fase 7: Investigación Científica, Papers & Academia IA:** Semantic Scholar (Top 1 grafos Allen AI), Connected Papers (Top 1 linaje visual), Consensus AI (Top 1 evidencia científica), SciSpace AI, Zotero, Google Scholar, Elicit, Overleaf LaTeX, Draw.io.
+7. **Fase 7: Investigación en Ingeniería de Software, Benchmarks & Papers con Código:** Papers With Code (Top 1 repositorios con papers), arXiv cs.SE / cs.AI (Top 1 preprints Cornell), LMSYS Chatbot Arena (Top 1 coding leaderboard), SWE-bench (Top 1 benchmark de agentes), Hugging Face Papers, Semantic Scholar CS, Connected Papers, SciSpace AI, Overleaf LaTeX, Draw.io UML.
