@@ -14,10 +14,10 @@ Visualizador interactivo y mapa de arquitectura para flujos de ingeniería de so
 * **Paleta visual suave:** Temas Dark y Light calibrados en tonos pizarra (slate), suaves a la vista y sin negros saturados.
 
 ## Fases del Flujo de Trabajo
-1. **Fase 1: Agentes de Código y Terminal:** OpenCode, Everything Claude Code (ECC), Cline, Aider, OpenHands, Claude Code CLI, Files2Prompt, Lovable, Bolt.new, Kimi K3.
-2. **Fase 2: Diseño UI/UX y Frontend:** M3E Canvas, Google Modern Web Guidance, Open Design, Apple HIG Skills.
-3. **Fase 3: Backend, APIs y Autenticación:** Better Auth, Reverse API Engineer.
-4. **Fase 4: Testing, Calidad y Ciberseguridad:** CodeRabbit AI, Autonoma AI (self-healing tests), Google OSS-Fuzz, REA, EmailOSINT.
-5. **Fase 5: Extracción de Datos y Automatización:** Firecrawl, Agent Reach.
-6. **Fase 6: Formación y Estrategia de Negocio:** Ecosistema MoureDev, SENA/Accenture, Validación y Legal SaaS.
-7. **Fase 7: Investigación en Ingeniería de Software, Benchmarks & Papers con Código:** Papers With Code (Top 1 repositorios con papers), arXiv cs.SE / cs.AI (Top 1 preprints Cornell), LMSYS Chatbot Arena (Top 1 coding leaderboard), SWE-bench (Top 1 benchmark de agentes), Hugging Face Papers, Semantic Scholar CS, Connected Papers, SciSpace AI, Overleaf LaTeX, Draw.io UML.
+1. **Fase 1: Investigación en Ingeniería de Software, Benchmarks & Papers con Código:** Papers With Code (Top 1 repositorios con papers), arXiv cs.SE / cs.AI (Top 1 preprints Cornell), LMSYS Chatbot Arena (Top 1 coding leaderboard), SWE-bench (Top 1 benchmark de agentes), Hugging Face Papers, Semantic Scholar CS, Connected Papers, SciSpace AI, Overleaf LaTeX, Draw.io UML.
+2. **Fase 2: Agentes de Código Autónomos & LLMs:** OpenCode, Everything Claude Code (ECC), Cline, Aider, OpenHands, Claude Code CLI, Files2Prompt, Lovable, Bolt.new, Kimi K3.
+3. **Fase 3: Diseño UI/UX & Prevención Anti-AI Slop:** M3E Canvas, Google Modern Web Guidance, Open Design, Apple HIG Skills, Tailwind CSS, GSAP.
+4. **Fase 4: Backend, Autenticación Soberana & APIs:** Better Auth, Reverse API Engineer, Cloud Sandboxes.
+5. **Fase 5: Testing Autónomo, Calidad & Ciberseguridad:** CodeRabbit AI, Autonoma AI (self-healing tests), Google OSS-Fuzz, REA, EmailOSINT.
+6. **Fase 6: Extracción de Datos, Automatización & RAG:** Firecrawl, Agent Reach.
+7. **Fase 7: Estrategia SaaS, Formación & Crecimiento:** Ecosistema MoureDev, SENA/Accenture, Validación y Legal SaaS.

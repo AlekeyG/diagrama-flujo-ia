@@ -700,349 +700,9 @@
     <script>
         const SOFTWARE_PIPELINE = [
             {
-                id: "fase1_agents",
+                id: "fase1_research",
                 n: "Fase 1",
-                title: "1. Agentes de Código Autónomos & LLMs",
-                desc: "Agentes de consola, pair programming en terminal, orquestadores y modelos de razonamiento",
-                color: "--c-p1",
-                tools: [
-                    {
-                        name: "OpenCode",
-                        tier: "tier-1",
-                        tierLabel: "Top 1 Oro",
-                        role: "Agente de Consola Open-Source (TUI)",
-                        what: "Agente CLI de código abierto independiente conectado a +75 proveedores de modelos o modelos 100% locales (Ollama/LM Studio). Sin cuotas de suscripción de interfaz.",
-                        impact: "Aporte: El estándar de oro comunitario para programar con agentes en terminal. Elimina vendor lock-in y protege código confidencial en tu propia máquina.",
-                        lic: "Open Source (MIT)",
-                        official: [["Web", "https://opencode.ai/"], ["GitHub", "https://github.com/anomalyco/opencode"]],
-                        refs: [["Ref 1", "https://www.facebook.com/share/r/14hWsnezzaB/"], ["Ref 2", "https://www.facebook.com/share/r/1BGHLzGDm4/"]]
-                    },
-                    {
-                        name: "Cline (Claude Dev)",
-                        tier: "tier-1",
-                        tierLabel: "Top 1 Oro",
-                        role: "Agente Autónomo en VS Code con Checkpoints",
-                        what: "Extensión open-source líder en VS Code que crea/edita archivos, ejecuta comandos de terminal y solicita confirmación humana explícita antes de acciones críticas.",
-                        impact: "Aporte: Trae autonomía completa de agentes dentro del editor con modelo Bring-Your-Own-Key (BYOK) sin planes de suscripción cerrados.",
-                        lic: "Open Source (Apache 2.0)",
-                        official: [["Marketplace", "https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev"], ["GitHub", "https://github.com/cline/cline"]],
-                        refs: []
-                    },
-                    {
-                        name: "Claude Code CLI",
-                        tier: "tier-1",
-                        tierLabel: "Top 1 Oro",
-                        role: "Agente Oficial de Consola (Anthropic)",
-                        what: "Agente autónomo de consola de Anthropic diseñado para proyectos complejos con permisos de navegación de repositorio, ejecución de linters y suites de test.",
-                        impact: "Aporte: Máxima capacidad de razonamiento multi-archivo directamente integrado en la terminal del sistema operativo.",
-                        lic: "Propietario / API",
-                        official: [["Anthropic", "https://www.anthropic.com/claude-code"]],
-                        refs: []
-                    },
-                    {
-                        name: "Aider",
-                        tier: "tier-1",
-                        tierLabel: "Top 1 Oro",
-                        role: "Pair Programming con Commits Automáticos",
-                        what: "Herramienta CLI para programar en pareja en la terminal conectada a Git. Cada refactorización o cambio lógico genera automáticamente un commit limpio y descriptivo.",
-                        impact: "Aporte: Historial de Git impecable y navegación profunda en repositorios grandes mediante mapeo AST del código.",
-                        lic: "Open Source (Apache 2.0)",
-                        official: [["Web", "https://aider.chat/"], ["GitHub", "https://github.com/paul-gauthier/aider"]],
-                        refs: []
-                    },
-                    {
-                        name: "Grandes Modelos (LLMs)",
-                        tier: "tier-1",
-                        tierLabel: "Top 1 Oro",
-                        role: "Motores Fundacionales de Razonamiento",
-                        what: "Chats y asistentes de cabecera para lógica, arquitectura y resolución de dudas: ChatGPT, Claude 3.7 Sonnet, DeepSeek R1 y Microsoft Copilot.",
-                        impact: "Aporte: Comparación multi-modelo para arquitectura, debugging de algoritmos y formulación de estrategias técnicas.",
-                        lic: "Freemium / Comercial",
-                        official: [["ChatGPT", "https://chatgpt.com/"], ["Claude", "https://claude.ai/"], ["DeepSeek", "https://chat.deepseek.com/"], ["Copilot", "https://copilot.microsoft.com/"]],
-                        refs: []
-                    },
-                    {
-                        name: "OpenHands (OpenDevin)",
-                        tier: "tier-2",
-                        tierLabel: "Alta",
-                        role: "Plataforma de Ingeniería Autónoma en Sandbox",
-                        what: "Plataforma de agentes autónomos que opera en un contenedor Docker aislado, capaz de resolver issues de GitHub, compilar entornos y auto-reparar fallos.",
-                        impact: "Aporte: Permite delegar tareas pesadas de mantenimiento e investigación de bugs sin arriesgar tu entorno local.",
-                        lic: "Open Source (MIT)",
-                        official: [["Web", "https://openhands.ai/"], ["GitHub", "https://github.com/All-Hands-AI/OpenHands"]],
-                        refs: []
-                    },
-                    {
-                        name: "Everything Claude Code (ECC)",
-                        tier: "tier-2",
-                        tierLabel: "Alta",
-                        role: "Orquestador de 70+ Subagentes",
-                        what: "Framework de más de 70 subagentes preconfigurados, memoria persistente entre sesiones y escudo AgentShield.",
-                        impact: "Aporte: Evita alucinaciones imponiendo especificaciones formales de diseño de software (SDD) en tareas largas.",
-                        lic: "Open Source",
-                        official: [["GitHub", "https://github.com/affaan-m/ECC"]],
-                        refs: [["Ref 3", "https://www.facebook.com/share/r/1EjGyB9V6C/"], ["Ref 4", "https://www.facebook.com/share/r/1TxX5m2S5G/"]]
-                    },
-                    {
-                        name: "Lovable & Bolt.new",
-                        tier: "tier-2",
-                        tierLabel: "Alta",
-                        role: "Generadores Web Fullstack en Navegador",
-                        what: "Entornos reactivos en el navegador para construir y probar aplicaciones completas con backend en minutos a partir de prompts.",
-                        impact: "Aporte: Acelera la validación de prototipos y pruebas de concepto (MVPs) a velocidad récord.",
-                        lic: "Freemium",
-                        official: [["Lovable", "https://lovable.dev/"], ["Bolt.new", "https://bolt.new/"]],
-                        refs: []
-                    },
-                    {
-                        name: "Kimi K3 & Files2Prompt",
-                        tier: "tier-3",
-                        tierLabel: "Especializado",
-                        role: "Modelos de Contexto Masivo & Empaquetadores",
-                        what: "Kimi K3 con 1M de tokens para auditar repositorios enteros y Files2Prompt para empaquetar código para modelos web.",
-                        impact: "Aporte: Resuelve la ingesta de bases de código monumentales sin fragmentar la memoria del modelo.",
-                        lic: "Open Weights / Gratis",
-                        official: [["Kimi.ai", "https://kimi.ai/"], ["Files2Prompt", "https://github.com/Thomas-McKanna/Files2Prompt"]],
-                        refs: [["Ref 7", "https://www.facebook.com/share/p/1DS89U3Mtg/"]]
-                    }
-                ]
-            },
-            {
-                id: "fase2_frontend",
-                n: "Fase 2",
-                title: "2. Diseño, UI/UX & Prevención Anti-AI Slop",
-                desc: "Garantizar código accesible, uso de APIs web nativas Baseline y arquitectura de componentes",
-                color: "--c-p2",
-                tools: [
-                    {
-                        name: "Modern Web Guidance",
-                        tier: "tier-1",
-                        tierLabel: "Top 1 Oro",
-                        role: "Estándar Oficial (Google Chrome)",
-                        what: "Skill oficial con más de 100 reglas para obligar a la IA a usar APIs nativas (Baseline, <dialog>, Popover API, CSS Anchor).",
-                        impact: "Aporte: Elimina dependencias JS pesadas innecesarias y código obsoleto. Asegura que la IA escriba frontend nativo ultraligero.",
-                        lic: "Open Source (Google)",
-                        official: [["GitHub", "https://github.com/GoogleChrome/modern-web-guidance"], ["Docs", "https://developer.chrome.com/docs/modern-web-guidance/"]],
-                        refs: [["Ref 9", "https://www.facebook.com/share/v/1cMnqK4BfL/"]]
-                    },
-                    {
-                        name: "Draw.io & Balsamiq",
-                        tier: "tier-1",
-                        tierLabel: "Top 1 Oro",
-                        role: "Arquitectura de Software & Wireframes",
-                        what: "Diagramación visual de arquitectura de sistemas, esquemas UML, bases de datos y prototipos estructurales de baja fidelidad.",
-                        impact: "Aporte: Claridad arquitectónica absoluta antes de escribir la primera línea de código en el frontend.",
-                        lic: "Freemium / Gratuito",
-                        official: [["Draw.io", "https://app.diagrams.net/"], ["Balsamiq", "https://balsamiq.cloud/"]],
-                        refs: []
-                    },
-                    {
-                        name: "Tailwind CSS & GSAP",
-                        tier: "tier-1",
-                        tierLabel: "Top 1 Oro",
-                        role: "Diseño Atómico & Animaciones de Alto Rendimiento",
-                        what: "Framework de utilidades CSS moderno combinado con el motor de animación JS más robusto para interfaces dinámicas.",
-                        impact: "Aporte: Flexibilidad estética total sin archivos CSS inflados y microinteracciones fluidas a 60 FPS.",
-                        lic: "Open Source (MIT)",
-                        official: [["Tailwind", "https://tailwindcss.com/"], ["GSAP", "https://gsap.com/"]],
-                        refs: []
-                    },
-                    {
-                        name: "M3E Canvas",
-                        tier: "tier-2",
-                        tierLabel: "Alta",
-                        role: "Lienzo de Tokens Material 3 Expressive",
-                        what: "Compositor visual interactivo que traduce pantallas basadas en Material 3 en prompts estructurados listos para asistentes de código.",
-                        impact: "Aporte: Asegura que la IA construya interfaces limpias, proporcionadas y con estándares de diseño corporativo a la primera.",
-                        lic: "Open Source (MIT)",
-                        official: [["GitHub", "https://github.com/lnkiai/m3e-canvas"]],
-                        refs: [["Ref 8", "https://www.instagram.com/reel/DdBZM7YhkZt/?vrfl=aXk1M3FveDd2djNu"]]
-                    },
-                    {
-                        name: "Skills de Diseño Apple (HIG) & Open Design",
-                        tier: "tier-3",
-                        tierLabel: "Especializado",
-                        role: "Directrices Premium & Prototipado Abierto",
-                        what: "Módulos de directrices formales de Apple (HIG) y estudio de prototipado libre alternativa a Claude Design.",
-                        impact: "Aporte: Impone una estética sobria, minimalista y refinada para aplicaciones móviles y SaaS.",
-                        lic: "Open Source",
-                        official: [["Apple HIG", "https://developer.apple.com/design/human-interface-guidelines/"], ["Open Design", "https://github.com/nexu-io/open-design"]],
-                        refs: [["Ref 11", "https://www.facebook.com/share/r/1Hwrur2vog/"]]
-                    }
-                ]
-            },
-            {
-                id: "fase3_backend",
-                n: "Fase 3",
-                title: "3. Backend, Autenticación Soberana & APIs",
-                desc: "Seguridad de datos en tu propio servidor, clientes tipados e infraestructura cloud",
-                color: "--c-p3",
-                tools: [
-                    {
-                        name: "Better Auth",
-                        tier: "tier-1",
-                        tierLabel: "Top 1 Oro",
-                        role: "Autenticación Type-Safe Autoalojada",
-                        what: "Framework TypeScript integral con passkeys, autenticación en dos pasos (2FA), soporte multi-inquilino y ORMs (Prisma, Drizzle).",
-                        impact: "Aporte: Ahorra miles de dólares en proveedores SaaS de Auth por usuario activo mensual y retiene la propiedad de los datos.",
-                        lic: "Open Source (MIT)",
-                        official: [["Web", "https://better-auth.com/"], ["GitHub", "https://github.com/better-auth/better-auth"]],
-                        refs: [["Ref 12", "https://www.instagram.com/reel/DeXKWxLGUrA/?cplk=c2p6anYwNDBsb3dt"]]
-                    },
-                    {
-                        name: "Cloud, Sandboxes & Repositorios",
-                        tier: "tier-1",
-                        tierLabel: "Top 1 Oro",
-                        role: "Control de Versiones & Cómputo Escalable",
-                        what: "Gestión de código en GitHub, portal cloud Microsoft Azure y entornos rápidos de prototipado en CodePen.",
-                        impact: "Aporte: Canalización continua y disponibilidad global de servidores y despliegues sin interrupciones.",
-                        lic: "Freemium / Cloud",
-                        official: [["GitHub", "https://github.com/"], ["Azure", "https://portal.azure.com/"], ["CodePen", "https://codepen.io/spark"]],
-                        refs: []
-                    },
-                    {
-                        name: "Reverse API Engineer",
-                        tier: "tier-2",
-                        tierLabel: "Alta",
-                        role: "Generador de Clientes HTTP Tipados",
-                        what: "Herramienta que intercepta el tráfico HTTP del navegador y genera de forma automática un cliente Python tipado y listo para producción.",
-                        impact: "Aporte: Ahorra horas de trabajo manual descifrando endpoints ocultos en sitios sin API oficial documentada.",
-                        lic: "Open Source",
-                        official: [["GitHub", "https://github.com/kalil0321/reverse-api-engineer"]],
-                        refs: [["Ref 13", "https://www.instagram.com/reel/DeSH1O_sxI2/?dlrf=MThxd2cwYm9ja2FlYw=="]]
-                    }
-                ]
-            },
-            {
-                id: "fase4_qa_security",
-                n: "Fase 4",
-                title: "4. Testing Autónomo, Calidad & Ciberseguridad",
-                desc: "Auditoría incremental de Pull Requests, tests auto-reparables y fuzzing continuo",
-                color: "--c-p4",
-                tools: [
-                    {
-                        name: "CodeRabbit AI",
-                        tier: "tier-1",
-                        tierLabel: "Top 1 Oro",
-                        role: "Revisor Automático de Pull Requests",
-                        what: "Auditor continuo para GitHub y GitLab que revisa cada PR, detecta posibles regresiones de lógica, propone parches y grafica diagramas de secuencia.",
-                        impact: "Aporte: Eleva la calidad y la seguridad del código del equipo antes de fusionar a la rama principal de producción.",
-                        lic: "Freemium (100% Gratis en OSS)",
-                        official: [["Web", "https://www.coderabbit.ai/"], ["GitHub", "https://github.com/coderabbitai"]],
-                        refs: [["Ref 14", "https://www.facebook.com/share/p/1Ba3h7oiHE/"]]
-                    },
-                    {
-                        name: "Autonoma AI",
-                        tier: "tier-1",
-                        tierLabel: "Top 1 Oro",
-                        role: "Generación & Auto-Reparación de Tests con IA",
-                        what: "Plataforma de testing impulsada por agentes que planifica, genera, ejecuta y auto-repara pruebas unitarias y de integración en tu base de código.",
-                        impact: "Aporte: Elimina el trabajo manual de escribir tests repetitivos y mantiene la cobertura verde ante cambios de API.",
-                        lic: "Source Available / Gratis",
-                        official: [["Web", "https://getautonoma.com/"]],
-                        refs: []
-                    },
-                    {
-                        name: "OSS-Fuzz (Google)",
-                        tier: "tier-1",
-                        tierLabel: "Top 1 Oro",
-                        role: "Fuzzing Continuo Automatizado en la Nube",
-                        what: "Servicio de Google que bombardea software con millones de entradas aleatorias y mutadas por segundo junto a sanitizadores de memoria.",
-                        impact: "Aporte: Descubre vulnerabilidades críticas que escapan a linters estáticos: buffer overflows, fugas de memoria y condiciones de carrera.",
-                        lic: "Open Source (Apache 2.0)",
-                        official: [["GitHub", "https://github.com/google/oss-fuzz"], ["Docs", "https://google.github.io/oss-fuzz/"]],
-                        refs: []
-                    },
-                    {
-                        name: "REA (Reverse Engineer Anything) & EmailOSINT",
-                        tier: "tier-3",
-                        tierLabel: "Especializado",
-                        role: "Desensamblador MCP & Auditoría de Exposición",
-                        what: "REA conecta asistentes de IA con descompiladores de binarios y apps Electron, y EmailOSINT audita fugas de datos de correos corporativos.",
-                        impact: "Aporte: Inspección interna de librerías dudosas y evaluación del riesgo de credenciales comprometidas.",
-                        lic: "Open Source / Freemium",
-                        official: [["REA GitHub", "https://github.com/morluto/rea"], ["EmailOSINT", "https://emailosint.org/"]],
-                        refs: [["Ref 15", "https://www.instagram.com/reel/DeXQgNhgFl5/?psln=MWxkb2J2eTBpNHNvaw=="]]
-                    }
-                ]
-            },
-            {
-                id: "fase5_data_rag",
-                n: "Fase 5",
-                title: "5. Extracción de Datos, Automatización & RAG",
-                desc: "Suministro de datos limpios para agentes de IA y scraping sin bloqueos",
-                color: "--c-p5",
-                tools: [
-                    {
-                        name: "Firecrawl",
-                        tier: "tier-1",
-                        tierLabel: "Top 1 Oro",
-                        role: "Scraping a Markdown Limpio para RAG",
-                        what: "Plataforma de rastreo web que convierte cualquier URL o sitio completo en Markdown puro, eliminando menús, anuncios y hojas de estilo.",
-                        impact: "Aporte: Ahorra millones de tokens al alimentar modelos con texto puro y sortea bloqueos de JavaScript dinámico.",
-                        lic: "Intermedia (OSS Autoalojable + Nube)",
-                        official: [["Web", "https://www.firecrawl.dev/"], ["GitHub", "https://github.com/firecrawl/firecrawl"]],
-                        refs: [["Ref 17", "https://www.facebook.com/share/r/193MgfYZEC/"]]
-                    },
-                    {
-                        name: "Agent Reach",
-                        tier: "tier-2",
-                        tierLabel: "Alta",
-                        role: "Lectura de Redes Sociales sin APIs de Pago",
-                        what: "Capa de conexión pasiva que permite a agentes de IA leer Reddit, X (Twitter), YouTube y GitHub sin pagar costosas suscripciones de APIs oficiales.",
-                        impact: "Aporte: Monitoreo de tendencias y opiniones de usuarios en tiempo real a coste cero.",
-                        lic: "Open Source",
-                        official: [["GitHub", "https://github.com/Panniantong/Agent-Reach"]],
-                        refs: [["Ref 18", "https://www.instagram.com/reel/DeVbt7FleL5/?mdxt=MXJmeWx6Z2FzcGY5aQ=="]]
-                    }
-                ]
-            },
-            {
-                id: "fase6_strategy",
-                n: "Fase 6",
-                title: "6. Estrategia SaaS, Formación & Crecimiento",
-                desc: "Capacidades transversales de modelo de negocio, validación de mercado y empleo digital",
-                color: "--c-p6",
-                tools: [
-                    {
-                        name: "Formación Técnica de MoureDev",
-                        tier: "tier-1",
-                        tierLabel: "Top 1 Oro",
-                        role: "Comunidad & Formación Continua",
-                        what: "Cursos gratuitos de desarrollo guiado por IA, configuración de TUI en terminal y comunidad hispanohablante.",
-                        impact: "Aporte: Nivelación constante de habilidades en herramientas de desarrollo asistido de vanguardia.",
-                        lic: "Comunidad / Gratis",
-                        official: [["moure.dev", "https://moure.dev/"], ["YouTube", "https://www.youtube.com/@mouredev"], ["GitHub", "https://github.com/mouredev"]],
-                        refs: [["Ref 2", "https://www.facebook.com/share/r/1BGHLzGDm4/"]]
-                    },
-                    {
-                        name: "Convocatorias SENA / Accenture",
-                        tier: "tier-2",
-                        tierLabel: "Alta",
-                        role: "Inserción Laboral & Empleo",
-                        what: "Oportunidades de formación y convocatorias de contratación para perfiles tecnológicos en Colombia.",
-                        impact: "Aporte: Transición directa hacia empleo formal en desarrollo y cloud corporativo.",
-                        lic: "Institucional",
-                        official: [["Accenture", "https://www.accenture.com/co-es/careers/jobdetails?id=R00243777_es&title=Aprendices+SENA"]],
-                        refs: [["Ref 19", "https://www.accenture.com/co-es/careers/jobdetails?id=R00243777_es&title=Aprendices+SENA"]]
-                    },
-                    {
-                        name: "Estrategia SaaS & Validación de Apps",
-                        tier: "tier-3",
-                        tierLabel: "Especializado",
-                        role: "Modelo de Negocio & Legalidad",
-                        what: "Estrategias para monetizar herramientas de software, mitigar riesgos legales de código generado por IA y diseñar periodos de prueba exitosos.",
-                        impact: "Aporte: Transforma proyectos técnicos en productos digitales comercialmente viables.",
-                        lic: "Estrategia",
-                        official: [],
-                        refs: [["Ref 20", "https://www.instagram.com/reel/Dd7idktuOFx/?exln=MWtoYzhyaDI3ODN4cw=="], ["Ref 21", "https://www.instagram.com/reel/DeZCQHvxohj/?srtk=MTltczZodHRpc3Bzcg=="]]
-                    }
-                ]
-            },
-            {
-                id: "fase7",
-                n: "Fase 7",
-                title: "7. Investigación en Ingeniería de Software, Benchmarks & Papers con Código",
+                title: "1. Investigación en Ingeniería de Software, Benchmarks & Papers con Código",
                 desc: "Descubrimiento de arquitecturas de software, papers con código fuente reproducible en GitHub, benchmarks de LLMs y estándares de ingeniería informática",
                 color: "--c-p7",
                 tools: [
@@ -1155,6 +815,346 @@
                         lic: "Open Source (Apache 2.0)",
                         official: [["Web App", "https://app.diagrams.net/"], ["GitHub", "https://github.com/jgraph/drawio"]],
                         refs: []
+                    }
+                ]
+            },
+            {
+                id: "fase2_agents",
+                n: "Fase 2",
+                title: "2. Agentes de Código Autónomos & LLMs",
+                desc: "Agentes de consola, pair programming en terminal, orquestadores y modelos de razonamiento",
+                color: "--c-p1",
+                tools: [
+                    {
+                        name: "OpenCode",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Agente de Consola Open-Source (TUI)",
+                        what: "Agente CLI de código abierto independiente conectado a +75 proveedores de modelos o modelos 100% locales (Ollama/LM Studio). Sin cuotas de suscripción de interfaz.",
+                        impact: "Aporte: El estándar de oro comunitario para programar con agentes en terminal. Elimina vendor lock-in y protege código confidencial en tu propia máquina.",
+                        lic: "Open Source (MIT)",
+                        official: [["Web", "https://opencode.ai/"], ["GitHub", "https://github.com/anomalyco/opencode"]],
+                        refs: [["Ref 1", "https://www.facebook.com/share/r/14hWsnezzaB/"], ["Ref 2", "https://www.facebook.com/share/r/1BGHLzGDm4/"]]
+                    },
+                    {
+                        name: "Cline (Claude Dev)",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Agente Autónomo en VS Code con Checkpoints",
+                        what: "Extensión open-source líder en VS Code que crea/edita archivos, ejecuta comandos de terminal y solicita confirmación humana explícita antes de acciones críticas.",
+                        impact: "Aporte: Trae autonomía completa de agentes dentro del editor con modelo Bring-Your-Own-Key (BYOK) sin planes de suscripción cerrados.",
+                        lic: "Open Source (Apache 2.0)",
+                        official: [["Marketplace", "https://marketplace.visualstudio.com/items?itemName=saoudrizwan.claude-dev"], ["GitHub", "https://github.com/cline/cline"]],
+                        refs: []
+                    },
+                    {
+                        name: "Claude Code CLI",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Agente Oficial de Consola (Anthropic)",
+                        what: "Agente autónomo de consola de Anthropic diseñado para proyectos complejos con permisos de navegación de repositorio, ejecución de linters y suites de test.",
+                        impact: "Aporte: Máxima capacidad de razonamiento multi-archivo directamente integrado en la terminal del sistema operativo.",
+                        lic: "Propietario / API",
+                        official: [["Anthropic", "https://www.anthropic.com/claude-code"]],
+                        refs: []
+                    },
+                    {
+                        name: "Aider",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Pair Programming con Commits Automáticos",
+                        what: "Herramienta CLI para programar en pareja en la terminal conectada a Git. Cada refactorización o cambio lógico genera automáticamente un commit limpio y descriptivo.",
+                        impact: "Aporte: Historial de Git impecable y navegación profunda en repositorios grandes mediante mapeo AST del código.",
+                        lic: "Open Source (Apache 2.0)",
+                        official: [["Web", "https://aider.chat/"], ["GitHub", "https://github.com/paul-gauthier/aider"]],
+                        refs: []
+                    },
+                    {
+                        name: "Grandes Modelos (LLMs)",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Motores Fundacionales de Razonamiento",
+                        what: "Chats y asistentes de cabecera para lógica, arquitectura y resolución de dudas: ChatGPT, Claude 3.7 Sonnet, DeepSeek R1 y Microsoft Copilot.",
+                        impact: "Aporte: Comparación multi-modelo para arquitectura, debugging de algoritmos y formulación de estrategias técnicas.",
+                        lic: "Freemium / Comercial",
+                        official: [["ChatGPT", "https://chatgpt.com/"], ["Claude", "https://claude.ai/"], ["DeepSeek", "https://chat.deepseek.com/"], ["Copilot", "https://copilot.microsoft.com/"]],
+                        refs: []
+                    },
+                    {
+                        name: "OpenHands (OpenDevin)",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Plataforma de Ingeniería Autónoma en Sandbox",
+                        what: "Plataforma de agentes autónomos que opera en un contenedor Docker aislado, capaz de resolver issues de GitHub, compilar entornos y auto-reparar fallos.",
+                        impact: "Aporte: Permite delegar tareas pesadas de mantenimiento e investigación de bugs sin arriesgar tu entorno local.",
+                        lic: "Open Source (MIT)",
+                        official: [["Web", "https://openhands.ai/"], ["GitHub", "https://github.com/All-Hands-AI/OpenHands"]],
+                        refs: []
+                    },
+                    {
+                        name: "Everything Claude Code (ECC)",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Orquestador de 70+ Subagentes",
+                        what: "Framework de más de 70 subagentes preconfigurados, memoria persistente entre sesiones y escudo AgentShield.",
+                        impact: "Aporte: Evita alucinaciones imponiendo especificaciones formales de diseño de software (SDD) en tareas largas.",
+                        lic: "Open Source",
+                        official: [["GitHub", "https://github.com/affaan-m/ECC"]],
+                        refs: [["Ref 3", "https://www.facebook.com/share/r/1EjGyB9V6C/"], ["Ref 4", "https://www.facebook.com/share/r/1TxX5m2S5G/"]]
+                    },
+                    {
+                        name: "Lovable & Bolt.new",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Generadores Web Fullstack en Navegador",
+                        what: "Entornos reactivos en el navegador para construir y probar aplicaciones completas con backend en minutos a partir de prompts.",
+                        impact: "Aporte: Acelera la validación de prototipos y pruebas de concepto (MVPs) a velocidad récord.",
+                        lic: "Freemium",
+                        official: [["Lovable", "https://lovable.dev/"], ["Bolt.new", "https://bolt.new/"]],
+                        refs: []
+                    },
+                    {
+                        name: "Kimi K3 & Files2Prompt",
+                        tier: "tier-3",
+                        tierLabel: "Especializado",
+                        role: "Modelos de Contexto Masivo & Empaquetadores",
+                        what: "Kimi K3 con 1M de tokens para auditar repositorios enteros y Files2Prompt para empaquetar código para modelos web.",
+                        impact: "Aporte: Resuelve la ingesta de bases de código monumentales sin fragmentar la memoria del modelo.",
+                        lic: "Open Weights / Gratis",
+                        official: [["Kimi.ai", "https://kimi.ai/"], ["Files2Prompt", "https://github.com/Thomas-McKanna/Files2Prompt"]],
+                        refs: [["Ref 7", "https://www.facebook.com/share/p/1DS89U3Mtg/"]]
+                    }
+                ]
+            },
+            {
+                id: "fase3_frontend",
+                n: "Fase 3",
+                title: "3. Diseño, UI/UX & Prevención Anti-AI Slop",
+                desc: "Garantizar código accesible, uso de APIs web nativas Baseline y arquitectura de componentes",
+                color: "--c-p2",
+                tools: [
+                    {
+                        name: "Modern Web Guidance",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Estándar Oficial (Google Chrome)",
+                        what: "Skill oficial con más de 100 reglas para obligar a la IA a usar APIs nativas (Baseline, <dialog>, Popover API, CSS Anchor).",
+                        impact: "Aporte: Elimina dependencias JS pesadas innecesarias y código obsoleto. Asegura que la IA escriba frontend nativo ultraligero.",
+                        lic: "Open Source (Google)",
+                        official: [["GitHub", "https://github.com/GoogleChrome/modern-web-guidance"], ["Docs", "https://developer.chrome.com/docs/modern-web-guidance/"]],
+                        refs: [["Ref 9", "https://www.facebook.com/share/v/1cMnqK4BfL/"]]
+                    },
+                    {
+                        name: "Draw.io & Balsamiq",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Arquitectura de Software & Wireframes",
+                        what: "Diagramación visual de arquitectura de sistemas, esquemas UML, bases de datos y prototipos estructurales de baja fidelidad.",
+                        impact: "Aporte: Claridad arquitectónica absoluta antes de escribir la primera línea de código en el frontend.",
+                        lic: "Freemium / Gratuito",
+                        official: [["Draw.io", "https://app.diagrams.net/"], ["Balsamiq", "https://balsamiq.cloud/"]],
+                        refs: []
+                    },
+                    {
+                        name: "Tailwind CSS & GSAP",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Diseño Atómico & Animaciones de Alto Rendimiento",
+                        what: "Framework de utilidades CSS moderno combinado con el motor de animación JS más robusto para interfaces dinámicas.",
+                        impact: "Aporte: Flexibilidad estética total sin archivos CSS inflados y microinteracciones fluidas a 60 FPS.",
+                        lic: "Open Source (MIT)",
+                        official: [["Tailwind", "https://tailwindcss.com/"], ["GSAP", "https://gsap.com/"]],
+                        refs: []
+                    },
+                    {
+                        name: "M3E Canvas",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Lienzo de Tokens Material 3 Expressive",
+                        what: "Compositor visual interactivo que traduce pantallas basadas en Material 3 en prompts estructurados listos para asistentes de código.",
+                        impact: "Aporte: Asegura que la IA construya interfaces limpias, proporcionadas y con estándares de diseño corporativo a la primera.",
+                        lic: "Open Source (MIT)",
+                        official: [["GitHub", "https://github.com/lnkiai/m3e-canvas"]],
+                        refs: [["Ref 8", "https://www.instagram.com/reel/DdBZM7YhkZt/?vrfl=aXk1M3FveDd2djNu"]]
+                    },
+                    {
+                        name: "Skills de Diseño Apple (HIG) & Open Design",
+                        tier: "tier-3",
+                        tierLabel: "Especializado",
+                        role: "Directrices Premium & Prototipado Abierto",
+                        what: "Módulos de directrices formales de Apple (HIG) y estudio de prototipado libre alternativa a Claude Design.",
+                        impact: "Aporte: Impone una estética sobria, minimalista y refinada para aplicaciones móviles y SaaS.",
+                        lic: "Open Source",
+                        official: [["Apple HIG", "https://developer.apple.com/design/human-interface-guidelines/"], ["Open Design", "https://github.com/nexu-io/open-design"]],
+                        refs: [["Ref 11", "https://www.facebook.com/share/r/1Hwrur2vog/"]]
+                    }
+                ]
+            },
+            {
+                id: "fase4_backend",
+                n: "Fase 4",
+                title: "4. Backend, Autenticación Soberana & APIs",
+                desc: "Seguridad de datos en tu propio servidor, clientes tipados e infraestructura cloud",
+                color: "--c-p3",
+                tools: [
+                    {
+                        name: "Better Auth",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Autenticación Type-Safe Autoalojada",
+                        what: "Framework TypeScript integral con passkeys, autenticación en dos pasos (2FA), soporte multi-inquilino y ORMs (Prisma, Drizzle).",
+                        impact: "Aporte: Ahorra miles de dólares en proveedores SaaS de Auth por usuario activo mensual y retiene la propiedad de los datos.",
+                        lic: "Open Source (MIT)",
+                        official: [["Web", "https://better-auth.com/"], ["GitHub", "https://github.com/better-auth/better-auth"]],
+                        refs: [["Ref 12", "https://www.instagram.com/reel/DeXKWxLGUrA/?cplk=c2p6anYwNDBsb3dt"]]
+                    },
+                    {
+                        name: "Cloud, Sandboxes & Repositorios",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Control de Versiones & Cómputo Escalable",
+                        what: "Gestión de código en GitHub, portal cloud Microsoft Azure y entornos rápidos de prototipado en CodePen.",
+                        impact: "Aporte: Canalización continua y disponibilidad global de servidores y despliegues sin interrupciones.",
+                        lic: "Freemium / Cloud",
+                        official: [["GitHub", "https://github.com/"], ["Azure", "https://portal.azure.com/"], ["CodePen", "https://codepen.io/spark"]],
+                        refs: []
+                    },
+                    {
+                        name: "Reverse API Engineer",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Generador de Clientes HTTP Tipados",
+                        what: "Herramienta que intercepta el tráfico HTTP del navegador y genera de forma automática un cliente Python tipado y listo para producción.",
+                        impact: "Aporte: Ahorra horas de trabajo manual descifrando endpoints ocultos en sitios sin API oficial documentada.",
+                        lic: "Open Source",
+                        official: [["GitHub", "https://github.com/kalil0321/reverse-api-engineer"]],
+                        refs: [["Ref 13", "https://www.instagram.com/reel/DeSH1O_sxI2/?dlrf=MThxd2cwYm9ja2FlYw=="]]
+                    }
+                ]
+            },
+            {
+                id: "fase5_qa_security",
+                n: "Fase 5",
+                title: "5. Testing Autónomo, Calidad & Ciberseguridad",
+                desc: "Auditoría incremental de Pull Requests, tests auto-reparables y fuzzing continuo",
+                color: "--c-p4",
+                tools: [
+                    {
+                        name: "CodeRabbit AI",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Revisor Automático de Pull Requests",
+                        what: "Auditor continuo para GitHub y GitLab que revisa cada PR, detecta posibles regresiones de lógica, propone parches y grafica diagramas de secuencia.",
+                        impact: "Aporte: Eleva la calidad y la seguridad del código del equipo antes de fusionar a la rama principal de producción.",
+                        lic: "Freemium (100% Gratis en OSS)",
+                        official: [["Web", "https://www.coderabbit.ai/"], ["GitHub", "https://github.com/coderabbitai"]],
+                        refs: [["Ref 14", "https://www.facebook.com/share/p/1Ba3h7oiHE/"]]
+                    },
+                    {
+                        name: "Autonoma AI",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Generación & Auto-Reparación de Tests con IA",
+                        what: "Plataforma de testing impulsada por agentes que planifica, genera, ejecuta y auto-repara pruebas unitarias y de integración en tu base de código.",
+                        impact: "Aporte: Elimina el trabajo manual de escribir tests repetitivos y mantiene la cobertura verde ante cambios de API.",
+                        lic: "Source Available / Gratis",
+                        official: [["Web", "https://getautonoma.com/"]],
+                        refs: []
+                    },
+                    {
+                        name: "OSS-Fuzz (Google)",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Fuzzing Continuo Automatizado en la Nube",
+                        what: "Servicio de Google que bombardea software con millones de entradas aleatorias y mutadas por segundo junto a sanitizadores de memoria.",
+                        impact: "Aporte: Descubre vulnerabilidades críticas que escapan a linters estáticos: buffer overflows, fugas de memoria y condiciones de carrera.",
+                        lic: "Open Source (Apache 2.0)",
+                        official: [["GitHub", "https://github.com/google/oss-fuzz"], ["Docs", "https://google.github.io/oss-fuzz/"]],
+                        refs: []
+                    },
+                    {
+                        name: "REA (Reverse Engineer Anything) & EmailOSINT",
+                        tier: "tier-3",
+                        tierLabel: "Especializado",
+                        role: "Desensamblador MCP & Auditoría de Exposición",
+                        what: "REA conecta asistentes de IA con descompiladores de binarios y apps Electron, y EmailOSINT audita fugas de datos de correos corporativos.",
+                        impact: "Aporte: Inspección interna de librerías dudosas y evaluación del riesgo de credenciales comprometidas.",
+                        lic: "Open Source / Freemium",
+                        official: [["REA GitHub", "https://github.com/morluto/rea"], ["EmailOSINT", "https://emailosint.org/"]],
+                        refs: [["Ref 15", "https://www.instagram.com/reel/DeXQgNhgFl5/?psln=MWxkb2J2eTBpNHNvaw=="]]
+                    }
+                ]
+            },
+            {
+                id: "fase6_data_rag",
+                n: "Fase 6",
+                title: "6. Extracción de Datos, Automatización & RAG",
+                desc: "Suministro de datos limpios para agentes de IA y scraping sin bloqueos",
+                color: "--c-p5",
+                tools: [
+                    {
+                        name: "Firecrawl",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Scraping a Markdown Limpio para RAG",
+                        what: "Plataforma de rastreo web que convierte cualquier URL o sitio completo en Markdown puro, eliminando menús, anuncios y hojas de estilo.",
+                        impact: "Aporte: Ahorra millones de tokens al alimentar modelos con texto puro y sortea bloqueos de JavaScript dinámico.",
+                        lic: "Intermedia (OSS Autoalojable + Nube)",
+                        official: [["Web", "https://www.firecrawl.dev/"], ["GitHub", "https://github.com/firecrawl/firecrawl"]],
+                        refs: [["Ref 17", "https://www.facebook.com/share/r/193MgfYZEC/"]]
+                    },
+                    {
+                        name: "Agent Reach",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Lectura de Redes Sociales sin APIs de Pago",
+                        what: "Capa de conexión pasiva que permite a agentes de IA leer Reddit, X (Twitter), YouTube y GitHub sin pagar costosas suscripciones de APIs oficiales.",
+                        impact: "Aporte: Monitoreo de tendencias y opiniones de usuarios en tiempo real a coste cero.",
+                        lic: "Open Source",
+                        official: [["GitHub", "https://github.com/Panniantong/Agent-Reach"]],
+                        refs: [["Ref 18", "https://www.instagram.com/reel/DeVbt7FleL5/?mdxt=MXJmeWx6Z2FzcGY5aQ=="]]
+                    }
+                ]
+            },
+            {
+                id: "fase7_strategy",
+                n: "Fase 7",
+                title: "7. Estrategia SaaS, Formación & Crecimiento",
+                desc: "Capacidades transversales de modelo de negocio, validación de mercado y empleo digital",
+                color: "--c-p6",
+                tools: [
+                    {
+                        name: "Formación Técnica de MoureDev",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Comunidad & Formación Continua",
+                        what: "Cursos gratuitos de desarrollo guiado por IA, configuración de TUI en terminal y comunidad hispanohablante.",
+                        impact: "Aporte: Nivelación constante de habilidades en herramientas de desarrollo asistido de vanguardia.",
+                        lic: "Comunidad / Gratis",
+                        official: [["moure.dev", "https://moure.dev/"], ["YouTube", "https://www.youtube.com/@mouredev"], ["GitHub", "https://github.com/mouredev"]],
+                        refs: [["Ref 2", "https://www.facebook.com/share/r/1BGHLzGDm4/"]]
+                    },
+                    {
+                        name: "Convocatorias SENA / Accenture",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Inserción Laboral & Empleo",
+                        what: "Oportunidades de formación y convocatorias de contratación para perfiles tecnológicos en Colombia.",
+                        impact: "Aporte: Transición directa hacia empleo formal en desarrollo y cloud corporativo.",
+                        lic: "Institucional",
+                        official: [["Accenture", "https://www.accenture.com/co-es/careers/jobdetails?id=R00243777_es&title=Aprendices+SENA"]],
+                        refs: [["Ref 19", "https://www.accenture.com/co-es/careers/jobdetails?id=R00243777_es&title=Aprendices+SENA"]]
+                    },
+                    {
+                        name: "Estrategia SaaS & Validación de Apps",
+                        tier: "tier-3",
+                        tierLabel: "Especializado",
+                        role: "Modelo de Negocio & Legalidad",
+                        what: "Estrategias para monetizar herramientas de software, mitigar riesgos legales de código generado por IA y diseñar periodos de prueba exitosos.",
+                        impact: "Aporte: Transforma proyectos técnicos en productos digitales comercialmente viables.",
+                        lic: "Estrategia",
+                        official: [],
+                        refs: [["Ref 20", "https://www.instagram.com/reel/Dd7idktuOFx/?exln=MWtoYzhyaDI3ODN4cw=="], ["Ref 21", "https://www.instagram.com/reel/DeZCQHvxohj/?srtk=MTltczZodHRpc3Bzcg=="]]
                     }
                 ]
             }
