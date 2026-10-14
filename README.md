@@ -1,6 +1,6 @@
 # Diagrama: Flujo de Desarrollo de Software Asistido por IA
 
-Visualizador interactivo y mapa de arquitectura para flujos de ingeniería de software potenciados por agentes de Inteligencia Artificial (Fases 1 a 6).
+Visualizador interactivo y mapa de arquitectura para flujos de ingeniería de software potenciados por agentes de Inteligencia Artificial e investigación científica (Fases 1 a 7).
 
 * **Despliegue en vivo:** [https://alexanderucun.github.io/diagrama-flujo-ia/](https://alexanderucun.github.io/diagrama-flujo-ia/)
 * **Repositorio:** [https://github.com/AlexanderUcun/diagrama-flujo-ia](https://github.com/AlexanderUcun/diagrama-flujo-ia)
@@ -20,3 +20,4 @@ Visualizador interactivo y mapa de arquitectura para flujos de ingeniería de so
 4. **Fase 4: Testing, Calidad y Ciberseguridad:** CodeRabbit AI, Autonoma AI (self-healing tests), Google OSS-Fuzz, REA, EmailOSINT.
 5. **Fase 5: Extracción de Datos y Automatización:** Firecrawl, Agent Reach.
 6. **Fase 6: Formación y Estrategia de Negocio:** Ecosistema MoureDev, SENA/Accenture, Validación y Legal SaaS.
+7. **Fase 7: Investigación Científica, Papers & Academia IA:** Semantic Scholar (Top 1 grafos Allen AI), Connected Papers (Top 1 linaje visual), Consensus AI (Top 1 evidencia científica), SciSpace AI, Zotero, Google Scholar, Elicit, Overleaf LaTeX, Draw.io.

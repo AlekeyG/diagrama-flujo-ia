@@ -24,6 +24,7 @@
             --c-p4: #e11d48;       /* Testing, QA & Seguridad */
             --c-p5: #d97706;       /* Datos, RAG & Scraping */
             --c-p6: #475569;       /* Estrategia & Empleo */
+            --c-p7: #4f46e5;       /* Investigación Científica & Academia IA */
             
             --shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
             
@@ -57,6 +58,7 @@
                 --c-p4: #fb7185;
                 --c-p5: #fbbf24;
                 --c-p6: #94a3b8;
+                --c-p7: #818cf8;
                 
                 --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
                 --prio-tier1-bg: rgba(59, 130, 246, 0.12);
@@ -88,6 +90,7 @@
             --c-p4: #fb7185;
             --c-p5: #fbbf24;
             --c-p6: #94a3b8;
+            --c-p7: #818cf8;
             
             --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
             --prio-tier1-bg: rgba(59, 130, 246, 0.12);
@@ -652,12 +655,12 @@
 <body>
     <header>
         <h1>Pipeline de Ingeniería de Software con IA</h1>
-        <p>Ecosistema integral clasificado por <strong>fases del ciclo de vida del software</strong>, posicionando en los primeros puestos a los mejores agentes de código abierto, herramientas de testing autónomo, arquitecturas frontend y modelos fundacionales.</p>
+        <p>Ecosistema integral clasificado por <strong>fases del ciclo de vida del software e investigación</strong>, posicionando en los primeros puestos a los mejores agentes de código abierto, herramientas de testing autónomo, arquitecturas frontend, modelos fundacionales y plataformas científicas con IA.</p>
         <div class="toolbar">
             <button class="btn-ctrl" id="theme" type="button" aria-label="Cambiar tema">Cambiar tema</button>
             <div class="search-box">
                 <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" class="search-input" placeholder="Buscar agente, testing, LLM, auth, fuzzing...">
+                <input type="text" id="searchInput" class="search-input" placeholder="Buscar agente, testing, LLM, papers, consenso, grafos, LaTeX...">
             </div>
             <div class="filter-bar">
                 <span style="font-size:0.8rem; color:var(--muted); font-weight:600;">Jerarquía:</span>
@@ -1033,6 +1036,114 @@
                         lic: "Estrategia",
                         official: [],
                         refs: [["Ref 20", "https://www.instagram.com/reel/Dd7idktuOFx/?exln=MWtoYzhyaDI3ODN4cw=="], ["Ref 21", "https://www.instagram.com/reel/DeZCQHvxohj/?srtk=MTltczZodHRpc3Bzcg=="]]
+                    }
+                ]
+            },
+            {
+                id: "fase7",
+                n: "Fase 7",
+                title: "7. Investigación Científica, Papers & Academia IA",
+                desc: "Descubrimiento bibliográfico con IA, análisis de grafos de conocimiento, síntesis de papers y redacción científica",
+                color: "--c-p7",
+                tools: [
+                    {
+                        name: "Semantic Scholar",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Búsqueda Científica con IA & TLDRs (Allen AI)",
+                        what: "Motor de búsqueda académico desarrollado por el Allen Institute for AI con más de 200 millones de publicaciones. Extrae citas altamente influyentes y resúmenes automáticos en una oración.",
+                        impact: "Aporte: Discrimina citas incidentales de citas que realmente aportaron a la metodología o resultados de la investigación.",
+                        lic: "100% Gratuito / Open Science",
+                        official: [["Portal Oficial", "https://www.semanticscholar.org/"]],
+                        refs: []
+                    },
+                    {
+                        name: "Connected Papers",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Grafos Visuales de Literatura & Co-citación",
+                        what: "Genera grafos bidimensionales que mapean relaciones de co-citación y similitud semántica en un campo de investigación a partir de un paper semilla.",
+                        impact: "Aporte: Descubre artículos fundacionales (*origin paper*) y derivados clave que escapan a las búsquedas tradicionales por texto.",
+                        lic: "Freemium",
+                        official: [["Portal Oficial", "https://www.connectedpapers.com/"]],
+                        refs: []
+                    },
+                    {
+                        name: "Consensus AI",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Motor de Búsqueda Basado en Evidencia Científica",
+                        what: "Buscador de IA que extrae respuestas y métricas de consenso basadas exclusivamente en estudios revisados por pares (peer-reviewed).",
+                        impact: "Aporte: Valida hipótesis de ingeniería con rigor científico evitando alucinaciones de modelos de lenguaje.",
+                        lic: "Freemium",
+                        official: [["Portal Oficial", "https://consensus.app/"]],
+                        refs: []
+                    },
+                    {
+                        name: "SciSpace (Typeset.io)",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Copiloto IA para Lectura & Fórmulas de Papers",
+                        what: "Lector interactivo con IA para PDFs científicos. Permite desglosar fórmulas matemáticas complejas, consultar dudas sobre tablas y resumir metodología.",
+                        impact: "Aporte: Acelera exponencialmente la comprensión de papers matemáticos y arquitecturas de redes neuronales.",
+                        lic: "Freemium",
+                        official: [["Portal Oficial", "https://typeset.io/"]],
+                        refs: []
+                    },
+                    {
+                        name: "Zotero",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Gestor Bibliográfico & Citación Automática",
+                        what: "Software open source para indexar bibliografía técnica, anotar PDFs en local y generar citas en normas APA 7, IEEE, ACM o Harvard.",
+                        impact: "Aporte: Gestión local privada y sincronizada de cientos de fuentes bibliográficas sin costos de suscripción.",
+                        lic: "Open Source (AGPL)",
+                        official: [["Web Oficial", "https://www.zotero.org/"], ["GitHub", "https://github.com/zotero/zotero"]],
+                        refs: []
+                    },
+                    {
+                        name: "Google Scholar & ResearchGate",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Repositorio Global, Métricas de Impacto & Autores",
+                        what: "Directorio global de citas académicas, cálculo de índice h y red de investigadores para solicitar preprints y artículos de acceso abierto.",
+                        impact: "Aporte: Acceso a preprints y literatura indexada global sin muros de pago corporativos.",
+                        lic: "100% Gratuito",
+                        official: [["Google Académico", "https://scholar.google.es/"], ["ResearchGate", "https://www.researchgate.net/"]],
+                        refs: []
+                    },
+                    {
+                        name: "Elicit",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Revisiones Sistemáticas & Matrices de Literatura",
+                        what: "Asistente de investigación que analiza múltiples papers en simultáneo y extrae automáticamente variables, métodos y resultados en una matriz comparativa.",
+                        impact: "Aporte: Reduce de semanas a horas la redacción del estado del arte o marco conceptual en investigaciones formales.",
+                        lic: "Freemium",
+                        official: [["Portal Oficial", "https://elicit.com/"]],
+                        refs: []
+                    },
+                    {
+                        name: "Overleaf (LaTeX)",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Redacción Científica Colaborativa & TeX",
+                        what: "Editor en la nube para escritura de artículos técnicos, monografías y papers en formato LaTeX con plantillas de IEEE, Springer y ACM.",
+                        impact: "Aporte: Formato tipográfico perfecto y compilación matemática sin lidiar con configuraciones locales.",
+                        lic: "Freemium",
+                        official: [["Portal Oficial", "https://www.overleaf.com/"]],
+                        refs: []
+                    },
+                    {
+                        name: "Draw.io (Diagramación Científica)",
+                        tier: "tier-3",
+                        tierLabel: "Especializado",
+                        role: "Arquitectura de Software & Esquemas Metodológicos",
+                        what: "Software de diagramación vectorial para ilustrar flujos algorítmicos, redes neuronales y pipelines de datos exportables en SVG/PDF de alta resolución.",
+                        impact: "Aporte: Diagramas profesionales listos para publicación sin pixelado en papers científicos.",
+                        lic: "Open Source (Apache 2.0)",
+                        official: [["Web App", "https://app.diagrams.net/"], ["GitHub", "https://github.com/jgraph/drawio"]],
+                        refs: []
                     }
                 ]
             }
