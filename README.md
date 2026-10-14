@@ -15,7 +15,12 @@ Visualizador interactivo y mapa de arquitectura para flujos de ingeniería de so
   * `🛡️ Auditar Seguridad & Testing` (Fases 4 y 5: Better Auth, CodeRabbit, Autonoma, OSS-Fuzz)
   * `📈 Validar Métricas & Producto` (Fases 6 y 7: Firecrawl, Clarity, MDN Web Docs, Similarweb)
 * **Divulgación Progresiva:** Tarjetas ligeras con rol técnico, frase directa de valor y chips compactos de conexión interactiva (`🔗 Conecta: [Target]`). Al hacer clic se despliega el modal con la arquitectura, relaciones completas y enlaces oficiales.
-* **Filtros Técnicos Plegables:** Control desplegable `[⚙️ Filtros Técnicos ▾]` para filtrar por jerarquía (Top 1 Oro, Alta, Especializado) o tipo de artefacto (App, Extensión/CLI, Librería, Framework).
+* **Filtros Técnicos Plegables:** Control desplegable `[⚙️ Filtros Técnicos ▾]` para filtrar por mérito (*Top 1 Oro*, *Alta*, *Especializado*) o por la **Jerarquía de Identificación de Recursos**:
+  1. `📄 Paper / Benchmark` *(Fundamentos científicos y benchmarks estandarizados: SWE-bench, LMSYS Arena)*
+  2. `⚡ Framework / Motor` *(Marcos de trabajo arquitectónicos)*
+  3. `📦 Librería / SDK` *(Módulos de integración técnica: RAG, Auth, Testing)*
+  4. `🧩 Extensión / CLI / Tool` *(Agentes en terminal y extensiones IDE: OpenCode, Cline, Claude Code)*
+  5. `🌐 App / Plataforma Web` *(Plataformas SaaS, suites en la nube y observabilidad)*
 * **Vistas duales:** Alternador rápido entre vista de **Flujo horizontal por fases (⇄)** y **Cuadrícula completa por tarjetas (☷)**.
 * **Buscador interactivo y filtros en tiempo real:** Búsqueda instantánea por nombre de herramienta, palabra clave o rol.
 * **Paleta visual suave:** Temas Dark y Light calibrados en tonos pizarra (slate), suaves a la vista y sin negros saturados.
