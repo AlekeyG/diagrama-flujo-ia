@@ -4,30 +4,39 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Diagrama de flujo de herramientas</title>
+    <title>Pipeline de Ingeniería de Software con IA</title>
     <style>
         :root {
-            --bg: #f6f7f9;
+            --bg: #f8fafc;
             --panel: #ffffff;
-            --ink: #1b1f27;
-            --muted: #5b6472;
-            --line: #b8c0cc;
+            --ink: #0f172a;
+            --muted: #64748b;
+            --line: #cbd5e1;
             --p1: #2563eb;
             --p2: #7c3aed;
             --p3: #0d9488;
             --p4: #dc2626;
             --p5: #d97706;
-            --p6: #64748b;
-            --shadow: 0 1px 2px rgba(16, 24, 40, .08);
+            --p6: #475569;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --prio-core-bg: #eff6ff;
+            --prio-core-border: #3b82f6;
+            --prio-core-text: #1d4ed8;
+            --prio-high-bg: #ecfdf5;
+            --prio-high-border: #10b981;
+            --prio-high-text: #047857;
+            --prio-opt-bg: #f8fafc;
+            --prio-opt-border: #94a3b8;
+            --prio-opt-text: #64748b;
         }
 
         @media (prefers-color-scheme: dark) {
             :root:not([data-theme="light"]) {
-                --bg: #0f1218;
-                --panel: #181d26;
-                --ink: #e8ecf3;
-                --muted: #9aa5b5;
-                --line: #3a4454;
+                --bg: #090d16;
+                --panel: #131b2e;
+                --ink: #f1f5f9;
+                --muted: #94a3b8;
+                --line: #26334d;
                 --p1: #60a5fa;
                 --p2: #a78bfa;
                 --p3: #2dd4bf;
@@ -35,15 +44,24 @@
                 --p5: #fbbf24;
                 --p6: #94a3b8;
                 --shadow: none;
+                --prio-core-bg: rgba(59, 130, 246, 0.15);
+                --prio-core-border: #60a5fa;
+                --prio-core-text: #93c5fd;
+                --prio-high-bg: rgba(16, 185, 129, 0.15);
+                --prio-high-border: #34d399;
+                --prio-high-text: #6ee7b7;
+                --prio-opt-bg: rgba(148, 163, 184, 0.1);
+                --prio-opt-border: #64748b;
+                --prio-opt-text: #cbd5e1;
             }
         }
 
         :root[data-theme="dark"] {
-            --bg: #0f1218;
-            --panel: #181d26;
-            --ink: #e8ecf3;
-            --muted: #9aa5b5;
-            --line: #3a4454;
+            --bg: #090d16;
+            --panel: #131b2e;
+            --ink: #f1f5f9;
+            --muted: #94a3b8;
+            --line: #26334d;
             --p1: #60a5fa;
             --p2: #a78bfa;
             --p3: #2dd4bf;
@@ -51,43 +69,52 @@
             --p5: #fbbf24;
             --p6: #94a3b8;
             --shadow: none;
+            --prio-core-bg: rgba(59, 130, 246, 0.15);
+            --prio-core-border: #60a5fa;
+            --prio-core-text: #93c5fd;
+            --prio-high-bg: rgba(16, 185, 129, 0.15);
+            --prio-high-border: #34d399;
+            --prio-high-text: #6ee7b7;
+            --prio-opt-bg: rgba(148, 163, 184, 0.1);
+            --prio-opt-border: #64748b;
+            --prio-opt-text: #cbd5e1;
         }
 
         * {
-            box-sizing: border-box
+            box-sizing: border-box;
         }
 
         body {
             margin: 0;
             background: var(--bg);
             color: var(--ink);
-            font: 15px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif
+            font: 14px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         }
 
         header {
-            padding: 28px 24px 8px;
-            max-width: 1280px;
-            margin: 0 auto
+            padding: 30px 24px 10px;
+            max-width: 1440px;
+            margin: 0 auto;
         }
 
         h1 {
             margin: 0 0 6px;
-            font-size: 1.6rem;
-            letter-spacing: -.01em
+            font-size: 1.7rem;
+            letter-spacing: -0.02em;
         }
 
         header p {
             margin: 0;
             color: var(--muted);
-            max-width: 70ch
+            max-width: 80ch;
         }
 
         .toolbar {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             align-items: center;
             margin-top: 14px;
-            flex-wrap: wrap
+            flex-wrap: wrap;
         }
 
         .toolbar button {
@@ -95,9 +122,41 @@
             color: var(--ink);
             border: 1px solid var(--line);
             border-radius: 8px;
-            padding: 6px 12px;
+            padding: 7px 14px;
             cursor: pointer;
-            font: inherit
+            font: inherit;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .toolbar button:hover {
+            border-color: var(--p1);
+            color: var(--p1);
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            font-size: 0.78rem;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: var(--panel);
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .filter-btn.active {
+            background: var(--ink);
+            color: var(--bg);
+            border-color: var(--ink);
+            font-weight: 600;
         }
 
         .legend {
@@ -105,52 +164,54 @@
             gap: 14px;
             flex-wrap: wrap;
             color: var(--muted);
-            font-size: .85rem
+            font-size: 0.82rem;
+            margin-top: 8px;
         }
 
         .legend span {
             display: inline-flex;
             align-items: center;
-            gap: 6px
+            gap: 6px;
         }
 
         .dot {
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            display: inline-block
+            display: inline-block;
         }
 
         .scroll {
             overflow-x: auto;
-            padding: 18px 24px 40px
+            padding: 20px 24px 40px;
         }
 
         .flow {
-            min-width: 1240px;
-            max-width: 1280px;
+            min-width: 1360px;
+            max-width: 1440px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            align-items: center
+            align-items: center;
         }
 
         .start {
             background: var(--ink);
             color: var(--bg);
             border-radius: 999px;
-            padding: 10px 22px;
-            font-weight: 600
+            padding: 10px 24px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
         }
 
         .end {
             background: #10b981;
             color: #ffffff;
             border-radius: 999px;
-            padding: 10px 24px;
+            padding: 10px 26px;
             font-weight: 600;
-            box-shadow: 0 2px 8px rgba(16, 185, 129, .25);
-            margin-top: 18px;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+            margin-top: 24px;
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -159,92 +220,89 @@
         .stem {
             width: 2px;
             height: 24px;
-            background: var(--line)
+            background: var(--line);
         }
 
         .rail {
             width: 100%;
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 34px;
-            position: relative
+            gap: 28px;
+            position: relative;
         }
 
         .col {
             position: relative;
             display: flex;
             flex-direction: column;
-            align-items: stretch
+            align-items: stretch;
         }
 
-        /* fase */
         .phase {
             --c: var(--p1);
             background: var(--panel);
             border: 2px solid var(--c);
             border-radius: 12px;
-            padding: 12px 14px;
+            padding: 14px;
             box-shadow: var(--shadow);
-            position: relative
+            position: relative;
         }
 
         .phase .n {
-            font-size: .72rem;
+            font-size: 0.72rem;
             font-weight: 700;
-            letter-spacing: .06em;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
-            color: var(--c)
+            color: var(--c);
         }
 
         .phase h2 {
             margin: 2px 0 4px;
-            font-size: 1rem;
-            line-height: 1.25
+            font-size: 1.05rem;
+            line-height: 1.25;
         }
 
         .phase p {
             margin: 0;
             color: var(--muted);
-            font-size: .8rem
+            font-size: 0.78rem;
         }
 
-        /* flecha horizontal entre fases */
         .col:not(:last-child) .phase::after {
             content: "";
             position: absolute;
             top: 50%;
-            right: -34px;
-            width: 34px;
+            right: -28px;
+            width: 28px;
             height: 2px;
             background: var(--line);
-            transform: translateY(-1px)
+            transform: translateY(-1px);
         }
 
         .col:not(:last-child) .phase::before {
             content: "";
             position: absolute;
             top: 50%;
-            right: -36px;
+            right: -30px;
             border-left: 8px solid var(--line);
             border-top: 5px solid transparent;
             border-bottom: 5px solid transparent;
             transform: translateY(-5px);
-            z-index: 1
+            z-index: 1;
         }
 
         .branch {
             width: 2px;
             height: 20px;
             background: var(--line);
-            align-self: center
+            align-self: center;
         }
 
         .tools {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             position: relative;
-            padding-left: 0
         }
 
         .tool {
@@ -253,35 +311,107 @@
             border: 1px solid var(--line);
             border-left: 4px solid var(--c);
             border-radius: 10px;
-            padding: 10px 12px;
+            padding: 12px;
             box-shadow: var(--shadow);
-            position: relative
+            position: relative;
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .tool:hover {
+            transform: translateY(-2px);
+        }
+
+        .tool.prio-core {
+            border-top: 1px solid var(--prio-core-border);
+            border-right: 1px solid var(--prio-core-border);
+            border-bottom: 1px solid var(--prio-core-border);
+        }
+
+        .tool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 3px;
         }
 
         .tool h3 {
-            margin: 0 0 2px;
-            font-size: .92rem
+            margin: 0;
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        .prio-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+        }
+
+        .prio-badge.core {
+            background: var(--prio-core-bg);
+            color: var(--prio-core-text);
+            border: 1px solid var(--prio-core-border);
+        }
+
+        .prio-badge.high {
+            background: var(--prio-high-bg);
+            color: var(--prio-high-text);
+            border: 1px solid var(--prio-high-border);
+        }
+
+        .prio-badge.opt {
+            background: var(--prio-opt-bg);
+            color: var(--prio-opt-text);
+            border: 1px solid var(--prio-opt-border);
+        }
+
+        .tool .role {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--c);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
         }
 
         .tool .what {
-            margin: 0 0 6px;
+            margin: 0 0 8px;
             color: var(--muted);
-            font-size: .78rem
+            font-size: 0.77rem;
+            line-height: 1.35;
+        }
+
+        .tool .impact {
+            background: rgba(0, 0, 0, 0.025);
+            border-left: 2px solid var(--c);
+            padding: 4px 8px;
+            border-radius: 0 4px 4px 0;
+            margin-bottom: 8px;
+            font-size: 0.73rem;
+            color: var(--ink);
+        }
+
+        :root[data-theme="dark"] .tool .impact {
+            background: rgba(255, 255, 255, 0.04);
         }
 
         .tool .meta {
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
-            align-items: center
+            align-items: center;
         }
 
         .tag {
-            font-size: .68rem;
+            font-size: 0.68rem;
             border: 1px solid var(--line);
             border-radius: 999px;
             padding: 1px 8px;
-            color: var(--muted)
+            color: var(--muted);
         }
 
         .refs {
@@ -292,7 +422,7 @@
         }
 
         .refs a {
-            font-size: .75rem;
+            font-size: 0.72rem;
             font-weight: 600;
             color: var(--c);
             text-decoration: none;
@@ -302,356 +432,451 @@
             display: inline-flex;
             align-items: center;
             gap: 3px;
-            transition: all .15s ease;
+            transition: all 0.15s ease;
         }
 
         .refs a.official {
             background: var(--c);
-            color: var(--panel);
-            border-color: var(--c);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, .08);
-        }
-
-        .refs a.official:hover,
-        .refs a.official:focus-visible {
-            filter: brightness(1.12);
             color: #ffffff;
-            outline: none;
+            border-color: var(--c);
         }
 
-        .refs a:not(.official):hover,
-        .refs a:not(.official):focus-visible {
+        .refs a.official:hover {
+            filter: brightness(1.15);
+        }
+
+        .refs a:not(.official):hover {
             background: var(--c);
-            color: var(--panel);
-            outline: none;
+            color: #ffffff;
         }
 
         .tool:not(:last-child)::after {
             content: "";
             position: absolute;
             left: 50%;
-            bottom: -10px;
+            bottom: -12px;
             width: 2px;
-            height: 10px;
-            background: var(--line)
+            height: 12px;
+            background: var(--line);
         }
 
-        /* fase 6 */
         .side {
-            margin-top: 34px;
+            margin-top: 36px;
             width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center
+            align-items: center;
         }
 
         .side .tagline {
-            font-size: .8rem;
+            font-size: 0.8rem;
             color: var(--muted);
-            margin-bottom: 8px
+            margin-bottom: 8px;
+            font-weight: 500;
         }
 
         .phase.six {
             --c: var(--p6);
             border-style: dashed;
-            max-width: 980px;
-            width: 100%
+            max-width: 1080px;
+            width: 100%;
         }
 
         .phase.six .items {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 10px
+            gap: 12px;
+            margin-top: 12px;
         }
 
         .item {
             border: 1px solid var(--line);
             border-radius: 10px;
-            padding: 10px 12px;
-            background: var(--bg)
+            padding: 12px;
+            background: var(--bg);
         }
 
         .item h3 {
             margin: 0 0 2px;
-            font-size: .88rem
+            font-size: 0.9rem;
         }
 
         .item p {
-            margin: 0 0 6px;
+            margin: 0 0 8px;
             color: var(--muted);
-            font-size: .78rem
+            font-size: 0.77rem;
         }
 
         footer {
-            max-width: 1280px;
+            max-width: 1440px;
             margin: 0 auto;
-            padding: 0 24px 40px;
+            padding: 20px 24px 40px;
             color: var(--muted);
-            font-size: .8rem
-        }
-
-        @media print {
-            .toolbar {
-                display: none
-            }
-
-            .scroll {
-                overflow: visible
-            }
+            font-size: 0.8rem;
+            border-top: 1px solid var(--line);
         }
     </style>
 </head>
 
 <body>
     <header>
-        <h1>Flujo de trabajo de desarrollo asistido por IA</h1>
-        <p>Clasificación de herramientas por fase con acceso directo a sus <strong>sitios y repositorios oficiales</strong> junto con las publicaciones de referencia original.</p>
+        <h1>Pipeline de Ingeniería de Software con IA</h1>
+        <p>Estructura jerárquica por <strong>fases del ciclo de vida</strong>, clasificadas por nivel de prioridad operativa, rol arquitectónico y aporte de valor técnico.</p>
         <div class="toolbar">
-            <button id="theme" type="button" aria-label="Cambiar entre tema claro y oscuro">Cambiar tema</button>
+            <button id="theme" type="button" aria-label="Cambiar tema">Cambiar tema</button>
+            <div class="filter-bar">
+                <span style="font-size:0.8rem; color:var(--muted); font-weight:600;">Filtrar por Prioridad:</span>
+                <button class="filter-btn active" data-prio="all">Todas</button>
+                <button class="filter-btn" data-prio="core">⚡ Core / Imprescindible</button>
+                <button class="filter-btn" data-prio="high">🔥 Alta Relevancia</button>
+                <button class="filter-btn" data-prio="opt">💡 Especializada / Opcional</button>
+            </div>
             <div class="legend" id="legend"></div>
         </div>
     </header>
 
     <div class="scroll">
         <div class="flow">
-            <div class="start">Inicio: Proyecto de software</div>
+            <div class="start">Inicio: Requerimiento &amp; Arquitectura</div>
             <div class="stem"></div>
             <div class="rail" id="rail"></div>
             <div class="stem"></div>
-            <div class="end">Entrega y Despliegue en Producción</div>
+            <div class="end">Despliegue Continuo &amp; Producción</div>
             <div class="side" id="side"></div>
         </div>
     </div>
 
     <footer>
-        Fuente: catálogo «herramientas_clasificadas.md». Incluye enlaces oficiales a repositorios (GitHub), documentación técnica y publicaciones originales en redes sociales.
+        Pipeline de ingeniería basado en el catálogo técnico de «catalogo_herramientas.md». Diseñado para estructurar proyectos asistidos por Inteligencia Artificial.
     </footer>
 
     <script>
         const PHASES = [
             {
-                n: "Fase 1", t: "Codificación asistida por IA", d: "Agentes, contexto y modelos", c: "--p1", tools: [
-                    { 
-                        name: "OpenCode", 
-                        what: "Agente de código en terminal con +75 proveedores y modelos locales", 
-                        lic: "Open source", 
+                n: "Fase 1", t: "Codificación Asistida por IA", d: "Agentes de consola, LLMs y orquestación", c: "--p1", tools: [
+                    {
+                        name: "OpenCode",
+                        prio: "core",
+                        prioLabel: "Core",
+                        role: "Agente de Consola (TUI)",
+                        what: "Agente CLI de código abierto conectado a +75 proveedores o modelos 100% locales (Ollama/LM Studio).",
+                        impact: "Aporte: Elimina suscripciones fijas y desbloquea desarrollo privado sin fugas de datos.",
+                        lic: "Open Source (Gratis)",
                         official: [["Web", "https://opencode.ai/"], ["GitHub", "https://github.com/anomalyco/opencode"]],
-                        refs: [["Ref 1", "https://www.facebook.com/share/r/14hWsnezzaB/"], ["Ref 2", "https://www.facebook.com/share/r/1BGHLzGDm4/"]] 
+                        refs: [["Ref 1", "https://www.facebook.com/share/r/14hWsnezzaB/"], ["Ref 2", "https://www.facebook.com/share/r/1BGHLzGDm4/"]]
                     },
-                    { 
-                        name: "Everything Claude Code (ECC)", 
-                        what: "Más de 70 subagentes, memoria persistente y AgentShield", 
-                        lic: "Open source", 
-                        official: [["GitHub", "https://github.com/affaan-m/ECC"]],
-                        refs: [["Ref 3", "https://www.facebook.com/share/r/1EjGyB9V6C/"], ["Ref 4", "https://www.facebook.com/share/r/1TxX5m2S5G/"]] 
-                    },
-                    { 
-                        name: "Kimi K3 (Moonshot AI)", 
-                        what: "Modelo de pesos abiertos con contexto de 1 M de tokens", 
-                        lic: "Pesos abiertos", 
-                        official: [["Web", "https://kimi.ai/"], ["HuggingFace", "https://huggingface.co/moonshotai/Kimi-K3"]],
-                        refs: [["Ref 7", "https://www.facebook.com/share/p/1DS89U3Mtg/"]] 
-                    },
-                    { 
-                        name: "Files2Prompt", 
-                        what: "Copia archivos de VS Code como XML/Markdown respetando .gitignore", 
-                        lic: "Gratuito", 
-                        official: [["Marketplace", "https://marketplace.visualstudio.com/items?itemName=thomas-mckanna.files2Prompt"], ["GitHub", "https://github.com/Thomas-McKanna/Files2Prompt"]],
-                        refs: [["Ref 5", "https://www.facebook.com/share/r/1H65kUXRwn/"]] 
-                    },
-                    { 
-                        name: "Kickbacks.ai", 
-                        what: "Microanuncios en los spinners de Claude Code con reparto del 50-70 %", 
-                        lic: "Gratuito + anuncios", 
-                        official: [["Web", "https://kickbacks.ai/"], ["Dev", "https://kickbacks.dev/"]],
-                        refs: [["Ref 6", "https://www.facebook.com/share/r/1BKEYoMPpn/"]] 
-                    },
-                    { 
-                        name: "Grandes Modelos & Asistentes (LLMs)", 
-                        what: "Chats fundacionales de razonamiento y asistencia: ChatGPT, Claude, DeepSeek y Microsoft Copilot", 
-                        lic: "Freemium / Comercial", 
-                        official: [["ChatGPT", "https://chatgpt.com/"], ["Claude", "https://claude.ai/"], ["DeepSeek", "https://chat.deepseek.com/"], ["Copilot", "https://copilot.microsoft.com/"]],
-                        refs: [] 
-                    },
-                    { 
-                        name: "Google AI Suite & Laboratorios", 
-                        what: "Prototipado rápido de prompts, cuadernos interactivos de Python y síntesis de notas RAG", 
-                        lic: "Freemium (Google)", 
-                        official: [["AI Studio", "https://aistudio.google.com/"], ["Colab", "https://colab.research.google.com/"], ["NotebookLM", "https://notebooklm.google.com/"]],
-                        refs: [] 
-                    },
-                    { 
-                        name: "Claude Code CLI", 
-                        what: "Agente autónomo de consola de Anthropic para refactorizar y ejecutar comandos en el sistema", 
-                        lic: "Propietario / Anthropic API", 
+                    {
+                        name: "Claude Code CLI",
+                        prio: "core",
+                        prioLabel: "Core",
+                        role: "Agente Autónomo de Sistema",
+                        what: "Agente de consola de Anthropic con permisos para navegar directorios, editar código y correr bash.",
+                        impact: "Aporte: Resuelve refactorizaciones complejas y valida compilaciones de inmediato en tu terminal.",
+                        lic: "Propietario / API",
                         official: [["Anthropic", "https://www.anthropic.com/claude-code"]],
-                        refs: [] 
+                        refs: []
                     },
-                    { 
-                        name: "Lovable & Bolt.new", 
-                        what: "Generadores fullstack y entornos en el navegador para prototipar aplicaciones completas con IA", 
-                        lic: "Freemium", 
+                    {
+                        name: "Everything Claude Code (ECC)",
+                        prio: "high",
+                        prioLabel: "Alta",
+                        role: "Orquestador de Subagentes",
+                        what: "Framework de más de 70 subagentes especializados, memoria entre sesiones y escudo AgentShield.",
+                        impact: "Aporte: Evita alucinaciones imponiendo especificaciones formales de diseño de software (SDD).",
+                        lic: "Open Source",
+                        official: [["GitHub", "https://github.com/affaan-m/ECC"]],
+                        refs: [["Ref 3", "https://www.facebook.com/share/r/1EjGyB9V6C/"], ["Ref 4", "https://www.facebook.com/share/r/1TxX5m2S5G/"]]
+                    },
+                    {
+                        name: "Grandes Modelos (LLMs)",
+                        prio: "core",
+                        prioLabel: "Core",
+                        role: "Motores Fundacionales de Razonamiento",
+                        what: "Chats y asistentes de cabecera para lógica, arquitectura y resolución de dudas.",
+                        impact: "Aporte: Máxima capacidad de análisis comparando respuestas entre modelos líderes.",
+                        lic: "Freemium",
+                        official: [["ChatGPT", "https://chatgpt.com/"], ["Claude", "https://claude.ai/"], ["DeepSeek", "https://chat.deepseek.com/"], ["Copilot", "https://copilot.microsoft.com/"]],
+                        refs: []
+                    },
+                    {
+                        name: "Google AI Suite & Colab",
+                        prio: "high",
+                        prioLabel: "Alta",
+                        role: "Laboratorio Experimental & RAG",
+                        what: "AI Studio con contexto extendido, Colab para notebooks Python y NotebookLM para síntesis documental.",
+                        impact: "Aporte: Experimentación con APIs de Gemini y lectura de bibliotecas técnicas completas.",
+                        lic: "Freemium",
+                        official: [["AI Studio", "https://aistudio.google.com/"], ["Colab", "https://colab.research.google.com/"], ["NotebookLM", "https://notebooklm.google.com/"]],
+                        refs: []
+                    },
+                    {
+                        name: "Lovable & Bolt.new",
+                        prio: "high",
+                        prioLabel: "Alta",
+                        role: "Generadores Web Fullstack",
+                        what: "Entornos reactivos en el navegador para construir y probar aplicaciones completas con backend en minutos.",
+                        impact: "Aporte: Acelera la validación de prototipos y pruebas de concepto (MVPs) a velocidad récord.",
+                        lic: "Freemium",
                         official: [["Lovable", "https://lovable.dev/"], ["Bolt.new", "https://bolt.new/"]],
-                        refs: [] 
+                        refs: []
+                    },
+                    {
+                        name: "Kimi K3 (Moonshot)",
+                        prio: "opt",
+                        prioLabel: "Opcional",
+                        role: "Modelo de Contexto Masivo",
+                        what: "Modelo open-weights de 2.8B parámetros optimizado para ventanas de contexto de 1 millón de tokens.",
+                        impact: "Aporte: Permite auditar bases de código enteras o libros técnicos en una sola pasada.",
+                        lic: "Open Weights",
+                        official: [["Web", "https://kimi.ai/"], ["HuggingFace", "https://huggingface.co/moonshotai/Kimi-K3"]],
+                        refs: [["Ref 7", "https://www.facebook.com/share/p/1DS89U3Mtg/"]]
+                    },
+                    {
+                        name: "Files2Prompt",
+                        prio: "opt",
+                        prioLabel: "Opcional",
+                        role: "Utilidad de Contexto para VS Code",
+                        what: "Empaqueta archivos seleccionados en formato Markdown/XML respetando reglas de .gitignore.",
+                        impact: "Aporte: Evita copiar manualmente fragmentos de código y saturar la ventana de contexto.",
+                        lic: "Gratis (Extensión)",
+                        official: [["Marketplace", "https://marketplace.visualstudio.com/items?itemName=thomas-mckanna.files2Prompt"], ["GitHub", "https://github.com/Thomas-McKanna/Files2Prompt"]],
+                        refs: [["Ref 5", "https://www.facebook.com/share/r/1H65kUXRwn/"]]
+                    },
+                    {
+                        name: "Kickbacks.ai",
+                        prio: "opt",
+                        prioLabel: "Opcional",
+                        role: "Monetización de Espera",
+                        what: "Muestra microanuncios de texto mientras Claude Code compila o piensa, con reparto del 50-70%.",
+                        impact: "Aporte: Genera ingresos pasivos durante los tiempos muertos de desarrollo intensivo.",
+                        lic: "Gratis + Anuncios",
+                        official: [["Web", "https://kickbacks.ai/"], ["Dev", "https://kickbacks.dev/"]],
+                        refs: [["Ref 6", "https://www.facebook.com/share/r/1BKEYoMPpn/"]]
                     }
                 ]
             },
             {
-                n: "Fase 2", t: "Diseño de interfaces y frontend", d: "Evitar el «AI slop»", c: "--p2", tools: [
-                    { 
-                        name: "Modern Web Guidance", 
-                        what: "Skill oficial de Google Chrome con +100 reglas de APIs nativas (Baseline)", 
-                        lic: "Open source (Google)", 
+                n: "Fase 2", t: "Diseño & Frontend UI/UX", d: "Anti-AI Slop, arquitectura y maquetación", c: "--p2", tools: [
+                    {
+                        name: "Modern Web Guidance",
+                        prio: "core",
+                        prioLabel: "Core",
+                        role: "Estándar Oficial (Google Chrome)",
+                        what: "Skill oficial con más de 100 reglas para obligar a la IA a usar APIs nativas (Baseline, dialog, popover).",
+                        impact: "Aporte: Elimina código obsoleto o redundante y garantiza máximo rendimiento y accesibilidad nativa.",
+                        lic: "Open Source (Google)",
                         official: [["GitHub", "https://github.com/GoogleChrome/modern-web-guidance"], ["Docs", "https://developer.chrome.com/docs/modern-web-guidance/"]],
-                        refs: [["Ref 9", "https://www.facebook.com/share/v/1cMnqK4BfL/"]] 
+                        refs: [["Ref 9", "https://www.facebook.com/share/v/1cMnqK4BfL/"]]
                     },
-                    { 
-                        name: "M3E Canvas", 
-                        what: "Lienzo Material 3 Expressive que exporta prompts estructurados", 
-                        lic: "Open source (MIT)", 
-                        official: [["GitHub", "https://github.com/lnkiai/m3e-canvas"]],
-                        refs: [["Ref 8", "https://www.instagram.com/reel/DdBZM7YhkZt/?vrfl=aXk1M3FveDd2djNu"]] 
-                    },
-                    { 
-                        name: "Skills de Diseño Apple (HIG)", 
-                        what: "Directrices oficiales de diseño de Apple integradas como SKILL.md", 
-                        lic: "Open source", 
-                        official: [["Apple HIG", "https://developer.apple.com/design/human-interface-guidelines/"], ["GitHub", "https://github.com/justinwetch/HIGAgentSkills"]],
-                        refs: [["Ref 11", "https://www.facebook.com/share/r/1Hwrur2vog/"]] 
-                    },
-                    { 
-                        name: "Open Design", 
-                        what: "Estudio de prototipado local, alternativa libre a Claude Design", 
-                        lic: "Open source", 
-                        official: [["GitHub", "https://github.com/nexu-io/open-design"]],
-                        refs: [["Ref 10", "https://www.facebook.com/share/r/1JQQsuGaco/"]] 
-                    },
-                    { 
-                        name: "Draw.io & Balsamiq Wireframes", 
-                        what: "Diagramación visual de arquitectura de sistemas, esquemas UML y mockups rápidos de baja fidelidad", 
-                        lic: "Freemium / Gratuito", 
+                    {
+                        name: "Draw.io & Balsamiq",
+                        prio: "core",
+                        prioLabel: "Core",
+                        role: "Esquematización & Wireframes",
+                        what: "Diagramación de flujos de usuario, diagramas de clases, bases de datos y prototipos estructurales rápidos.",
+                        impact: "Aporte: Claridad arquitectónica antes de escribir una sola línea de código en el frontend.",
+                        lic: "Freemium / Gratis",
                         official: [["Draw.io", "https://app.diagrams.net/"], ["Balsamiq", "https://balsamiq.cloud/"]],
-                        refs: [] 
+                        refs: []
                     },
-                    { 
-                        name: "Tailwind CSS & GSAP", 
-                        what: "Framework de diseño atómico y librería de animación de alto rendimiento para interfaces fluidas", 
-                        lic: "Open source (MIT)", 
+                    {
+                        name: "M3E Canvas",
+                        prio: "high",
+                        prioLabel: "Alta",
+                        role: "Lienzo de Tokens Material 3",
+                        what: "Compositor visual interactivo que traduce pantallas Material 3 Expressive en prompts estructurados.",
+                        impact: "Aporte: Asegura que la IA construya interfaces limpias y proporcionadas a la primera.",
+                        lic: "Open Source (MIT)",
+                        official: [["GitHub", "https://github.com/lnkiai/m3e-canvas"]],
+                        refs: [["Ref 8", "https://www.instagram.com/reel/DdBZM7YhkZt/?vrfl=aXk1M3FveDd2djNu"]]
+                    },
+                    {
+                        name: "Tailwind CSS & GSAP",
+                        prio: "high",
+                        prioLabel: "Alta",
+                        role: "Diseño Atómico & Animaciones",
+                        what: "Framework de utilidades CSS para diseño responsive junto al motor de animación más veloz del mercado.",
+                        impact: "Aporte: Flexibilidad estética total sin salir de clases atómicas y microinteracciones fluidas.",
+                        lic: "Open Source (MIT)",
                         official: [["Tailwind", "https://tailwindcss.com/"], ["GSAP", "https://gsap.com/"]],
-                        refs: [] 
+                        refs: []
+                    },
+                    {
+                        name: "Skills de Diseño Apple (HIG)",
+                        prio: "opt",
+                        prioLabel: "Opcional",
+                        role: "Directrices de Interfaz Premium",
+                        what: "Módulos de directrices formales de Apple (Human Interface Guidelines) integrados en formato SKILL.md.",
+                        impact: "Aporte: Impone una estética sobria, minimalista y refinada para aplicaciones web y móviles.",
+                        lic: "Open Source",
+                        official: [["Apple HIG", "https://developer.apple.com/design/human-interface-guidelines/"], ["GitHub", "https://github.com/justinwetch/HIGAgentSkills"]],
+                        refs: [["Ref 11", "https://www.facebook.com/share/r/1Hwrur2vog/"]]
+                    },
+                    {
+                        name: "Open Design",
+                        prio: "opt",
+                        prioLabel: "Opcional",
+                        role: "Estudio de Prototipado Abierto",
+                        what: "Alternativa libre a Claude Design para diseñar maquetas conectando modelos locales propios.",
+                        impact: "Aporte: Libertad completa para iterar sin gastar cuota de plataformas cerradas.",
+                        lic: "Open Source",
+                        official: [["GitHub", "https://github.com/nexu-io/open-design"]],
+                        refs: [["Ref 10", "https://www.facebook.com/share/r/1JQQsuGaco/"]]
                     }
                 ]
             },
             {
-                n: "Fase 3", t: "Backend, APIs, autenticación y datos", d: "Acceso seguro y clientes sin fricción", c: "--p3", tools: [
-                    { 
-                        name: "Better Auth", 
-                        what: "Autenticación TypeScript autoalojada: passkeys, 2FA, multi-inquilino", 
-                        lic: "Open source (MIT)", 
+                n: "Fase 3", t: "Backend, APIs & Cloud", d: "Seguridad de datos, infraestructura y conectividad", c: "--p3", tools: [
+                    {
+                        name: "Better Auth",
+                        prio: "core",
+                        prioLabel: "Core",
+                        role: "Autenticación Type-Safe Autoalojada",
+                        what: "Framework TypeScript integral con passkeys, autenticación 2FA, multi-inquilino y soporte nativo de ORMs.",
+                        impact: "Aporte: Ahorra cientos de dólares en proveedores externos de Auth y mantiene soberanía total de datos.",
+                        lic: "Open Source (MIT)",
                         official: [["Web", "https://better-auth.com/"], ["GitHub", "https://github.com/better-auth/better-auth"]],
-                        refs: [["Ref 12", "https://www.instagram.com/reel/DeXKWxLGUrA/?cplk=c2p6anYwNDBsb3dt"]] 
+                        refs: [["Ref 12", "https://www.instagram.com/reel/DeXKWxLGUrA/?cplk=c2p6anYwNDBsb3dt"]]
                     },
-                    { 
-                        name: "Reverse API Engineer", 
-                        what: "Genera un cliente Python a partir del tráfico HTTP del navegador", 
-                        lic: "Open source", 
-                        official: [["GitHub", "https://github.com/kalil0321/reverse-api-engineer"]],
-                        refs: [["Ref 13", "https://www.instagram.com/reel/DeSH1O_sxI2/?dlrf=MThxd2cwYm9ja2FlYw=="]] 
-                    },
-                    { 
-                        name: "Cloud & Sandboxes de Código", 
-                        what: "Gestión de repositorios en GitHub, pruebas rápidas en CodePen y computación en Microsoft Azure", 
-                        lic: "Freemium / Cloud", 
+                    {
+                        name: "Cloud, Sandboxes & Repos",
+                        prio: "core",
+                        prioLabel: "Core",
+                        role: "Infraestructura & Control de Código",
+                        what: "Control de versiones centralizado en GitHub, portal cloud Microsoft Azure y pruebas rápidas en CodePen.",
+                        impact: "Aporte: Integración continua fiable y disponibilidad para despliegues en servidores globales.",
+                        lic: "Freemium / Cloud",
                         official: [["GitHub", "https://github.com/"], ["Azure", "https://portal.azure.com/"], ["CodePen", "https://codepen.io/spark"]],
-                        refs: [] 
+                        refs: []
+                    },
+                    {
+                        name: "Reverse API Engineer",
+                        prio: "high",
+                        prioLabel: "Alta",
+                        role: "Generador de Clientes HTTP",
+                        what: "Captura el tráfico de red del navegador y genera clientes Python tipados para portales sin API oficial.",
+                        impact: "Aporte: Ahorra horas de ingeniería inversa manual conectando servicios web externos con tu backend.",
+                        lic: "Open Source",
+                        official: [["GitHub", "https://github.com/kalil0321/reverse-api-engineer"]],
+                        refs: [["Ref 13", "https://www.instagram.com/reel/DeSH1O_sxI2/?dlrf=MThxd2cwYm9ja2FlYw=="]]
                     }
                 ]
             },
             {
-                n: "Fase 4", t: "Testing, calidad y ciberseguridad", d: "Revisión y auditoría", c: "--p4", tools: [
-                    { 
-                        name: "OSS-Fuzz (Google)", 
-                        what: "Infraestructura oficial de fuzzing continuo automatizado en la nube", 
-                        lic: "Open source (Google)", 
-                        official: [["GitHub", "https://github.com/google/oss-fuzz"], ["Docs", "https://google.github.io/oss-fuzz/"]],
-                        refs: [] 
-                    },
-                    { 
-                        name: "CodeRabbit AI", 
-                        what: "Revisión automatizada de Pull Requests en GitHub y GitLab con análisis de impacto", 
-                        lic: "Freemium", 
+                n: "Fase 4", t: "Testing & Calidad de Código", d: "Auditoría automatizada, fuzzing y seguridad", c: "--p4", tools: [
+                    {
+                        name: "CodeRabbit AI",
+                        prio: "core",
+                        prioLabel: "Core",
+                        role: "Revisor Automático de Pull Requests",
+                        what: "Auditor continuo de PRs en GitHub/GitLab que detecta regresiones, cuellos de botella y riesgos de seguridad.",
+                        impact: "Aporte: Eleva la calidad del código del equipo antes de fusionar a la rama principal de producción.",
+                        lic: "Freemium (Gratis en OSS)",
                         official: [["Web", "https://www.coderabbit.ai/"], ["GitHub", "https://github.com/coderabbitai"]],
-                        refs: [["Ref 14", "https://www.facebook.com/share/p/1Ba3h7oiHE/"]] 
+                        refs: [["Ref 14", "https://www.facebook.com/share/p/1Ba3h7oiHE/"]]
                     },
-                    { 
-                        name: "REA (Reverse Engineer Anything)", 
-                        what: "CLI/MCP para desensamblar y descompilar binarios y apps Electron", 
-                        lic: "Open source", 
+                    {
+                        name: "OSS-Fuzz (Google)",
+                        prio: "high",
+                        prioLabel: "Alta",
+                        role: "Fuzzing Continuo en la Nube",
+                        what: "Servicio de pruebas aleatorias mutadas con sanitizadores de memoria para descubrir fallos críticos ocultos.",
+                        impact: "Aporte: Detecta fugas de memoria, desbordamientos de búfer y cuelgues antes de que lleguen a los usuarios.",
+                        lic: "Open Source (Google)",
+                        official: [["GitHub", "https://github.com/google/oss-fuzz"], ["Docs", "https://google.github.io/oss-fuzz/"]],
+                        refs: []
+                    },
+                    {
+                        name: "REA (Reverse Engineer Anything)",
+                        prio: "opt",
+                        prioLabel: "Opcional",
+                        role: "Desensamblador MCP",
+                        what: "Herramienta CLI/MCP que permite a la IA desensamblar ejecutables y aplicaciones de Electron.",
+                        impact: "Aporte: Inspección interna de librerías de terceros cerradas o análisis forense de seguridad.",
+                        lic: "Open Source",
                         official: [["GitHub", "https://github.com/morluto/rea"], ["npm", "https://www.npmjs.com/package/rea-agents"]],
-                        refs: [["Ref 15", "https://www.instagram.com/reel/DeXQgNhgFl5/?psln=MWxkb2J2eTBpNHNvaw=="]] 
+                        refs: [["Ref 15", "https://www.instagram.com/reel/DeXQgNhgFl5/?psln=MWxkb2J2eTBpNHNvaw=="]]
                     },
-                    { 
-                        name: "EmailOSINT", 
-                        what: "OSINT a partir de un correo: cuentas asociadas y fugas de datos", 
-                        lic: "Freemium / web", 
+                    {
+                        name: "EmailOSINT",
+                        prio: "opt",
+                        prioLabel: "Opcional",
+                        role: "Inteligencia de Amenazas OSINT",
+                        what: "Rastreo de cuentas vinculadas a correos electrónicos y verificación en registros de fugas de datos.",
+                        impact: "Aporte: Auditoría de seguridad defensiva y prevención contra suplantaciones corporativas.",
+                        lic: "Freemium / Web",
                         official: [["Web", "https://emailosint.org/"], ["GitHub", "https://github.com/krishpranav/emailosint"]],
-                        refs: [["Ref 16", "https://www.instagram.com/reel/DeCwsiJJ3j0/?stkn=Zmw0Z3gxMHV1NWlz"]] 
+                        refs: [["Ref 16", "https://www.instagram.com/reel/DeCwsiJJ3j0/?stkn=Zmw0Z3gxMHV1NWlz"]]
                     }
                 ]
             },
             {
-                n: "Fase 5", t: "Extracción de datos y automatización", d: "Datos limpios para agentes", c: "--p5", tools: [
-                    { 
-                        name: "Firecrawl", 
-                        what: "Motor de scraping a Markdown/JSON limpio para LLMs y RAG", 
-                        lic: "Intermedia (OSS + nube)", 
+                n: "Fase 5", t: "Extracción de Datos & RAG", d: "Suministro de información limpia para agentes", c: "--p5", tools: [
+                    {
+                        name: "Firecrawl",
+                        prio: "core",
+                        prioLabel: "Core",
+                        role: "Scraping a Markdown Limpio para RAG",
+                        what: "Motor de rastreo web que convierte cualquier página o sitio entero en Markdown puro sin menús ni CSS.",
+                        impact: "Aporte: Ahorra millones de tokens y optimiza la precisión en sistemas de búsqueda y RAG con IA.",
+                        lic: "Intermedia (OSS + Cloud)",
                         official: [["Web", "https://www.firecrawl.dev/"], ["GitHub", "https://github.com/firecrawl/firecrawl"]],
-                        refs: [["Ref 17", "https://www.facebook.com/share/r/193MgfYZEC/"]] 
+                        refs: [["Ref 17", "https://www.facebook.com/share/r/193MgfYZEC/"]]
                     },
-                    { 
-                        name: "Agent Reach", 
-                        what: "Lectura de Reddit, X, YouTube y GitHub sin APIs de pago", 
-                        lic: "Open source", 
+                    {
+                        name: "Agent Reach",
+                        prio: "high",
+                        prioLabel: "Alta",
+                        role: "Lectura de Redes sin APIs de Pago",
+                        what: "Capa de conexión pasiva que permite a agentes rastrear Reddit, X, YouTube y GitHub sin pagar suscripciones.",
+                        impact: "Aporte: Obtiene opiniones de usuarios y tendencias de mercado en tiempo real a coste cero.",
+                        lic: "Open Source",
                         official: [["GitHub", "https://github.com/Panniantong/Agent-Reach"]],
-                        refs: [["Ref 18", "https://www.instagram.com/reel/DeVbt7FleL5/?mdxt=MXJmeWx6Z2FzcGY5aQ=="]] 
+                        refs: [["Ref 18", "https://www.instagram.com/reel/DeVbt7FleL5/?mdxt=MXJmeWx6Z2FzcGY5aQ=="]]
                     }
                 ]
             }
         ];
 
         const SIX = {
-            n: "Fase 6", t: "Formación técnica, empleo y estrategia de negocio digital", d: "Recursos de apoyo (no son herramientas de desarrollo)", c: "--p6", items: [
-                { 
-                    name: "Formación técnica de MoureDev", 
-                    what: "Cursos gratuitos de desarrollo guiado por IA, configuración de TUI y comunidad", 
+            n: "Fase 6", t: "Estrategia de Negocio, Empleo & Crecimiento Digital", d: "Capacidades transversales de apoyo profesional", c: "--p6", items: [
+                {
+                    name: "Formación Técnica de MoureDev",
+                    role: "Comunidad & Formación Continua",
+                    what: "Cursos gratuitos de desarrollo guiado por IA, configuración de TUI en terminal y comunidad hispanohablante.",
                     official: [["moure.dev", "https://moure.dev/"], ["YouTube", "https://www.youtube.com/@mouredev"], ["GitHub", "https://github.com/mouredev"]],
-                    refs: [["Ref 2", "https://www.facebook.com/share/r/1BGHLzGDm4/"]] 
+                    refs: [["Ref 2", "https://www.facebook.com/share/r/1BGHLzGDm4/"]]
                 },
-                { 
-                    name: "Convocatorias SENA / Accenture", 
-                    what: "Oportunidades formativas y laborales para aprendices del SENA en Colombia", 
+                {
+                    name: "Convocatorias SENA / Accenture",
+                    role: "Inserción Laboral & Empleo",
+                    what: "Oportunidades de formación y convocatorias de contratación para perfiles tecnológicos en Colombia.",
                     official: [["Accenture", "https://www.accenture.com/co-es/careers/jobdetails?id=R00243777_es&title=Aprendices+SENA"]],
-                    refs: [["Ref 19", "https://www.accenture.com/co-es/careers/jobdetails?id=R00243777_es&title=Aprendices+SENA"]] 
+                    refs: [["Ref 19", "https://www.accenture.com/co-es/careers/jobdetails?id=R00243777_es&title=Aprendices+SENA"]]
                 },
-                { 
-                    name: "Estrategia y validación de apps con IA", 
-                    what: "Vibe coding, riesgos legales y pruebas para modelos SaaS", 
+                {
+                    name: "Estrategia SaaS & Validación de Apps",
+                    role: "Modelo de Negocio & Legalidad",
+                    what: "Estrategias para monetizar herramientas de software, mitigar riesgos legales de código IA y estructurar pruebas gratuitas.",
                     official: [],
-                    refs: [["Ref 20", "https://www.instagram.com/reel/Dd7idktuOFx/?exln=MWtoYzhyaDI3ODN4cw=="], ["Ref 21", "https://www.instagram.com/reel/DeZCQHvxohj/?srtk=MTltczZodHRpc3Bzcg=="]] 
+                    refs: [["Ref 20", "https://www.instagram.com/reel/Dd7idktuOFx/?exln=MWtoYzhyaDI3ODN4cw=="], ["Ref 21", "https://www.instagram.com/reel/DeZCQHvxohj/?srtk=MTltczZodHRpc3Bzcg=="]]
                 }
             ]
         };
 
-        const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.textContent = html; return e; };
-        
+        const el = (tag, cls, text) => {
+            const e = document.createElement(tag);
+            if (cls) e.className = cls;
+            if (text != null) e.textContent = text;
+            return e;
+        };
+
         const renderLinks = (officialList, refList) => {
             const w = el("div", "refs");
             if (officialList && officialList.length) {
                 officialList.forEach(([label, url]) => {
                     const a = el("a", "official", "↗ " + label);
                     a.href = url; a.target = "_blank"; a.rel = "noopener noreferrer";
-                    a.setAttribute("aria-label", "Sitio oficial " + label);
                     w.appendChild(a);
                 });
             }
@@ -659,7 +884,6 @@
                 refList.forEach(([id, url]) => {
                     const a = el("a", null, "[" + id + "]");
                     a.href = url; a.target = "_blank"; a.rel = "noopener noreferrer";
-                    a.setAttribute("aria-label", "Referencia " + id);
                     w.appendChild(a);
                 });
             }
@@ -669,41 +893,69 @@
         const rail = document.getElementById("rail");
         const legend = document.getElementById("legend");
 
-        PHASES.forEach(p => {
-            const col = el("div", "col");
-            col.style.setProperty("--c", "var(" + p.c + ")");
+        function renderPipeline(filterPrio = "all") {
+            rail.innerHTML = "";
+            legend.innerHTML = "";
 
-            const ph = el("div", "phase");
-            ph.style.setProperty("--c", "var(" + p.c + ")");
-            ph.appendChild(el("div", "n", p.n));
-            ph.appendChild(el("h2", null, p.t));
-            ph.appendChild(el("p", null, p.d));
-            col.appendChild(ph);
-            col.appendChild(el("div", "branch"));
+            PHASES.forEach(p => {
+                const col = el("div", "col");
+                col.style.setProperty("--c", "var(" + p.c + ")");
 
-            const tools = el("div", "tools");
-            p.tools.forEach(t => {
-                const c = el("div", "tool");
-                c.style.setProperty("--c", "var(" + p.c + ")");
-                c.appendChild(el("h3", null, t.name));
-                c.appendChild(el("p", "what", t.what));
-                const meta = el("div", "meta");
-                meta.appendChild(el("span", "tag", t.lic));
-                meta.appendChild(renderLinks(t.official, t.refs));
-                c.appendChild(meta);
-                tools.appendChild(c);
+                const ph = el("div", "phase");
+                ph.style.setProperty("--c", "var(" + p.c + ")");
+                ph.appendChild(el("div", "n", p.n));
+                ph.appendChild(el("h2", null, p.t));
+                ph.appendChild(el("p", null, p.d));
+                col.appendChild(ph);
+                col.appendChild(el("div", "branch"));
+
+                const tools = el("div", "tools");
+                const filteredTools = p.tools.filter(t => filterPrio === "all" || t.prio === filterPrio);
+
+                if (filteredTools.length === 0) {
+                    const empty = el("div", "tool");
+                    empty.style.opacity = "0.6";
+                    empty.appendChild(el("p", "what", "Sin herramientas en este filtro de prioridad."));
+                    tools.appendChild(empty);
+                } else {
+                    filteredTools.forEach(t => {
+                        const c = el("div", "tool prio-" + t.prio);
+                        c.style.setProperty("--c", "var(" + p.c + ")");
+
+                        const head = el("div", "tool-header");
+                        head.appendChild(el("h3", null, t.name));
+                        head.appendChild(el("span", "prio-badge " + t.prio, t.prioLabel));
+                        c.appendChild(head);
+
+                        c.appendChild(el("div", "role", t.role));
+                        c.appendChild(el("p", "what", t.what));
+                        c.appendChild(el("div", "impact", t.impact));
+
+                        const meta = el("div", "meta");
+                        meta.appendChild(el("span", "tag", t.lic));
+                        meta.appendChild(renderLinks(t.official, t.refs));
+                        c.appendChild(meta);
+
+                        tools.appendChild(c);
+                    });
+                }
+
+                col.appendChild(tools);
+                rail.appendChild(col);
+
+                const l = el("span");
+                const d = el("i", "dot"); d.style.background = "var(" + p.c + ")";
+                l.appendChild(d); l.appendChild(document.createTextNode(p.n + ": " + p.t));
+                legend.appendChild(l);
             });
-            col.appendChild(tools);
-            rail.appendChild(col);
+        }
 
-            const l = el("span");
-            const d = el("i", "dot"); d.style.background = "var(" + p.c + ")";
-            l.appendChild(d); l.appendChild(document.createTextNode(p.n + ": " + p.t));
-            legend.appendChild(l);
-        });
+        // Render inicial
+        renderPipeline("all");
 
+        // Fase 6
         const side = document.getElementById("side");
-        side.appendChild(el("div", "tagline", "Recursos complementarios al flujo"));
+        side.appendChild(el("div", "tagline", "Recursos transversales de crecimiento y ecosistema"));
         const six = el("div", "phase six");
         six.appendChild(el("div", "n", SIX.n));
         six.appendChild(el("h2", null, SIX.t));
@@ -712,6 +964,7 @@
         SIX.items.forEach(i => {
             const c = el("div", "item");
             c.appendChild(el("h3", null, i.name));
+            c.appendChild(el("div", "role", i.role));
             c.appendChild(el("p", null, i.what));
             c.appendChild(renderLinks(i.official, i.refs));
             items.appendChild(c);
@@ -719,10 +972,20 @@
         six.appendChild(items);
         side.appendChild(six);
 
+        // Filtros de prioridad interactivos
+        document.querySelectorAll(".filter-btn").forEach(btn => {
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                renderPipeline(btn.dataset.prio);
+            });
+        });
+
+        // Alternador de tema
         document.getElementById("theme").addEventListener("click", () => {
             const r = document.documentElement;
-            const dark = matchMedia("(prefers-color-scheme: dark)").matches;
-            const cur = r.getAttribute("data-theme") || (dark ? "dark" : "light");
+            const isDark = matchMedia("(prefers-color-scheme: dark)").matches;
+            const cur = r.getAttribute("data-theme") || (isDark ? "dark" : "light");
             r.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
         });
     </script>
