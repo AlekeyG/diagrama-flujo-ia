@@ -930,6 +930,7 @@
                 <button class="mission-pill" data-mission="frontend">✨ Maquetar Frontend Baseline</button>
                 <button class="mission-pill" data-mission="backend_qa">🛡️ Auditar Seguridad &amp; Testing</button>
                 <button class="mission-pill" data-mission="metrics_saas">📈 Validar Métricas &amp; Producto</button>
+                <button class="mission-pill" data-mission="community">🎓 Comunidad &amp; Empleo</button>
                 <button class="advanced-toggle" id="advancedToggle" type="button">⚙️ Filtros Técnicos ▾</button>
             </div>
 
@@ -1614,13 +1615,27 @@
             {
                 id: "fase7_strategy",
                 n: "Fase 7",
-                title: "7. Estrategia SaaS, Analítica de Producto & Crecimiento",
-                desc: "Validación de mercado, analítica conductual de usuarios, rendimiento Web Vitals, modelo de negocio y formación",
+                title: "7. Analítica de Producto, Métricas SaaS & Telemetría",
+                desc: "Mapas de calor, telemetría de eventos, embudos de conversión, rendimiento Core Web Vitals y validación de mercado",
                 color: "--c-p6",
                 tools: [
                     {
+                        name: "PostHog",
+                        conns: [{"target":"Microsoft Clarity","rel":"Combina analítica de eventos y embudos con mapas de calor de sesión"},{"target":"Supabase","rel":"Telemetría de retención de usuarios autenticados"}],
+                        type: "app",
+                        typeLabel: "Plataforma Open Source / Product OS",
+                        tier: "tier-1",
+                        tierLabel: "Top 1 Oro",
+                        role: "Suite Completa de Analítica de Producto, Feature Flags & Embudos",
+                        what: "La plataforma open-source líder todo-en-uno para productos digitales: analítica de eventos, embudos de conversión de usuarios, grabaciones de sesión, feature flags, experimentos A/B y encuestas de satisfacción.",
+                        impact: "Aporte: Reemplaza costosas herramientas como Mixpanel o Amplitude con control total de tus datos, generoso plan gratuito y soporte de autoalojamiento.",
+                        lic: "Open Source / Freemium",
+                        official: [["Portal PostHog", "https://posthog.com/"], ["Docs", "https://posthog.com/docs"], ["GitHub PostHog", "https://github.com/PostHog/posthog"]],
+                        refs: []
+                    },
+                    {
                         name: "Microsoft Clarity",
-                        conns: [{"target":"MDN Web Docs & Web.dev","rel":"Cruza mapas de calor y clics frustrados con métricas de Core Web Vitals"},{"target":"Estrategia SaaS & Validación de Apps","rel":"Optimización basada en datos reales de uso del producto"}],
+                        conns: [{"target":"PostHog","rel":"Cruza mapas de calor y clics frustrados (rage clicks) con métricas de embudos"},{"target":"MDN Web Docs & Web.dev","rel":"Optimización de UX guiada por rendimiento Web Vitals"}],
                         type: "app",
                         typeLabel: "Plataforma / SDK",
                         tier: "tier-1",
@@ -1661,15 +1676,38 @@
                         refs: []
                     },
                     {
+                        name: "Estrategia SaaS & Validación de Apps",
+                        conns: [{"target":"PostHog","rel":"Analítica de retención y optimización de flujos de suscripción"}],
+                        type: "app",
+                        typeLabel: "Metodología / Guía",
+                        tier: "tier-2",
+                        tierLabel: "Alta",
+                        role: "Modelo de Negocio & Legalidad de Software con IA",
+                        what: "Estrategias para monetizar herramientas de software, mitigar riesgos legales de código generado por IA y diseñar periodos de prueba exitosos para productos digitales.",
+                        impact: "Aporte: Transforma proyectos técnicos en productos digitales comercialmente viables con modelos de pricing y gobernanza sólidos.",
+                        lic: "Estrategia",
+                        official: [],
+                        refs: [["Ref 20", "https://www.instagram.com/reel/Dd7idktuOFx/?exln=MWtoYzhyaDI3ODN4cw=="], ["Ref 21", "https://www.instagram.com/reel/DeZCQHvxohj/?srtk=MTltczZodHRpc3Bzcg=="]]
+                    }
+                ]
+            },
+            {
+                id: "fase8_community",
+                n: "Fase 8",
+                title: "8. Comunidad, Formación Continua & Empleo Tech",
+                desc: "Rutas de aprendizaje técnico, canales de inserción laboral en desarrollo y comunidad hispanohablante",
+                color: "--c-p6",
+                tools: [
+                    {
                         name: "Formación Técnica de MoureDev",
                         conns: [{"target":"Convocatorias SENA / Accenture","rel":"Ruta de aprendizaje continuo hacia inserción laboral profesional"}],
                         type: "app",
                         typeLabel: "Comunidad & Cursos",
                         tier: "tier-1",
                         tierLabel: "Top 1 Oro",
-                        role: "Comunidad & Formación Continua",
-                        what: "Cursos gratuitos de desarrollo guiado por IA, configuración de TUI en terminal y comunidad hispanohablante.",
-                        impact: "Aporte: Nivelación constante de habilidades en herramientas de desarrollo asistido de vanguardia.",
+                        role: "Comunidad Hispana & Formación Continua en Programación",
+                        what: "Cursos gratuitos de desarrollo guiado por IA, configuración de TUI en terminal, retos de código y comunidad hispanohablante.",
+                        impact: "Aporte: Nivelación constante de habilidades prácticas en herramientas de desarrollo asistido de vanguardia.",
                         lic: "Comunidad / Gratis",
                         official: [["moure.dev", "https://moure.dev/"], ["YouTube", "https://www.youtube.com/@mouredev"], ["GitHub", "https://github.com/mouredev"]],
                         refs: [["Ref 2", "https://www.facebook.com/share/r/1BGHLzGDm4/"]]
@@ -1681,26 +1719,12 @@
                         typeLabel: "Portal de Empleo",
                         tier: "tier-2",
                         tierLabel: "Alta",
-                        role: "Inserción Laboral & Empleo",
-                        what: "Oportunidades de formación y convocatorias de contratación para perfiles tecnológicos en Colombia.",
-                        impact: "Aporte: Transición directa hacia empleo formal en desarrollo y cloud corporativo.",
+                        role: "Inserción Laboral & Vacantes Cloud / Desarrollo",
+                        what: "Oportunidades de formación práctica y convocatorias de contratación para perfiles tecnológicos y aprendices en Colombia.",
+                        impact: "Aporte: Transición directa hacia empleo formal en desarrollo de software y cloud corporativo.",
                         lic: "Institucional",
                         official: [["Accenture", "https://www.accenture.com/co-es/careers/jobdetails?id=R00243777_es&title=Aprendices+SENA"]],
                         refs: [["Ref 19", "https://www.accenture.com/co-es/careers/jobdetails?id=R00243777_es&title=Aprendices+SENA"]]
-                    },
-                    {
-                        name: "Estrategia SaaS & Validación de Apps",
-                        conns: [{"target":"Microsoft Clarity","rel":"Analítica de retención y optimización de flujos de suscripción"}],
-                        type: "app",
-                        typeLabel: "Metodología / Guía",
-                        tier: "tier-3",
-                        tierLabel: "Especializado",
-                        role: "Modelo de Negocio & Legalidad",
-                        what: "Estrategias para monetizar herramientas de software, mitigar riesgos legales de código generado por IA y diseñar periodos de prueba exitosos.",
-                        impact: "Aporte: Transforma proyectos técnicos en productos digitales comercialmente viables.",
-                        lic: "Estrategia",
-                        official: [],
-                        refs: [["Ref 20", "https://www.instagram.com/reel/Dd7idktuOFx/?exln=MWtoYzhyaDI3ODN4cw=="], ["Ref 21", "https://www.instagram.com/reel/DeZCQHvxohj/?srtk=MTltczZodHRpc3Bzcg=="]]
                     }
                 ]
             }
@@ -1722,8 +1746,9 @@
             "research": ["fase1_research"],
             "agents": ["fase2_agents"],
             "frontend": ["fase3_frontend"],
-            "backend_qa": ["fase4_backend", "fase5_qa_sec"],
-            "metrics_saas": ["fase6_monitoreo", "fase7_deployment"]
+            "backend_qa": ["fase4_backend", "fase5_qa_security"],
+            "metrics_saas": ["fase7_strategy"],
+            "community": ["fase8_community"]
         };
 
         function buildStageNav() {
